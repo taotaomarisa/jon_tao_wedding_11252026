@@ -1,0 +1,66 @@
+{
+  "name": "acme",
+  "private": true,
+  "packageManager": "pnpm@10.22.0",
+  "scripts": {
+    "env:init": "tsx scripts/init-env.ts",
+    "env:set": "tsx scripts/set-env.ts",
+    "dev": "docker compose up -d --wait && pnpm local:migrate && pnpm -C apps/web dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "prettier --write .",
+    "typecheck": "turbo run typecheck",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down -v",
+    "local:migrate": "pnpm -C packages/db migrate:apply",
+    "test:integration": "pnpm -C packages/tests test",
+    "test:e2e": "pnpm -C apps/web test:e2e",
+    "evals": "node packages/evals/dist/cli.js",
+    "ai:build": "pnpm -C packages/ai build",
+    "obs:build": "pnpm -C packages/obs build",
+    "tools:build": "pnpm -C packages/tools build",
+    "tools-testing:build": "pnpm -C packages/tools-testing build",
+    "tools-testing:test": "pnpm -C packages/tools-testing test",
+    "rag:build": "pnpm -C packages/rag build",
+    "rag:seed": "pnpm -C packages/rag seed",
+    "metro": "pnpm -C apps/mobile start",
+    "mobile": "pnpm -C apps/mobile ios",
+    "mobile:start": "pnpm -C apps/mobile start"
+  },
+  "devDependencies": {
+    "@better-auth/cli": "^1.4.9",
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^25.0.0",
+    "@types/pg": "^8.16.0",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.8",
+    "drizzle-orm": "^0.45.1",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-unused-imports": "^4.3.0",
+    "pg": "^8.16.3",
+    "prettier": "^3.7.4",
+    "tsx": "^4.21.0",
+    "turbo": "^2.7.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0",
+    "wait-on": "^9.0.3"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^3.0.26",
+    "@upstash/ratelimit": "^2.0.7",
+    "@upstash/redis": "^1.35.8",
+    "ai": "^6.0.77"
+  },
+  "pnpm": {
+    "overrides": {
+      "ai": "^6.0.77",
+      "@ai-sdk/provider": "^3.0.8"
+    },
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

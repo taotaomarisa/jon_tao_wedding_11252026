@@ -1,0 +1,67 @@
+name: iOS TestFlight Upload
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-upload:
+    runs-on: macos-15
+    env:
+      # Locale settings to prevent CocoaPods encoding issues
+      LANG: en_US.UTF-8
+      LC_ALL: en_US.UTF-8
+      APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+      MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select latest Xcode
+        run: |
+          # List available Xcode versions and select the latest
+          ls -d /Applications/Xcode*.app | sort -V | tail -1
+          LATEST_XCODE=$(ls -d /Applications/Xcode*.app | sort -V | tail -1)
+          sudo xcode-select -s "$LATEST_XCODE/Contents/Developer"
+          echo "Selected Xcode: $(xcodebuild -version)"
+          echo "SDK: $(xcrun --show-sdk-version)"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install JS deps
+        run: pnpm install
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version-file: 'apps/mobile/ios/.ruby-version'
+          bundler-cache: true
+          working-directory: apps/mobile/ios
+
+      - name: Install CocoaPods
+        run: |
+          cd apps/mobile/ios
+          rm -rf Pods Podfile.lock build
+          pod install --repo-update
+
+      - name: Fastlane preflight (safe if secrets missing)
+        working-directory: apps/mobile/ios
+        run: bundle exec fastlane ios preflight
+
+      - name: Fastlane upload to TestFlight
+        if: ${{ success() }}
+        working-directory: apps/mobile/ios
+        timeout-minutes: 90
+        run: bundle exec fastlane ios upload_testflight

@@ -1,0 +1,24 @@
+{
+  "name": "@acme/security",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/rateLimit.ts",
+  "types": "src/rateLimit.ts",
+  "exports": {
+    ".": "./src/rateLimit.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@upstash/ratelimit": "^2.0.7",
+    "@upstash/redis": "^1.35.8"
+  }
+}

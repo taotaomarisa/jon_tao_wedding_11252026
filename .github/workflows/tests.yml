@@ -1,0 +1,116 @@
+# Tests Pipeline for the monorepo
+# Runs build, integration tests, and E2E tests
+
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - '5432:5432'
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+      BETTER_AUTH_SECRET: testsecretkeythatishighentropy_0123456789
+      APP_BASE_URL: http://localhost:3000
+      AI_MODEL: gpt-4o-mini
+      # OPENAI_API_KEY not required; stream will use mock fallback if absent
+      # Enable dev token echoing for email verification in tests
+      ALLOW_DEV_TOKENS: true
+      # Disable rate limiting entirely for integration tests
+      DISABLE_RATE_LIMIT: 'true'
+      # Integration test base URL (must match the port in pnpm start)
+      TEST_BASE_URL: http://localhost:3000
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Setup pnpm before Node.js to enable pnpm caching in setup-node
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        # Version is read from package.json packageManager field
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build web app
+        run: pnpm -C apps/web build
+
+      # Optional: Run mobile tests if they exist
+      - name: Run mobile tests (optional)
+        run: pnpm -C apps/mobile test || echo "mobile tests optional"
+
+      # Run database migrations
+      - name: Run database migrations
+        run: pnpm -C packages/db migrate:apply
+
+      # Start web server in background and wait for it to be ready
+      - name: Start web server
+        run: |
+          pnpm -C apps/web start &
+          npx wait-on http://localhost:3000/api/health --timeout 60000
+
+      # Run integration tests
+      - name: Run integration tests
+        run: pnpm test:integration
+
+      # Get Playwright version for cache key
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(pnpm -C apps/web exec playwright --version | head -1)" >> $GITHUB_OUTPUT
+
+      # Cache Playwright browsers to speed up E2E tests
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      # Install Playwright browsers (chromium for desktop, webkit for mobile Safari)
+      - name: Install Playwright browsers
+        run: pnpm -C apps/web exec playwright install --with-deps chromium webkit
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+      # Install system dependencies even if browsers are cached
+      - name: Install Playwright system dependencies
+        run: pnpm -C apps/web exec playwright install-deps chromium webkit
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+
+      # Run E2E tests
+      - name: Run E2E tests
+        run: pnpm test:e2e
+
+      # Upload Playwright HTML report (always, for debugging)
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report/
+          retention-days: 7
