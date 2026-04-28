@@ -5,10 +5,13 @@ import type { createRateLimiter } from '@acme/security';
 type RateLimiter = ReturnType<typeof createRateLimiter>;
 
 /**
- * Route context for dynamic routes (e.g., [id], [slug]).
+ * Route context for dynamic routes (e.g., [id], [slug], [...any]).
  * Next.js passes this as the second argument to route handlers.
+ * Catch-all routes provide string arrays, so we allow both shapes here.
  */
-export type RouteContext = { params: Promise<Record<string, string>> };
+export type RouteContext = {
+  params: Promise<Record<string, string | string[] | undefined>>;
+};
 
 type RouteHandler = (request: NextRequest, ctx?: RouteContext) => Promise<Response>;
 
