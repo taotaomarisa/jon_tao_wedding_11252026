@@ -68,12 +68,15 @@ Canapes:
 
 Reception starters:
 - Three Taste of the Sea
-- Mushroom risotto with grana Padano and truffle
+- Mushroom risotto with grana Padano & truffle
 
 Reception mains:
-- Char-grilled beef tenderloin with garlic butter, truffle mashed potatoes, asparagus, and red wine jus
-- Blackened local grouper fillet with Caribbean lime and mango salsa plus local rice and peas
-- Vegetarian breaded cauliflower steak with coconut rice, spiced black bean salsa, and curry yogurt sauce
+- Char-grilled beef tenderloin
+  - grilled with garlic butter, truffle mashed potatoes, asparagus, and red wine jus
+- Blackened local grouper fillet
+  - served with fresh Caribbean lime and mango salsa plus local rice and peas
+- Vegetarian breaded cauliflower steak
+  - coconut rice, spiced black bean salsa, and curry yogurt sauce
 
 Reception desserts:
 - Caribbean key lime cheesecake
@@ -84,7 +87,7 @@ Extra note:
 
 Current website framing:
 - The Our Story and accommodation sections are currently styled content blocks and can be expanded later with more specific couple details.
-- Activity choices shown on the website are Catamaran + Reef Swim, Spa Morning + Pool Cabana, and Island Explorer Afternoon.
+- Activity choices shown on the website are Sunset Cruise and Ocean Horseback Riding.
 - Explore suggestions currently shown are Grace Bay, Sunset Cruise, and Local Flavors.
 `;
 
@@ -100,7 +103,7 @@ function buildFallbackText(question: string) {
   const message = question.toLowerCase();
 
   if (message.includes('nov 24') || message.includes('activity')) {
-    return 'On November 24, guests can choose between Catamaran + Reef Swim, Spa Morning + Pool Cabana, or Island Explorer Afternoon. The website is set up so guests can pick the pace that fits them best.';
+    return 'On November 24, guests can choose between a Sunset Cruise or Ocean Horseback Riding. The website is set up to make that island-day choice simple and easy.';
   }
 
   if (message.includes('bbq') || message.includes('welcome') || message.includes('menu')) {
