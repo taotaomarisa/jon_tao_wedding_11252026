@@ -95,6 +95,11 @@
     transform-origin: 50% 52%;
   }
 
+  .mobile-menu-slide-down {
+    animation: mobile-menu-slide-down 520ms cubic-bezier(0.2, 0.9, 0.22, 1) both;
+    transform-origin: top center;
+  }
+
   @keyframes wedding-letter-pop {
     0% {
       opacity: 0;
@@ -113,8 +118,20 @@
     }
   }
 
+  @keyframes mobile-menu-slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .wedding-letter-pop {
+    .wedding-letter-pop,
+    .mobile-menu-slide-down {
       animation: none;
     }
   }

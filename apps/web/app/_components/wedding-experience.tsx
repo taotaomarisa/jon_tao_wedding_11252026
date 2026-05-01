@@ -9,6 +9,7 @@ import {
   MapPin,
   Menu,
   SunMedium,
+  X,
 } from 'lucide-react';
 import { Alex_Brush } from 'next/font/google';
 import Image from 'next/image';
@@ -95,7 +96,7 @@ const activityChoices = [
     id: 'sunset-cruise',
     title: 'Sunset Cruise',
     description:
-      'Sail into golden hour with ocean views, island breezes, and a relaxed sunset experience on the water.',
+      'A relaxed golden-hour sail with ocean views, hors d’oeuvres, and an open bar.',
     websiteDescription:
       'A relaxing 1.5-hour sunset sail starting at 4pm from The Ritz-Carlton beach, with a gourmet selection of hors d’oeuvres, a full open bar, and an easy golden-hour experience on the water.',
     image: '/sunset-cruise.webp',
@@ -105,7 +106,7 @@ const activityChoices = [
     id: 'ocean-horseback',
     title: 'Ocean Horseback Riding',
     description:
-      'Ride along the shoreline and into the turquoise water for one of the most memorable island experiences.',
+      'A memorable shoreline ride that goes into the turquoise water with expert guides.',
     websiteDescription:
       'An approximately 1-hour horseback ride with start time TBD, where you will ride along the shoreline and into the ocean for a scenic, freeing experience that feels deeply connected to nature.',
     image: '/ocean-horseback-riding.webp',
@@ -208,9 +209,9 @@ const copy = {
     },
     planner: {
       eyebrow: 'Before Entering',
-      title: 'Choose your activity and dinner selections',
-      body: 'To make things easier for everyone, please make your selections here first. You can update them later on the website.',
-      back: 'Back To Intro',
+      title: 'A few quick choices for the celebration',
+      body: 'Please share your name, Nov 24 activity, and reception dinner selections so we can plan everything smoothly. You can still update them later on the website.',
+      back: 'Back to Welcome',
       save: 'Save and Enter Website',
       guestName: 'Guest Name',
       guestEmail: 'Guest Email',
@@ -219,7 +220,8 @@ const copy = {
       nov24: 'November 24',
       nov25: 'November 25',
       chooseActivity: 'Choose your activity',
-      chooseActivityBody: 'Choose between two island experiences and keep the one that feels right for your day.',
+      chooseActivityBody: 'Pick the island experience that feels most like your perfect Nov 24.',
+      chooseActivityMobileBody: 'Pick your Nov 24 island plan.',
       chooseDinner: 'Choose your dinner',
       chooseDinnerBody: 'Select your starter, main, and dessert for the reception dinner.',
       activity: 'Activity',
@@ -236,7 +238,8 @@ const copy = {
       daysToWedding: 'days to the wedding',
       location: 'Location',
       weather: 'November Weather',
-      weatherValue: '82F and sunny',
+      weatherValue: '82F',
+      weatherMobileBody: 'warm and sunny',
       weatherBody: 'warm breezes, bright water, and light tropical evenings',
       crest: 'Wedding Crest',
       crestSchedule: [
@@ -395,9 +398,9 @@ const copy = {
     },
     planner: {
       eyebrow: 'Antes de entrar',
-      title: 'Elige tu actividad y cena',
-      body: 'Para hacerlo más fácil para todos, por favor haz tus elecciones aquí primero. Podrás actualizarlas después en el sitio.',
-      back: 'Volver a la intro',
+      title: 'Unas elecciones rápidas para la celebración',
+      body: 'Comparte tu nombre, actividad del 24 de noviembre y cena de recepción para ayudarnos a organizar todo con calma. Podrás actualizarlo después en el sitio.',
+      back: 'Volver a bienvenida',
       save: 'Guardar y entrar',
       guestName: 'Nombre del invitado',
       guestEmail: 'Correo del invitado',
@@ -406,7 +409,8 @@ const copy = {
       nov24: '24 de noviembre',
       nov25: '25 de noviembre',
       chooseActivity: 'Elige tu actividad',
-      chooseActivityBody: 'Elige entre dos experiencias de isla y quédate con la que mejor vaya con tu día.',
+      chooseActivityBody: 'Elige la experiencia de isla que más se parezca a tu 24 de noviembre ideal.',
+      chooseActivityMobileBody: 'Elige tu plan del 24 de noviembre.',
       chooseDinner: 'Elige tu cena',
       chooseDinnerBody: 'Selecciona tu entrada, plato fuerte y postre para la cena de recepción.',
       activity: 'Actividad',
@@ -423,7 +427,8 @@ const copy = {
       daysToWedding: 'días para la boda',
       location: 'Lugar',
       weather: 'Clima en noviembre',
-      weatherValue: '82F y soleado',
+      weatherValue: '82F',
+      weatherMobileBody: 'cálido y soleado',
       weatherBody: 'brisas cálidas, agua brillante y tardes tropicales suaves',
       crest: 'Cresta de boda',
       crestSchedule: [
@@ -582,9 +587,9 @@ const copy = {
     },
     planner: {
       eyebrow: '进入网站前',
-      title: '请选择活动和晚宴菜品',
-      body: '为了方便安排，请先在这里完成选择。进入网站后也可以再更新。',
-      back: '返回介绍',
+      title: '先完成几个简单选择',
+      body: '请填写姓名、11月24日活动以及婚宴晚餐选择，方便我们更好安排。进入网站后也可以再更新。',
+      back: '返回欢迎页',
       save: '保存并进入网站',
       guestName: '宾客姓名',
       guestEmail: '宾客邮箱',
@@ -593,7 +598,8 @@ const copy = {
       nov24: '11月24日',
       nov25: '11月25日',
       chooseActivity: '选择你的活动',
-      chooseActivityBody: '从两个海岛体验中选择一个最适合你的活动。',
+      chooseActivityBody: '选择最像你理想 11月24日节奏的海岛体验。',
+      chooseActivityMobileBody: '选择你的 11月24日安排。',
       chooseDinner: '选择你的晚宴',
       chooseDinnerBody: '请选择婚宴晚餐的前菜、主菜和甜品。',
       activity: '活动',
@@ -610,7 +616,8 @@ const copy = {
       daysToWedding: '天后婚礼',
       location: '地点',
       weather: '11月天气',
-      weatherValue: '82F 晴朗',
+      weatherValue: '82F',
+      weatherMobileBody: '温暖晴朗',
       weatherBody: '温暖海风、明亮海水和轻柔的热带夜晚',
       crest: '婚礼徽章',
       crestSchedule: [
@@ -861,14 +868,14 @@ const activityCopy: Record<
     'sunset-cruise': {
       title: 'Crucero al atardecer',
       description:
-        'Navega hacia la hora dorada con vistas al mar, brisa de isla y una experiencia relajada sobre el agua.',
+        'Un paseo relajado en la hora dorada con vistas al mar, hors d’oeuvres y barra libre.',
       websiteDescription:
         'Un paseo relajante de 1.5 horas al atardecer, comenzando a las 4pm desde la playa de The Ritz-Carlton, con hors d’oeuvres gourmet, barra libre completa y una experiencia dorada sobre el agua.',
     },
     'ocean-horseback': {
       title: 'Cabalgata en el océano',
       description:
-        'Cabalga por la orilla y entra al agua turquesa para una de las experiencias más memorables de la isla.',
+        'Una cabalgata memorable por la orilla y dentro del agua turquesa con guías expertos.',
       websiteDescription:
         'Una cabalgata de aproximadamente 1 hora, con hora de inicio por confirmar, recorriendo la orilla y entrando al océano para una experiencia escénica y libre conectada con la naturaleza.',
     },
@@ -876,13 +883,13 @@ const activityCopy: Record<
   zh: {
     'sunset-cruise': {
       title: '日落游船',
-      description: '在金色时刻出海，欣赏海景、海岛微风和轻松的日落体验。',
+      description: '轻松的金色日落游船，包含海景、小食和开放酒吧。',
       websiteDescription:
         '约 1.5 小时的轻松日落帆船体验，下午 4 点从 The Ritz-Carlton 海滩出发，包含 gourmet hors d’oeuvres、开放酒吧和水上金色时刻。',
     },
     'ocean-horseback': {
       title: '海中骑马',
-      description: '沿着海岸骑行并走入蓝绿色海水，是非常难忘的海岛体验。',
+      description: '在专业向导带领下沿海岸骑行并进入蓝绿色海水。',
       websiteDescription:
         '约 1 小时骑马体验，开始时间待定。你将沿海岸骑行并进入海水，感受自由、风景和与自然相连的体验。',
     },
@@ -1218,7 +1225,21 @@ export function WeddingExperience() {
     setPlannerOpen(true);
   }
 
+  function goToPreviousIntroSlide() {
+    setActiveSlide((current) => Math.max(current - 1, 0));
+  }
+
+  function goToNextIntroStep() {
+    if (activeSlide >= introSlides.length - 1) {
+      moveToPlanner();
+      return;
+    }
+
+    setActiveSlide((current) => Math.min(current + 1, introSlides.length - 1));
+  }
+
   function returnToIntro() {
+    setActiveSlide(0);
     setPlannerOpen(false);
     setIntroOpen(true);
   }
@@ -1331,9 +1352,12 @@ export function WeddingExperience() {
         return;
       }
       setPlannerOpen(false);
-      window.history.replaceState(null, '', '#home');
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
       window.requestAnimationFrame(() => {
-        document.getElementById('home')?.scrollIntoView({ block: 'start' });
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        window.requestAnimationFrame(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        });
       });
     } catch (error) {
       const message =
@@ -1345,7 +1369,7 @@ export function WeddingExperience() {
   }
 
   return (
-    <div className="relative overflow-hidden bg-[linear-gradient(180deg,#f6f8fd_0%,#f7fbff_34%,#fffaf4_100%)] text-slate-900">
+    <div className="relative overflow-hidden bg-[#f7faff] text-slate-900">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-10rem] top-20 h-72 w-72 rounded-full bg-[#d4e3fb] blur-3xl" />
         <div className="absolute right-[-8rem] top-44 h-72 w-72 rounded-full bg-[#fbefcf] blur-3xl" />
@@ -1354,12 +1378,10 @@ export function WeddingExperience() {
 
       {introOpen && (
         <div
-          className="fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto bg-[rgba(241,246,255,0.58)] p-2.5 backdrop-blur-xl sm:p-3"
-          onClick={moveToPlanner}
+          className="fixed inset-0 z-[70] overflow-y-auto bg-[rgba(241,246,255,0.58)] p-3 backdrop-blur-xl sm:flex sm:items-center sm:justify-center"
         >
           <section
             id="intro"
-            onClick={(event) => event.stopPropagation()}
             className="wedding-letter-pop relative z-20 mx-auto my-2.5 flex min-h-[min(35rem,calc(100vh-1.25rem))] w-full max-w-[1040px] items-center justify-center overflow-hidden rounded-[0.35rem] border border-[#d7e2f5] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(237,243,255,0.97))] px-3 py-3 shadow-[0_45px_140px_rgba(82,113,165,0.28)] sm:my-3 sm:px-4 lg:px-6 lg:py-5"
           >
             <div className="pointer-events-none absolute inset-0">
@@ -1368,48 +1390,40 @@ export function WeddingExperience() {
             </div>
 
             <div className="relative w-full max-w-[1000px] overflow-hidden rounded-[0.2rem] border border-white/70 bg-[rgba(255,255,255,0.68)] px-4 py-4 backdrop-blur-xl sm:px-5 sm:py-5 lg:px-6 lg:py-6">
-              <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
                 <div className="flex items-center gap-2">
                   {introSlides.map((slide, index) => (
-                    <button
+                    <span
                       key={slide.eyebrow}
-                      type="button"
-                      onClick={() => setActiveSlide(index)}
                       className={cn(
                         'h-2.5 rounded-full transition-all',
                         activeSlide === index ? 'w-10 bg-[#5f86c7]' : 'w-2.5 bg-[#c7d7f2]',
                       )}
-                      aria-label={`Go to slide ${index + 1}`}
+                      aria-hidden="true"
                     />
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <LanguageToggle language={language} onChange={setLanguage} />
+                <div className="flex w-full flex-wrap items-center justify-between gap-2 sm:w-auto sm:justify-start">
+                  <div className="origin-left scale-95 sm:scale-100">
+                    <LanguageToggle language={language} onChange={setLanguage} />
+                  </div>
                   <button
                     type="button"
-                    onClick={() =>
-                      setActiveSlide((current) => (current - 1 + introSlides.length) % introSlides.length)
-                    }
-                    className="rounded-full border border-[#d7e2f5] bg-white/85 p-3 text-[#45689d] transition hover:bg-white"
+                    onClick={goToPreviousIntroSlide}
+                    disabled={activeSlide === 0}
+                    className="rounded-full border border-[#d7e2f5] bg-white/85 p-2.5 text-[#45689d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-35 sm:p-3"
                     aria-label={t.common.previousSlide}
                   >
                     <ChevronLeft className="h-5 w-5" />
                   </button>
                   <button
                     type="button"
-                    onClick={() => setActiveSlide((current) => (current + 1) % introSlides.length)}
-                    className="rounded-full border border-[#d7e2f5] bg-white/85 p-3 text-[#45689d] transition hover:bg-white"
+                    onClick={goToNextIntroStep}
+                    className="rounded-full border border-[#d7e2f5] bg-white/85 p-2.5 text-[#45689d] transition hover:bg-white sm:p-3"
                     aria-label={t.common.nextSlide}
                   >
                     <ChevronRight className="h-5 w-5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={moveToPlanner}
-                    className="rounded-full bg-[#45689d] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#3c5a88]"
-                  >
-                    {t.common.continue}
                   </button>
                 </div>
               </div>
@@ -1493,7 +1507,7 @@ export function WeddingExperience() {
                               className="object-cover transition duration-700 group-hover:scale-[1.03]"
                             />
                           </div>
-                          <div className="relative flex min-h-[22rem] flex-col justify-end p-5">
+                          <div className="relative flex min-h-[15.5rem] flex-col justify-end p-5 sm:min-h-[22rem]">
                             <div className="absolute inset-x-0 bottom-0 h-[15rem] bg-[linear-gradient(0deg,rgba(8,23,43,0)_0%,rgba(8,23,43,0.24)_18%,rgba(8,23,43,0.46)_50%,rgba(8,23,43,0.25)_78%,rgba(8,23,43,0)_100%)]" />
                             <div className="relative max-w-md">
                               <div className="inline-flex w-fit rounded-full border border-white/25 bg-white/12 px-3 py-1 text-[0.65rem] uppercase tracking-[0.26em] text-white/90 backdrop-blur-sm">
@@ -1520,7 +1534,7 @@ export function WeddingExperience() {
                                 className="object-cover transition duration-700 group-hover:scale-[1.03]"
                               />
                             </div>
-                            <div className="relative flex min-h-[15.5rem] flex-col justify-between p-5">
+                            <div className="relative flex min-h-[15.5rem] flex-col justify-between p-5 sm:min-h-[15.5rem]">
                               <div className="absolute inset-x-0 bottom-0 h-[13rem] bg-[linear-gradient(0deg,rgba(8,23,43,0.62)_0%,rgba(8,23,43,0.48)_45%,rgba(8,23,43,0.18)_78%,rgba(8,23,43,0)_100%)]" />
                               <div className="relative inline-flex w-fit rounded-full border border-white/25 bg-white/12 px-3 py-1 text-[0.65rem] uppercase tracking-[0.26em] text-white/90 backdrop-blur-sm">
                                 Wymara Villa
@@ -1546,7 +1560,7 @@ export function WeddingExperience() {
                                 className="object-cover transition duration-700 group-hover:scale-[1.03]"
                               />
                             </div>
-                            <div className="relative flex min-h-[13rem] flex-col justify-between p-5">
+                            <div className="relative flex min-h-[15.5rem] flex-col justify-between p-5 sm:min-h-[13rem]">
                               <div className="absolute inset-x-0 bottom-0 h-[11.5rem] bg-[linear-gradient(0deg,rgba(8,23,43,0.64)_0%,rgba(8,23,43,0.48)_45%,rgba(8,23,43,0.2)_78%,rgba(8,23,43,0)_100%)]" />
                               <div className="relative inline-flex w-fit rounded-full border border-white/25 bg-white/12 px-3 py-1 text-[0.65rem] uppercase tracking-[0.26em] text-white/90 backdrop-blur-sm">
                                 {t.intro.eveningsBadge}
@@ -1582,8 +1596,7 @@ export function WeddingExperience() {
           >
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.38em] text-[#5f86c7]">{t.planner.eyebrow}</p>
-                <h2 className="mt-2 font-display text-[2rem] leading-none text-[#34557f] sm:text-[2.7rem]">
+                <h2 className="font-display text-[2rem] leading-none text-[#34557f] sm:text-[2.7rem]">
                   {t.planner.title}
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
@@ -1645,26 +1658,30 @@ export function WeddingExperience() {
             </div>
 
             <div className="mt-6 grid gap-4 lg:grid-cols-2">
-              <div className="group relative min-h-[40rem] overflow-hidden rounded-[2rem] border border-[#d7e2f5] shadow-[0_20px_60px_rgba(95,134,199,0.14)] lg:min-h-full">
+              <div className="group relative min-h-[51rem] overflow-hidden rounded-[2rem] border border-[#d7e2f5] shadow-[0_20px_60px_rgba(95,134,199,0.14)] sm:min-h-[40rem] lg:min-h-full">
                 <div className="absolute inset-0">
                   <Image
                     src="/selection-horseback-water.webp"
                     alt="Ocean horseback riding in Turks and Caicos"
                     fill
-                    className="object-cover object-top transition duration-700 group-hover:scale-[1.03]"
+                    className="object-cover object-[50%_10%] transition duration-700 group-hover:scale-[1.03] sm:object-top"
                   />
                 </div>
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,31,54,0.3)_0%,rgba(17,31,54,0.08)_32%,rgba(17,31,54,0.1)_54%,rgba(17,31,54,0.54)_100%)]" />
-                <div className="relative flex min-h-[16rem] items-start p-6">
-                  <div className="max-w-sm rounded-[1.35rem] border border-white/12 bg-[rgba(11,24,43,0.16)] px-4 py-4 backdrop-blur-[2px]">
+                <div className="relative flex min-h-[25rem] items-start p-6 sm:min-h-[16rem]">
+                  <div className="w-full max-w-sm rounded-[1.35rem] border border-white/12 bg-[rgba(11,24,43,0.16)] px-4 py-4 backdrop-blur-[2px] sm:w-auto">
                     <p className="text-sm uppercase tracking-[0.28em] text-white/76">{t.planner.nov24}</p>
-                    <h3 className="mt-4 text-2xl font-semibold text-white">{t.planner.chooseActivity}</h3>
-                    <p className="mt-3 text-sm leading-7 text-white/84">
+                    <h3 className="mt-4 text-2xl font-semibold text-white sm:hidden">{t.planner.activity}</h3>
+                    <h3 className="mt-4 hidden text-2xl font-semibold text-white sm:block">{t.planner.chooseActivity}</h3>
+                    <p className="mt-3 text-sm leading-7 text-white/84 sm:hidden">
+                      {t.planner.chooseActivityMobileBody}
+                    </p>
+                    <p className="mt-3 hidden text-sm leading-7 text-white/84 sm:block">
                       {t.planner.chooseActivityBody}
                     </p>
                   </div>
                 </div>
-                <div className="absolute inset-x-3 bottom-8 rounded-[1.7rem] border border-white/25 bg-white/55 p-5 shadow-[0_-22px_60px_rgba(8,23,43,0.2)] backdrop-blur-xl">
+                <div className="absolute inset-x-3 bottom-6 rounded-[1.7rem] border border-white/25 bg-white/55 p-5 shadow-[0_-22px_60px_rgba(8,23,43,0.2)] backdrop-blur-xl sm:bottom-8">
                   <p className="text-sm uppercase tracking-[0.3em] text-[#5f6f8d]">{t.planner.activity}</p>
                   <div className="mt-4 grid gap-3">
                     {translatedActivities.map((choice) => (
@@ -1742,11 +1759,11 @@ export function WeddingExperience() {
 
       <div
         className={cn(
-          'relative mx-auto max-w-7xl px-5 pb-24 pt-28 transition duration-300 sm:px-8 lg:px-12',
+          'relative mx-auto max-w-7xl px-5 pb-0 pt-28 transition duration-300 sm:px-8 lg:px-12',
           (introOpen || plannerOpen) && 'pointer-events-none select-none blur-[6px] saturate-[0.9]',
         )}
       >
-        <header className="fixed left-1/2 top-4 z-40 w-[calc(100%-2rem)] max-w-7xl -translate-x-1/2 rounded-full border border-[#d5e2f5] bg-white/75 px-5 py-3 shadow-[0_18px_50px_rgba(89,120,170,0.12)] backdrop-blur-xl sm:w-[calc(100%-4rem)]">
+        <header className="fixed left-1/2 top-4 z-40 w-[calc(100%-2rem)] max-w-7xl -translate-x-1/2 overflow-visible rounded-full border border-[#d5e2f5] bg-white/75 px-5 py-3 shadow-[0_18px_50px_rgba(89,120,170,0.12)] backdrop-blur-xl sm:w-[calc(100%-4rem)]">
           <div className="flex items-center justify-between gap-4">
             <a
               href="#home"
@@ -1788,32 +1805,62 @@ export function WeddingExperience() {
             <button
               type="button"
               onClick={() => setMobileNavOpen((current) => !current)}
-              className="rounded-full border border-[#d5e2f5] bg-[#eef4ff] p-2 text-[#45689d] lg:hidden"
+              className="rounded-full border border-[#d5e2f5] bg-[#eef4ff] p-2.5 text-[#45689d] shadow-[0_10px_24px_rgba(69,104,157,0.14)] transition hover:bg-white lg:hidden"
+              aria-expanded={mobileNavOpen}
               aria-label="Toggle navigation"
             >
               <Menu className="h-5 w-5" />
             </button>
           </div>
 
-          {mobileNavOpen && (
-            <div className="mt-4 grid gap-3 border-t border-[#e3ebf8] pt-4 text-sm text-slate-700 lg:hidden">
-              {navItems.map((item) => (
-                <a
-                  key={item}
-                  href={`#${item}`}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    scrollToSection(item);
-                  }}
-                  className="rounded-2xl bg-[#f5f8ff] px-4 py-3"
-                >
-                  {getNavLabel(item)}
-                </a>
-              ))}
-              <LanguageToggle language={language} onChange={setLanguage} />
-            </div>
-          )}
         </header>
+
+        {mobileNavOpen && (
+          <div className="mobile-menu-slide-down fixed inset-0 z-50 overflow-hidden bg-[#45689d] px-8 py-8 text-white shadow-[0_34px_90px_rgba(25,45,78,0.28)] lg:hidden">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(255,255,255,0.18),transparent_34%),linear-gradient(180deg,rgba(126,159,219,0.28),rgba(69,104,157,0.96)_42%,rgba(52,85,127,1))]" />
+            <button
+              type="button"
+              onClick={() => setMobileNavOpen(false)}
+              className="absolute right-7 top-7 z-10 rounded-full border border-white/18 bg-white/8 p-3 text-white transition hover:bg-white/14"
+              aria-label="Close navigation"
+            >
+              <X className="h-7 w-7" />
+            </button>
+
+            <div className="relative flex h-full flex-col justify-center">
+              <div className="mb-10 flex items-center gap-3">
+                <div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/35 bg-white/92">
+                  <Image src="/wedding-logo.png" alt="Jon and Tao wedding logo" fill className="object-cover" />
+                </div>
+                <div>
+                  <p className="font-display text-3xl leading-none text-white">Jon & Tao</p>
+                  <p className="mt-1 text-[0.65rem] uppercase tracking-[0.34em] text-white/68">Wymara Villa 2026</p>
+                </div>
+              </div>
+
+              <nav className="flex flex-col gap-6 text-[1.45rem] font-medium uppercase tracking-[0.16em] text-white/92">
+                {navItems.map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item}`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      scrollToSection(item);
+                    }}
+                    className="w-fit border-b border-white/0 pb-2 transition hover:border-white/38 hover:text-white"
+                  >
+                    {getNavLabel(item)}
+                  </a>
+                ))}
+              </nav>
+
+              <div className="mt-12 flex items-center gap-4">
+                <p className="text-[0.68rem] uppercase tracking-[0.32em] text-white/62">Language</p>
+                <LanguageToggle language={language} onChange={setLanguage} />
+              </div>
+            </div>
+          </div>
+        )}
 
         <section
           id="home"
@@ -1835,27 +1882,28 @@ export function WeddingExperience() {
                   {t.home.body}
                 </p>
 
-                <div className="mt-10 grid gap-5 text-left sm:grid-cols-3">
-                  <div className="relative overflow-hidden rounded-[1.6rem] border border-[#d6e1f3] bg-white/72 p-5 shadow-[0_18px_46px_rgba(69,104,157,0.10)] backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.home.countdown}</p>
-                    <p className="mt-3 font-display text-5xl text-[#34557f]">{countdown.days}</p>
-                    <p className="text-sm text-slate-600">{t.home.daysToWedding}</p>
+                <div className="mx-auto mt-8 grid w-full max-w-[18rem] gap-3 text-left sm:mt-10 sm:max-w-none sm:grid-cols-3 sm:gap-5">
+                  <div className="relative overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
+                    <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500 sm:text-xs sm:tracking-[0.3em]">{t.home.countdown}</p>
+                    <p className="mt-2 font-display text-4xl leading-none text-[#34557f] sm:mt-3 sm:text-5xl">{countdown.days}</p>
+                    <p className="mt-1 text-xs leading-4 text-slate-600 sm:mt-0 sm:text-sm sm:leading-normal">{t.home.daysToWedding}</p>
                   </div>
-                  <div className="relative overflow-hidden rounded-[1.6rem] border border-[#d6e1f3] bg-white/72 p-5 shadow-[0_18px_46px_rgba(69,104,157,0.10)] backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.home.location}</p>
-                    <p className="mt-3 flex items-center gap-2 text-lg font-semibold text-[#34557f]">
-                      <MapPin className="h-5 w-5 text-[#5f86c7]" />
+                  <div className="relative overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
+                    <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500 sm:text-xs sm:tracking-[0.3em]">{t.home.location}</p>
+                    <p className="mt-2 flex items-center gap-1.5 text-sm font-semibold leading-tight text-[#34557f] sm:mt-3 sm:gap-2 sm:text-lg">
+                      <MapPin className="h-4 w-4 text-[#5f86c7] sm:h-5 sm:w-5" />
                       Wymara Villa
                     </p>
-                    <p className="text-sm text-slate-600">Turks and Caicos</p>
+                    <p className="mt-1 text-xs leading-4 text-slate-600 sm:mt-0 sm:text-sm sm:leading-normal">Turks and Caicos</p>
                   </div>
-                  <div className="relative overflow-hidden rounded-[1.6rem] border border-[#d6e1f3] bg-white/72 p-5 shadow-[0_18px_46px_rgba(69,104,157,0.10)] backdrop-blur-xl">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.home.weather}</p>
-                    <p className="mt-3 flex items-center gap-2 text-lg font-semibold text-[#34557f]">
-                      <SunMedium className="h-5 w-5 text-[#5f86c7]" />
+                  <div className="relative overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
+                    <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500 sm:text-xs sm:tracking-[0.3em]">{t.home.weather}</p>
+                    <p className="mt-2 flex items-center gap-1.5 text-sm font-semibold leading-tight text-[#34557f] sm:mt-3 sm:gap-2 sm:text-lg">
+                      <SunMedium className="h-4 w-4 text-[#5f86c7] sm:h-5 sm:w-5" />
                       {t.home.weatherValue}
                     </p>
-                    <p className="text-sm text-slate-600">{t.home.weatherBody}</p>
+                    <p className="mt-1 text-xs leading-4 text-slate-600 sm:hidden">{t.home.weatherMobileBody}</p>
+                    <p className="mt-1 hidden text-sm leading-normal text-slate-600 sm:block">{t.home.weatherBody}</p>
                   </div>
                 </div>
               </div>
@@ -2265,7 +2313,7 @@ export function WeddingExperience() {
                   ))}
                 </div>
 
-                <div className="mt-auto border-l border-[#d7e2f5] bg-[#edf4ff] px-5 py-4">
+                <div className="mt-8 border-l border-[#d7e2f5] bg-[#edf4ff] px-5 py-4 lg:mt-auto">
                   <p className="text-xs uppercase tracking-[0.3em] text-[#5f86c7]">{t.accommodation.roomCode}</p>
                   <p className="mt-2 text-lg font-semibold text-[#34557f]">
                     {weddingRoomCode || t.accommodation.codeFallback}
@@ -2278,13 +2326,13 @@ export function WeddingExperience() {
 
             </article>
 
-            <div className="grid h-full bg-[#eef4ff] md:grid-cols-2">
+            <div className="grid h-full gap-5 bg-[#eef4ff] p-4 md:grid-cols-2 md:gap-0 md:p-0">
               {stayCards.map((stay) => (
                 <article
                   key={stay.title}
-                  className="grid overflow-hidden border border-[#d9e4f6] bg-white"
+                  className="grid overflow-hidden border border-[#d9e4f6] bg-white shadow-[0_16px_38px_rgba(69,104,157,0.12)] md:shadow-none"
                 >
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-56 overflow-hidden md:h-48">
                     <img
                       src={stay.image}
                       alt={stay.imageAlt}
@@ -2301,18 +2349,18 @@ export function WeddingExperience() {
                       </div>
                     </div>
                   </div>
-                  <div className="px-5 py-4">
-                    <div className="flex items-center justify-end gap-4">
+                  <div className="border-t border-[#edf3fb] px-5 py-5 md:py-4">
+                    <p className="text-sm leading-6 text-slate-700">
+                      {stay.description}{' '}
                       <a
                         href={stay.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-sm font-medium text-[#45689d] hover:text-[#34557f]"
+                        className="font-medium text-[#45689d] hover:text-[#34557f]"
                       >
                         {t.common.visit}
                       </a>
-                    </div>
-                    <p className="mt-3 text-sm leading-6 text-slate-700">{stay.description}</p>
+                    </p>
                   </div>
                 </article>
               ))}
@@ -2375,15 +2423,25 @@ export function WeddingExperience() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <p className="min-h-[5.25rem] text-sm leading-7 text-slate-700">{card.description}</p>
-                  <div className="mt-4 min-h-[4.5rem] border-l border-[#dce6f6] bg-[#f5f8ff] px-4 py-3 text-sm leading-6 text-slate-700">
+                  <p className="text-sm leading-7 text-slate-700 sm:min-h-[5.25rem]">
+                    {card.description}{' '}
+                    <a
+                      href={card.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-[#45689d] hover:text-[#34557f] sm:hidden"
+                    >
+                      {t.common.learnMore}
+                    </a>
+                  </p>
+                  <div className="mt-3 min-h-[4.5rem] border-l border-[#dce6f6] bg-[#f5f8ff] px-4 py-3 text-sm leading-6 text-slate-700 sm:mt-4">
                     {card.note}
                   </div>
                   <a
                     href={card.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-5 inline-flex text-sm font-medium text-[#45689d] hover:text-[#34557f]"
+                    className="mt-5 hidden text-sm font-medium text-[#45689d] hover:text-[#34557f] sm:inline-flex"
                   >
                     {t.common.learnMore}
                   </a>
@@ -2424,7 +2482,7 @@ export function WeddingExperience() {
           </div>
 
           <div className="grid lg:grid-cols-[1.08fr_0.92fr]">
-            <article className="bg-white px-7 py-12 lg:px-12">
+            <article className="order-2 bg-white px-7 py-12 lg:order-1 lg:px-12">
               <div className="grid gap-7">
                 {islandFacts.map(([title, body]) => (
                   <div key={title} className="border-l border-[#dce6f6] pl-5">
@@ -2443,7 +2501,7 @@ export function WeddingExperience() {
               </div>
             </article>
 
-            <article className="flex min-h-[30rem] items-center justify-center bg-[#eef4ff] px-8 py-16 text-center">
+            <article className="order-1 flex min-h-[30rem] items-center justify-center bg-[#eef4ff] px-8 py-16 text-center lg:order-2">
               <div className="max-w-md">
                 <p className={cn(calligraphyFont.className, 'text-3xl leading-none text-[#b38a35]')}>
                   Tiny Island Lore
@@ -2460,7 +2518,7 @@ export function WeddingExperience() {
           className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[linear-gradient(135deg,#45689d,#7f9fd7)] text-white"
         >
           <div className="grid min-h-[34rem] lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="flex items-center justify-center px-7 py-20 text-center lg:px-12">
+            <div className="order-2 flex items-center justify-center px-7 py-20 text-center lg:order-1 lg:px-12">
               <div className="max-w-2xl">
                 <p className={cn(calligraphyFont.className, 'text-4xl leading-none text-white/78')}>
                   With Love
@@ -2490,7 +2548,7 @@ export function WeddingExperience() {
               </div>
             </div>
 
-            <div className="relative min-h-[34rem] overflow-hidden">
+            <div className="order-1 relative min-h-[34rem] overflow-hidden lg:order-2">
               <Image
                 src="/thank-you-couple.JPG"
                 alt="Jon and Tao together on a boat"
@@ -2504,7 +2562,7 @@ export function WeddingExperience() {
         </section>
       </div>
 
-      {!introOpen && !plannerOpen ? <WeddingChat language={language} defaultOpen /> : null}
+      {!introOpen && !plannerOpen ? <WeddingChat language={language} /> : null}
     </div>
   );
 }
