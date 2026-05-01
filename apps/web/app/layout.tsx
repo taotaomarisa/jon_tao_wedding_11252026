@@ -8,7 +8,7 @@ import { StaleDataBanner } from '@/components/stale-data-banner';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
 const displayFont = Cormorant_Garamond({
@@ -41,6 +41,11 @@ export const metadata: Metadata = {
     shortcut: ['/favicon-wedding-crest.png'],
     apple: [{ url: '/favicon-wedding-crest.png', type: 'image/png' }],
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

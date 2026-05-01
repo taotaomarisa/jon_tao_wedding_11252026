@@ -172,7 +172,7 @@ const copy = {
       home: 'Home',
       schedule: 'Schedule',
       food: 'Dining',
-      activity: 'Activity',
+      activity: 'Review Plans',
       accommodation: 'Accommodation',
       explore: 'Explore',
       honeymoon: 'Thank You',
@@ -238,10 +238,10 @@ const copy = {
       daysToWedding: 'days to the wedding',
       location: 'Location',
       weather: 'November Weather',
-      weatherValue: '82F',
+      weatherValue: '82°F',
       weatherMobileBody: 'warm and sunny',
       weatherBody: 'warm breezes, bright water, and light tropical evenings',
-      crest: 'Wedding Crest',
+      crest: 'Wedding Agenda',
       crestSchedule: [
         ['Nov 23', 'Welcome Party beach BBQ'],
         ['Nov 24', 'Island activities and time to unwind'],
@@ -280,11 +280,11 @@ const copy = {
       salad: 'Salad Table',
       hot: 'Hot Table',
       dessert: 'Dessert',
-      canapes: 'Canapés after ceremony',
-      canapesBody: 'Passed bites served between the ceremony and reception dinner.',
+      canapes: 'Canapés',
+      canapesBody: 'Passed canapés bites served during cocktail hour.',
       selectionEyebrow: 'Reception Dinner Selection',
-      changeTitle: 'Need to make a change?',
-      changeBody: 'Your selections were already collected before entering the site. This section is here in case you would like to make a change before the final deadline.',
+      changeTitle: 'Need to update your dinner selection?',
+      changeBody: 'Your dinner selections were already collected before entering the site. This section is here in case you would like to make a change before the final deadline.',
       deadline: 'Final date to make food changes:',
       deadlineDate: 'October 1, 2026',
       allergyTitle: 'Food allergies or dietary notes',
@@ -292,9 +292,9 @@ const copy = {
       allergyPlaceholder: 'Example: shellfish allergy, gluten-free, no pork...',
     },
     activity: {
-      eyebrow: 'Activity',
-      title: 'Choose your island pace',
-      body: '',
+      eyebrow: 'Review Plans',
+      title: 'Your wedding-week plans',
+      body: 'Review your saved details and update your island experience if needed.',
       changeTitle: 'Want to switch your island experience?',
       changeBody: 'Your activity was already collected before entering the site. This section is here in case you would like to make a change before the final deadline.',
       deadline: 'Final date to make activity changes:',
@@ -361,7 +361,7 @@ const copy = {
       home: 'Inicio',
       schedule: 'Agenda',
       food: 'Comida',
-      activity: 'Actividad',
+      activity: 'Revisar planes',
       accommodation: 'Hospedaje',
       explore: 'Explorar',
       honeymoon: 'Gracias',
@@ -421,16 +421,16 @@ const copy = {
     home: {
       badge: 'Boda en la playa en Wymara Villa en Turks and Caicos',
       dateRange: '23 al 25 de noviembre de 2026',
-      title: 'Tus planes de boda en la isla, en un solo lugar.',
+      title: 'Tus planes de boda en la isla, en un solo lugar',
       body: 'Este sitio es tu guía de la isla. Empieza con la agenda de la boda y luego explora tus selecciones de menú, actividades y detalles del viaje a tu ritmo.',
       countdown: 'Cuenta regresiva',
       daysToWedding: 'días para la boda',
       location: 'Lugar',
       weather: 'Clima en noviembre',
-      weatherValue: '82F',
+      weatherValue: '82°F',
       weatherMobileBody: 'cálido y soleado',
       weatherBody: 'brisas cálidas, agua brillante y tardes tropicales suaves',
-      crest: 'Cresta de boda',
+      crest: 'Agenda de Boda',
       crestSchedule: [
         ['Nov 23', 'Fiesta de bienvenida BBQ en la playa'],
         ['Nov 24', 'Actividades en la isla y tiempo para relajarse'],
@@ -439,7 +439,7 @@ const copy = {
     },
     schedule: {
       eyebrow: 'Agenda',
-      title: 'La agenda de la boda, todo en un solo lugar.',
+      title: 'La agenda de la boda, todo en un solo lugar',
       body: '',
       items: [
         {
@@ -469,11 +469,11 @@ const copy = {
       salad: 'Mesa de ensaladas',
       hot: 'Mesa caliente',
       dessert: 'Postre',
-      canapes: 'Canapés después de la ceremonia',
-      canapesBody: 'Bocaditos servidos entre la ceremonia y la cena de recepción.',
+      canapes: 'Canapés',
+      canapesBody: 'Canapés y bocaditos de cóctel servidos durante la hora de cóctel.',
       selectionEyebrow: 'Selección de cena',
-      changeTitle: '¿Necesitas hacer un cambio?',
-      changeBody: 'Tus selecciones ya se recopilaron antes de entrar al sitio. Esta sección está aquí por si deseas hacer un cambio antes de la fecha límite.',
+      changeTitle: 'Necesitas actualizar tu selección de cena?',
+      changeBody: 'Tus selecciones de cena ya se recopilaron antes de entrar al sitio. Esta sección está aquí por si deseas hacer un cambio antes de la fecha límite.',
       deadline: 'Fecha final para cambiar comida:',
       deadlineDate: '1 de octubre de 2026',
       allergyTitle: 'Alergias o notas dietéticas',
@@ -481,9 +481,9 @@ const copy = {
       allergyPlaceholder: 'Ejemplo: alergia a mariscos, sin gluten, sin cerdo...',
     },
     activity: {
-      eyebrow: 'Actividad',
-      title: 'Elige tu ritmo en la isla',
-      body: '',
+      eyebrow: 'Revisar planes',
+      title: 'Tus planes de la semana de boda',
+      body: 'Revisa tus detalles guardados y actualiza tu experiencia en la isla si hace falta.',
       changeTitle: '¿Quieres cambiar tu experiencia en la isla?',
       changeBody: 'Tu actividad ya se recopiló antes de entrar al sitio. Esta sección está aquí por si deseas hacer un cambio antes de la fecha límite.',
       deadline: 'Fecha final para cambiar actividad:',
@@ -500,7 +500,7 @@ const copy = {
     },
     accommodation: {
       eyebrow: 'Hospedaje',
-      title: 'Quédate cerca de la celebración y haz el viaje más fácil.',
+      title: 'Quédate cerca de la celebración y haz el viaje más fácil',
       body: '',
       graceBay: 'Grace Bay',
       recommended: 'Hospedaje recomendado',
@@ -519,16 +519,16 @@ const copy = {
     },
     explore: {
       eyebrow: 'Explorar',
-      title: 'Algunos favoritos memorables de Turks and Caicos.',
+      title: 'Algunos favoritos memorables de Turks and Caicos',
       body: 'Si tienes tiempo extra alrededor de la boda, estas son algunas recomendaciones fáciles de paisaje, cultura local y comida de la isla.',
       tipsEyebrow: 'Tips de viaje',
-      tipsTitle: 'Algunas cosas útiles para saber.',
+      tipsTitle: 'Algunas cosas útiles para saber',
       factsEyebrow: 'Datos curiosos',
-      factsTitle: 'Detalles de la isla que a los invitados suelen encantarles.',
+      factsTitle: 'Detalles de la isla que a los invitados suelen encantarles',
     },
     honeymoon: {
       eyebrow: 'Gracias',
-      title: 'Su presencia significa muchísimo para nosotros.',
+      title: 'Su presencia significa muchísimo para nosotros',
       body1: 'Apreciamos muchísimo que viajen hasta Turks and Caicos para celebrar con nosotros; no necesitamos nada más que tenerlos ahí.',
       body2: 'Si aun así desean regalarnos algo, recibiremos con humildad una pequeña ayuda para nuestra luna de miel y los recuerdos que comenzaremos justo después de la boda.',
       cardTitle: 'Un pequeño regalo para el viaje que empieza después de la celebración.',
@@ -550,7 +550,7 @@ const copy = {
       home: '首页',
       schedule: '行程',
       food: '餐饮',
-      activity: '活动',
+      activity: '查看安排',
       accommodation: '住宿',
       explore: '探索',
       honeymoon: '感谢',
@@ -610,16 +610,16 @@ const copy = {
     home: {
       badge: 'Wymara Villa 特克斯和凯科斯海滩婚礼',
       dateRange: '2026年11月23日至11月25日',
-      title: '你的海岛婚礼安排都在这里。',
+      title: '你的海岛婚礼安排都在这里',
       body: '这个网站是你的海岛婚礼指南。先查看婚礼行程，再慢慢了解菜单选择、活动安排和岛上信息。',
       countdown: '倒计时',
       daysToWedding: '天后婚礼',
       location: '地点',
       weather: '11月天气',
-      weatherValue: '82F',
+      weatherValue: '28°C',
       weatherMobileBody: '温暖晴朗',
       weatherBody: '温暖海风、明亮海水和轻柔的热带夜晚',
-      crest: '婚礼徽章',
+      crest: '婚礼日程',
       crestSchedule: [
         ['11月23日', '欢迎派对海滩 BBQ'],
         ['11月24日', '海岛活动和放松时间'],
@@ -628,7 +628,7 @@ const copy = {
     },
     schedule: {
       eyebrow: '行程',
-      title: '婚礼时间表都在这里。',
+      title: '婚礼时间表都在这里',
       body: '',
       items: [
         {
@@ -658,11 +658,11 @@ const copy = {
       salad: '沙拉台',
       hot: '热菜台',
       dessert: '甜品',
-      canapes: '仪式后小食',
-      canapesBody: '仪式和婚宴晚餐之间会提供小食。',
+      canapes: '小食和鸡尾酒时光',
+      canapesBody: '仪式和婚宴晚餐之间会提供小食和鸡尾酒时光点心。',
       selectionEyebrow: '婚宴晚餐选择',
-      changeTitle: '需要更改吗？',
-      changeBody: '你的选择已经在进入网站前收集。这里可以在最终截止日期前进行更改。',
+      changeTitle: '想要更新你的晚餐选择吗？',
+      changeBody: '你的晚餐选择已经在进入网站前收集。这里可以在最终截止日期前进行更改。',
       deadline: '更改餐食的最后日期：',
       deadlineDate: '2026年10月1日',
       allergyTitle: '食物过敏或饮食备注',
@@ -670,9 +670,9 @@ const copy = {
       allergyPlaceholder: '例如：海鲜过敏、无麸质、不吃猪肉...',
     },
     activity: {
-      eyebrow: '活动',
-      title: '选择你的海岛节奏',
-      body: '',
+      eyebrow: '查看安排',
+      title: '你的婚礼周安排',
+      body: '查看已保存的信息，如有需要可更新海岛活动。',
       changeTitle: '想更换你的海岛体验吗？',
       changeBody: '你的活动选择已经在进入网站前收集。这里可以在最终截止日期前进行更改。',
       deadline: '更改活动的最后日期：',
@@ -689,7 +689,7 @@ const copy = {
     },
     accommodation: {
       eyebrow: '住宿',
-      title: '住得离庆祝地点近一些，让旅程更轻松。',
+      title: '住得离庆祝地点近一些，让旅程更轻松',
       body: '',
       graceBay: 'Grace Bay',
       recommended: '推荐住宿',
@@ -708,16 +708,16 @@ const copy = {
     },
     explore: {
       eyebrow: '探索',
-      title: '几个值得体验的特克斯和凯科斯推荐。',
+      title: '几个值得体验的特克斯和凯科斯推荐',
       body: '如果婚礼前后有额外时间，这些是一些轻松的风景、当地文化和海岛美食推荐。',
       tipsEyebrow: '旅行提示',
-      tipsTitle: '一些实用小贴士。',
+      tipsTitle: '一些实用小贴士',
       factsEyebrow: '有趣知识',
-      factsTitle: '宾客通常会喜欢的海岛小知识。',
+      factsTitle: '宾客通常会喜欢的海岛小知识',
     },
     honeymoon: {
       eyebrow: '感谢',
-      title: '你们的到来对我们意义非凡。',
+      title: '你们的到来对我们意义非凡',
       body1: '非常感谢大家远道而来到特克斯和凯科斯与我们庆祝。除了你们的陪伴，我们不需要任何其他礼物。',
       body2: '如果你仍然想送些什么，我们会很感激地接受一点点蜜月支持，用来开启婚礼后的新回忆。',
       cardTitle: '为庆祝之后即将开始的旅行添一份小小心意。',
@@ -921,8 +921,9 @@ export function WeddingExperience() {
     process.env.NEXT_PUBLIC_HONEYMOON_FUND_URL?.trim() ||
     'https://www.honeyfund.com/site/linch-linch-11-25-2026';
   const weddingRoomCode = process.env.NEXT_PUBLIC_WEDDING_ROOM_CODE?.trim();
-  const [introOpen, setIntroOpen] = useState(true);
+  const [introOpen, setIntroOpen] = useState(false);
   const [plannerOpen, setPlannerOpen] = useState(false);
+  const [onboardingChecked, setOnboardingChecked] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [countdown, setCountdown] = useState(getCountdownParts);
@@ -1001,6 +1002,9 @@ export function WeddingExperience() {
   useEffect(() => {
     const saved = window.localStorage.getItem(storageKey);
     if (!saved) {
+      setIntroOpen(true);
+      setPlannerOpen(false);
+      setOnboardingChecked(true);
       return;
     }
 
@@ -1014,8 +1018,14 @@ export function WeddingExperience() {
       if (parsed.allergies) setAllergies(parsed.allergies);
       if (parsed.activity) setActivity(parsed.activity);
       if (parsed.savedAt) setSavedAt(parsed.savedAt);
+      setIntroOpen(false);
+      setPlannerOpen(false);
     } catch {
       window.localStorage.removeItem(storageKey);
+      setIntroOpen(true);
+      setPlannerOpen(false);
+    } finally {
+      setOnboardingChecked(true);
     }
   }, []);
 
@@ -1366,6 +1376,10 @@ export function WeddingExperience() {
     } finally {
       setIsSubmittingPlanner(false);
     }
+  }
+
+  if (!onboardingChecked) {
+    return <div className="min-h-screen bg-[#f7faff]" />;
   }
 
   return (
@@ -1866,9 +1880,9 @@ export function WeddingExperience() {
           id="home"
           className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#f7faff]"
         >
-          <div className="grid min-h-[42rem] lg:grid-cols-[1.08fr_0.92fr]">
+          <div className="grid min-h-[42rem] lg:grid-cols-[1.22fr_0.78fr]">
             <div className="flex items-center justify-center bg-[linear-gradient(180deg,#ffffff,#f4f8ff)] px-7 py-20 text-center lg:px-12">
-              <div className="max-w-3xl">
+              <div className="w-full max-w-5xl">
                 <p className={cn(calligraphyFont.className, 'text-4xl leading-none text-[#b38a35]')}>
                   Jon & Tao
                 </p>
@@ -1882,13 +1896,13 @@ export function WeddingExperience() {
                   {t.home.body}
                 </p>
 
-                <div className="mx-auto mt-8 grid w-full max-w-[18rem] gap-3 text-left sm:mt-10 sm:max-w-none sm:grid-cols-3 sm:gap-5">
-                  <div className="relative overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
+                <div className="mx-auto mt-8 grid w-full max-w-[14.75rem] gap-3 text-left sm:mt-10 sm:max-w-[58rem] sm:grid-cols-3 sm:gap-5">
+                  <div className="relative h-[6.85rem] overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:h-[9.25rem] sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
                     <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500 sm:text-xs sm:tracking-[0.3em]">{t.home.countdown}</p>
                     <p className="mt-2 font-display text-4xl leading-none text-[#34557f] sm:mt-3 sm:text-5xl">{countdown.days}</p>
                     <p className="mt-1 text-xs leading-4 text-slate-600 sm:mt-0 sm:text-sm sm:leading-normal">{t.home.daysToWedding}</p>
                   </div>
-                  <div className="relative overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
+                  <div className="relative h-[6.85rem] overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:h-[9.25rem] sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
                     <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500 sm:text-xs sm:tracking-[0.3em]">{t.home.location}</p>
                     <p className="mt-2 flex items-center gap-1.5 text-sm font-semibold leading-tight text-[#34557f] sm:mt-3 sm:gap-2 sm:text-lg">
                       <MapPin className="h-4 w-4 text-[#5f86c7] sm:h-5 sm:w-5" />
@@ -1896,14 +1910,13 @@ export function WeddingExperience() {
                     </p>
                     <p className="mt-1 text-xs leading-4 text-slate-600 sm:mt-0 sm:text-sm sm:leading-normal">Turks and Caicos</p>
                   </div>
-                  <div className="relative overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
+                  <div className="relative h-[6.85rem] overflow-hidden rounded-[1.25rem] border border-[#d6e1f3] bg-white/72 p-4 shadow-[0_14px_32px_rgba(69,104,157,0.10)] backdrop-blur-xl sm:h-[9.25rem] sm:rounded-[1.6rem] sm:p-5 sm:shadow-[0_18px_46px_rgba(69,104,157,0.10)]">
                     <p className="text-[0.62rem] uppercase tracking-[0.22em] text-slate-500 sm:text-xs sm:tracking-[0.3em]">{t.home.weather}</p>
                     <p className="mt-2 flex items-center gap-1.5 text-sm font-semibold leading-tight text-[#34557f] sm:mt-3 sm:gap-2 sm:text-lg">
                       <SunMedium className="h-4 w-4 text-[#5f86c7] sm:h-5 sm:w-5" />
                       {t.home.weatherValue}
                     </p>
-                    <p className="mt-1 text-xs leading-4 text-slate-600 sm:hidden">{t.home.weatherMobileBody}</p>
-                    <p className="mt-1 hidden text-sm leading-normal text-slate-600 sm:block">{t.home.weatherBody}</p>
+                    <p className="mt-1 text-xs leading-4 text-slate-600 sm:text-sm sm:leading-normal">{t.home.weatherBody}</p>
                   </div>
                 </div>
               </div>
@@ -1981,7 +1994,7 @@ export function WeddingExperience() {
           <article className="flex min-h-[32rem] items-end justify-center bg-[#45689d] px-8 py-20 text-center text-white">
             <div className="max-w-md">
               <p className={cn(calligraphyFont.className, 'text-3xl leading-none text-white/80')}>
-                Island Day
+                Review Plans
               </p>
               <p className="mt-6 text-sm uppercase tracking-[0.42em] text-white/68">{t.schedule.items[1].day}</p>
               <h3 className="mt-4 font-display text-4xl leading-tight text-white">{t.schedule.items[1].title}</h3>
@@ -2313,7 +2326,7 @@ export function WeddingExperience() {
                   ))}
                 </div>
 
-                <div className="mt-8 border-l border-[#d7e2f5] bg-[#edf4ff] px-5 py-4 lg:mt-auto">
+                <div className="mt-8 border-l border-[#d7e2f5] bg-[#edf4ff] px-5 py-4">
                   <p className="text-xs uppercase tracking-[0.3em] text-[#5f86c7]">{t.accommodation.roomCode}</p>
                   <p className="mt-2 text-lg font-semibold text-[#34557f]">
                     {weddingRoomCode || t.accommodation.codeFallback}
@@ -2326,13 +2339,13 @@ export function WeddingExperience() {
 
             </article>
 
-            <div className="grid h-full gap-5 bg-[#eef4ff] p-4 md:grid-cols-2 md:gap-0 md:p-0">
+            <div className="grid h-full gap-5 bg-[#eef4ff] p-4 md:grid-cols-2">
               {stayCards.map((stay) => (
                 <article
                   key={stay.title}
-                  className="grid overflow-hidden border border-[#d9e4f6] bg-white shadow-[0_16px_38px_rgba(69,104,157,0.12)] md:shadow-none"
+                  className="grid overflow-hidden border border-[#d9e4f6] bg-white shadow-[0_16px_38px_rgba(69,104,157,0.12)]"
                 >
-                  <div className="relative h-56 overflow-hidden md:h-48">
+                  <div className="relative h-56 overflow-hidden">
                     <img
                       src={stay.image}
                       alt={stay.imageAlt}
@@ -2349,7 +2362,7 @@ export function WeddingExperience() {
                       </div>
                     </div>
                   </div>
-                  <div className="border-t border-[#edf3fb] px-5 py-5 md:py-4">
+                  <div className="border-t border-[#edf3fb] px-5 py-5">
                     <p className="text-sm leading-6 text-slate-700">
                       {stay.description}{' '}
                       <a
@@ -2429,22 +2442,14 @@ export function WeddingExperience() {
                       href={card.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-medium text-[#45689d] hover:text-[#34557f] sm:hidden"
+                      className="font-medium text-[#45689d] hover:text-[#34557f]"
                     >
                       {t.common.learnMore}
                     </a>
                   </p>
-                  <div className="mt-3 min-h-[4.5rem] border-l border-[#dce6f6] bg-[#f5f8ff] px-4 py-3 text-sm leading-6 text-slate-700 sm:mt-4">
+                  <div className="mt-3 flex h-[4.25rem] w-full items-center bg-[linear-gradient(90deg,rgba(245,248,255,0.95),rgba(255,255,255,0.78))] px-5 text-sm leading-6 text-slate-700 shadow-[inset_3px_0_0_rgba(95,134,199,0.34)] sm:mt-4 lg:h-[4.15rem]">
                     {card.note}
                   </div>
-                  <a
-                    href={card.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-5 hidden text-sm font-medium text-[#45689d] hover:text-[#34557f] sm:inline-flex"
-                  >
-                    {t.common.learnMore}
-                  </a>
                 </div>
               </article>
             ))}
