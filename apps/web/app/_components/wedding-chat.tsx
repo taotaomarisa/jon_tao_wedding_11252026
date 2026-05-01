@@ -13,26 +13,79 @@ type ChatMessage = {
   content: string;
 };
 
-const starters = [
-  'What should I know about the wedding weekend schedule?',
-  'What activity should I choose for November 24?',
-  'What are the reception dinner options?',
-];
+type ChatLanguage = 'en' | 'es' | 'zh';
+
+const chatCopy = {
+  en: {
+    initial:
+      'Hi, I am your wedding concierge. Ask me about the itinerary, menus, activities, where to stay, or what to explore in Turks and Caicos.',
+    eyebrow: 'AI Concierge',
+    title: 'Ask about the wedding weekend',
+    close: 'Close wedding concierge',
+    thinking: 'Thinking through your wedding question...',
+    placeholder: 'Ask about the menus, activities, timing, or Turks and Caicos...',
+    button: 'Wedding Concierge',
+    error: 'Unable to reach the wedding concierge right now.',
+    starters: [
+      'What should I know about the wedding weekend schedule?',
+      'What activity should I choose for November 24?',
+      'What are the reception dinner options?',
+    ],
+  },
+  es: {
+    initial:
+      'Hola, soy tu concierge de boda. Pregúntame sobre el itinerario, menús, actividades, hospedaje o qué explorar en Turks and Caicos.',
+    eyebrow: 'Concierge IA',
+    title: 'Pregunta sobre la boda',
+    close: 'Cerrar concierge de boda',
+    thinking: 'Pensando en tu pregunta...',
+    placeholder: 'Pregunta sobre menús, actividades, horarios o Turks and Caicos...',
+    button: 'Concierge de boda',
+    error: 'No se puede contactar al concierge de boda ahora.',
+    starters: [
+      '¿Qué debo saber sobre la agenda de la boda?',
+      '¿Qué actividad debería elegir para el 24 de noviembre?',
+      '¿Cuáles son las opciones de cena?',
+    ],
+  },
+  zh: {
+    initial:
+      '你好，我是你的婚礼礼宾助手。可以问我行程、菜单、活动、住宿，或特克斯和凯科斯有什么好探索。',
+    eyebrow: 'AI 礼宾助手',
+    title: '询问婚礼周末信息',
+    close: '关闭婚礼礼宾助手',
+    thinking: '正在思考你的婚礼问题...',
+    placeholder: '询问菜单、活动、时间安排或特克斯和凯科斯...',
+    button: '婚礼礼宾助手',
+    error: '现在无法连接婚礼礼宾助手。',
+    starters: [
+      '婚礼行程需要了解什么？',
+      '11月24日我应该选择哪个活动？',
+      '婚宴晚餐有哪些选择？',
+    ],
+  },
+};
 
 function generateId() {
   return Math.random().toString(36).slice(2, 10);
 }
 
-export function WeddingChat() {
-  const [isOpen, setIsOpen] = useState(false);
+export function WeddingChat({
+  language = 'en',
+  defaultOpen = false,
+}: {
+  language?: ChatLanguage;
+  defaultOpen?: boolean;
+}) {
+  const t = chatCopy[language];
+  const [isOpen, setIsOpen] = useState(defaultOpen);
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: generateId(),
       role: 'assistant',
-      content:
-        'Hi, I am your wedding concierge. Ask me about the itinerary, menus, activities, where to stay, or what to explore in Turks and Caicos.',
+      content: t.initial,
     },
   ]);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -74,7 +127,7 @@ export function WeddingChat() {
       });
 
       if (!response.ok) {
-        throw new Error('Unable to reach the wedding concierge right now.');
+        throw new Error(t.error);
       }
 
       const reader = response.body?.getReader();
@@ -126,7 +179,7 @@ export function WeddingChat() {
       }
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : 'Unable to reach the wedding concierge right now.';
+        error instanceof Error ? error.message : t.error;
 
       setMessages((current) => {
         const lastAssistantIndex = [...current]
@@ -164,15 +217,15 @@ export function WeddingChat() {
                 <Bot className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-white/75">AI Concierge</p>
-                <p className="font-semibold">Ask about the wedding weekend</p>
+                <p className="text-sm uppercase tracking-[0.25em] text-white/75">{t.eyebrow}</p>
+                <p className="font-semibold">{t.title}</p>
               </div>
             </div>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
               className="rounded-full bg-white/12 p-2 transition hover:bg-white/20"
-              aria-label="Close wedding concierge"
+              aria-label={t.close}
             >
               <X className="h-4 w-4" />
             </button>
@@ -201,7 +254,7 @@ export function WeddingChat() {
               <div className="flex justify-start">
                 <div className="inline-flex items-center gap-2 rounded-[1.25rem] border border-[#d8e3f8] bg-white px-4 py-3 text-sm text-slate-600">
                   <LoaderCircle className="h-4 w-4 animate-spin text-[#5f86c7]" />
-                  Thinking through your wedding question...
+                  {t.thinking}
                 </div>
               </div>
             )}
@@ -209,7 +262,7 @@ export function WeddingChat() {
 
           <div className="border-t border-[#d8e3f8] bg-white/80 px-4 py-4">
             <div className="mb-3 flex flex-wrap gap-2">
-              {starters.map((starter) => (
+              {t.starters.map((starter) => (
                 <button
                   key={starter}
                   type="button"
@@ -231,7 +284,7 @@ export function WeddingChat() {
                     void sendMessage(input);
                   }
                 }}
-                placeholder="Ask about the menus, activities, timing, or Turks and Caicos..."
+                placeholder={t.placeholder}
                 className="min-h-[68px] resize-none rounded-[1.2rem] border-[#c8d7f3] bg-[#f7faff]"
               />
               <Button
@@ -253,7 +306,7 @@ export function WeddingChat() {
         className="inline-flex items-center gap-3 rounded-full bg-[linear-gradient(135deg,#45689d,#8ea9dc)] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_50px_rgba(42,78,136,0.28)] transition hover:scale-[1.01]"
       >
         <Sparkles className="h-4 w-4" />
-        Wedding Concierge
+        {t.button}
       </button>
     </div>
   );

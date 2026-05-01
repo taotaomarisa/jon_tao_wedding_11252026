@@ -56,6 +56,21 @@ Set the following environment variables:
 2. Set `MAIL_FROM` to a verified sender/domain in Resend (e.g., `"Your App <no-reply@yourdomain.com>"`)
 3. Set `APP_BASE_URL` to your production URL (e.g., `https://yourapp.com`)
 
+## Wedding Selection Google Sheet Sync
+
+Wedding activity and dinner submissions can also sync to Google Sheets.
+
+1. Open the wedding selections Google Sheet.
+2. Go to **Extensions > Apps Script**.
+3. Paste the script from `scripts/wedding-selections-google-sheet.gs`.
+4. Click **Deploy > New deployment > Web app**.
+5. Set **Execute as** to `Me`.
+6. Set **Who has access** to `Anyone`.
+7. Copy the deployed web app URL.
+8. Add it to Vercel as `WEDDING_SELECTIONS_SHEET_WEBHOOK_URL`.
+
+The script updates rows by guest email, so later food or activity changes replace that guest's latest selections instead of creating duplicates.
+
 ## RAG Query Validation
 
 The web app includes a RAG (Retrieval-Augmented Generation) query endpoint for semantic search over document chunks.

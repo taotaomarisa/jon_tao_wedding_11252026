@@ -1,5 +1,7 @@
 import './globals.css';
 
+import { Alex_Brush, Cormorant_Garamond, Manrope } from 'next/font/google';
+
 import { GoogleAnalytics } from '@/components/google-analytics';
 import { NavigationProgress } from '@/components/navigation-progress';
 import { StaleDataBanner } from '@/components/stale-data-banner';
@@ -8,7 +10,6 @@ import { Toaster } from '@/components/ui/sonner';
 
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { Alex_Brush, Cormorant_Garamond, Manrope } from 'next/font/google';
 
 const displayFont = Cormorant_Garamond({
   subsets: ['latin'],
@@ -30,11 +31,16 @@ const scriptFont = Alex_Brush({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Turks & Caicos Wedding',
-    default: 'Turks & Caicos Wedding',
+    template: '%s | Jon & Tao 2026',
+    default: 'Jon & Tao 2026',
   },
   description:
     'An interactive destination wedding website for Wymara Villa in Turks and Caicos.',
+  icons: {
+    icon: [{ url: '/favicon-wedding-crest.png', type: 'image/png' }],
+    shortcut: ['/favicon-wedding-crest.png'],
+    apple: [{ url: '/favicon-wedding-crest.png', type: 'image/png' }],
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

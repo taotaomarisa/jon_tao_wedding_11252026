@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
 import { z } from 'zod';
 
 const requestSchema = z.object({
@@ -11,10 +11,21 @@ const requestSchema = z.object({
   starter: z.string().min(1),
   main: z.string().min(1),
   dessert: z.string().min(1),
+  allergies: z.string().optional().default(''),
   activity: z.string().min(1),
+  submissionType: z.enum(['initial', 'food_update', 'activity_update']).default('initial'),
 });
 
-function buildEmailHtml(data: z.infer<typeof requestSchema>) {
+type WeddingSelection = z.infer<typeof requestSchema>;
+
+function formatSubmissionType(type: WeddingSelection['submissionType']) {
+  return type
+    .split('_')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
+
+function buildEmailHtml(data: WeddingSelection) {
   return `
 <!DOCTYPE html>
 <html>
@@ -28,14 +39,40 @@ function buildEmailHtml(data: z.infer<typeof requestSchema>) {
   <table style="width: 100%; border-collapse: collapse; margin-top: 24px;">
     <tr><td style="padding: 10px 0; font-weight: 600;">Guest Name</td><td style="padding: 10px 0;">${data.guestName}</td></tr>
     <tr><td style="padding: 10px 0; font-weight: 600;">Guest Email</td><td style="padding: 10px 0;">${data.guestEmail}</td></tr>
+    <tr><td style="padding: 10px 0; font-weight: 600;">Submission Type</td><td style="padding: 10px 0;">${formatSubmissionType(data.submissionType)}</td></tr>
     <tr><td style="padding: 10px 0; font-weight: 600;">Nov 24 Activity</td><td style="padding: 10px 0;">${data.activity}</td></tr>
     <tr><td style="padding: 10px 0; font-weight: 600;">Starter</td><td style="padding: 10px 0;">${data.starter}</td></tr>
     <tr><td style="padding: 10px 0; font-weight: 600;">Main</td><td style="padding: 10px 0;">${data.main}</td></tr>
     <tr><td style="padding: 10px 0; font-weight: 600;">Dessert</td><td style="padding: 10px 0;">${data.dessert}</td></tr>
+    <tr><td style="padding: 10px 0; font-weight: 600;">Allergies / Dietary Notes</td><td style="padding: 10px 0;">${data.allergies || 'None shared'}</td></tr>
   </table>
 </body>
 </html>
   `.trim();
+}
+
+async function syncSelectionsToGoogleSheet(data: WeddingSelection) {
+  const webhookUrl = readEnvFallback('WEDDING_SELECTIONS_SHEET_WEBHOOK_URL');
+  if (!webhookUrl) {
+    return { enabled: false };
+  }
+
+  const response = await fetch(webhookUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ...data,
+      submissionType: formatSubmissionType(data.submissionType),
+      submittedAt: new Date().toISOString(),
+    }),
+  });
+
+  if (!response.ok) {
+    const message = await response.text().catch(() => '');
+    throw new Error(message || `Google Sheet sync failed with ${response.status}`);
+  }
+
+  return { enabled: true };
 }
 
 function readEnvFallback(key: string): string | undefined {
@@ -84,11 +121,22 @@ export async function POST(request: NextRequest) {
   }
 
   const mailFrom = readEnvFallback('MAIL_FROM') || 'onboarding@resend.dev';
+  let sheetSync: { enabled: boolean; error?: string } = { enabled: false };
+
+  try {
+    sheetSync = await syncSelectionsToGoogleSheet(parsed.data);
+  } catch (error) {
+    sheetSync = {
+      enabled: true,
+      error: error instanceof Error ? error.message : 'Unknown Google Sheet sync error',
+    };
+    console.error('[Wedding selections] Google Sheet sync failed:', sheetSync.error);
+  }
 
   if (process.env.NODE_ENV !== 'production' || readEnvFallback('RESEND_DRY_RUN') === '1') {
     console.log('[DEV] Wedding selections submission:');
-    console.log(JSON.stringify({ to: recipient, from: mailFrom, ...parsed.data }, null, 2));
-    return NextResponse.json({ ok: true, dev: true });
+    console.log(JSON.stringify({ to: recipient, from: mailFrom, sheetSync, ...parsed.data }, null, 2));
+    return NextResponse.json({ ok: true, dev: true, sheetSync });
   }
 
   const resendApiKey = readEnvFallback('RESEND_API_KEY');
@@ -110,7 +158,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: result.error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, sheetSync });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown email error';
     return NextResponse.json({ error: message }, { status: 500 });
