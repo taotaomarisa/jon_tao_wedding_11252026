@@ -67,12 +67,29 @@ async function syncSelectionsToGoogleSheet(data: WeddingSelection) {
     }),
   });
 
+  const responseText = await response.text().catch(() => '');
+
   if (!response.ok) {
-    const message = await response.text().catch(() => '');
+    const message = responseText;
     throw new Error(message || `Google Sheet sync failed with ${response.status}`);
   }
 
-  return { enabled: true };
+  if (!responseText) {
+    return { enabled: true };
+  }
+
+  let result: { ok?: boolean; error?: string; row?: number };
+  try {
+    result = JSON.parse(responseText) as { ok?: boolean; error?: string; row?: number };
+  } catch {
+    throw new Error(`Google Sheet sync returned an unexpected response: ${responseText.slice(0, 120)}`);
+  }
+
+  if (result.ok === false) {
+    throw new Error(result.error || 'Google Sheet sync failed.');
+  }
+
+  return { enabled: true, row: result.row };
 }
 
 function readEnvFallback(key: string): string | undefined {
@@ -93,7 +110,7 @@ function readEnvFallback(key: string): string | undefined {
     }
 
     const contents = fs.readFileSync(candidate, 'utf8');
-    const match = contents.match(new RegExp(`^${key}=(.*)$`, 'm'));
+    const match = contents.match(new RegExp(`^\\s*${key}\\s*=\\s*(.*)$`, 'm'));
     if (!match?.[1]) {
       continue;
     }

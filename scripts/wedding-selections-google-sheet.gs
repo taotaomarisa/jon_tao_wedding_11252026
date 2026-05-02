@@ -1,16 +1,39 @@
 const SPREADSHEET_ID = '14-a2Dsf6iBwl0fbzj_JJPzw2V_g0ZY3SqAV0aUl1gUg';
 const SHEET_GID = 1732892122;
 const HEADERS = [
-  'Last Updated',
   'Guest Name',
   'Guest Email',
-  'Nov 24 Activity',
+  'Activity',
   'Starter',
   'Main',
   'Dessert',
-  'Allergies / Dietary Notes',
-  'Submission Type',
+  'Allergies',
+  'Last Updated',
 ];
+
+function cleanActivityLabel(value) {
+  const labels = {
+    'Luxurious Sunset Sail': 'Sunset Cruise',
+    'Sunset Cruise': 'Sunset Cruise',
+    'Ocean Horseback Riding': 'Horseback Riding',
+  };
+
+  return labels[value] || value || '';
+}
+
+function cleanFoodLabel(value) {
+  const labels = {
+    'Three Taste of the Sea': 'Taste of the Sea',
+    'Mushroom risotto with grana Padano & truffle': 'Mushroom Risotto',
+    'Char-grilled beef tenderloin with Lobster': 'Beef Tenderloin + Lobster',
+    'Blackened local grouper fillet': 'Grouper Fillet',
+    'Vegetarian breaded cauliflower steak': 'Cauliflower Steak',
+    'Caribbean key lime cheesecake': 'Lime Cheesecake',
+    'Deconstructed Banoffee Pie': 'Banoffee Pie',
+  };
+
+  return labels[value] || value || '';
+}
 
 function getWeddingSelectionsSheet() {
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
@@ -50,7 +73,7 @@ function doPost(event) {
     const existingEmails =
       lastRow > 1
         ? sheet
-            .getRange(2, 3, lastRow - 1, 1)
+            .getRange(2, 2, lastRow - 1, 1)
             .getValues()
             .flat()
         : [];
@@ -63,15 +86,14 @@ function doPost(event) {
       .getRange(targetRow, 1, 1, HEADERS.length)
       .setValues([
         [
-          payload.submittedAt ? new Date(payload.submittedAt) : new Date(),
           payload.guestName || '',
           payload.guestEmail || '',
-          payload.activity || '',
-          payload.starter || '',
-          payload.main || '',
-          payload.dessert || '',
+          cleanActivityLabel(payload.activity),
+          cleanFoodLabel(payload.starter),
+          cleanFoodLabel(payload.main),
+          cleanFoodLabel(payload.dessert),
           payload.allergies || '',
-          payload.submissionType || '',
+          payload.submittedAt ? new Date(payload.submittedAt) : new Date(),
         ],
       ]);
 
