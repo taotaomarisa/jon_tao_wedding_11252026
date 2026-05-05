@@ -257,7 +257,7 @@ const copy = {
           day: 'Nov 23',
           title: 'Beach BBQ',
           body: 'Arrive, settle in, and join everyone for a relaxed beach BBQ kickoff at Wymara Villa.',
-          notes: ['Dress code: beach chic and relaxed resort wear', 'Expect a casual evening with the BBQ menu and time to reconnect'],
+          notes: ['Dress code: Beach & Resort Chic Attire', 'Lightweight fabrics and beach-friendly footwear recommended.', 'Expect a casual evening with the BBQ menu and time to reconnect'],
         },
         {
           day: 'Nov 24',
@@ -446,7 +446,7 @@ const copy = {
           day: 'Nov 23',
           title: 'Beach BBQ',
           body: 'Lleguen, acomódense y acompáñennos en una bienvenida relajada con BBQ en la playa en Wymara Villa.',
-          notes: ['Código de vestir: beach chic y ropa resort relajada', 'Una noche casual con menú BBQ y tiempo para reconectar'],
+          notes: ['Código de vestir: Beach & Resort Chic Attire', 'Telas ligeras y calzado cómodo para la playa.', 'Una noche casual con menú BBQ y tiempo para reconectar'],
         },
         {
           day: 'Nov 24',
@@ -635,7 +635,7 @@ const copy = {
           day: '11月23日',
           title: '海滩 BBQ',
           body: '抵达后先安顿下来，然后在 Wymara Villa 参加轻松的海滩 BBQ 欢迎派对。',
-          notes: ['着装：海滩精致休闲或度假风', '轻松的 BBQ 晚上，可以和大家见面聊天'],
+          notes: ['着装：Beach & Resort Chic Attire', '建议轻薄面料和适合海滩行走的鞋。', '轻松的 BBQ 晚上，可以和大家见面聊天'],
         },
         {
           day: '11月24日',
