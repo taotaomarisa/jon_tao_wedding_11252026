@@ -261,7 +261,7 @@ const copy = {
         },
         {
           day: 'Nov 24',
-          title: 'Island Day',
+          title: 'Choose Your Pace',
           body: 'A day to enjoy the island at your own pace, with your selected activity and plenty of time to unwind.',
           notes: ['Dress code: easy daytime resort wear with swim or sun gear if needed', 'Expect a lighter island day with space to relax between plans'],
         },
@@ -450,7 +450,7 @@ const copy = {
         },
         {
           day: 'Nov 24',
-          title: 'Día en la isla',
+          title: 'Elige tu ritmo',
           body: 'Un día para disfrutar la isla a tu ritmo, con la actividad elegida y suficiente tiempo para descansar.',
           notes: ['Código de vestir: ropa resort cómoda con traje de baño o protección solar si hace falta', 'Un día más ligero con espacio para relajarse entre planes'],
         },
@@ -639,7 +639,7 @@ const copy = {
         },
         {
           day: '11月24日',
-          title: '海岛放松日',
+          title: '选择你的节奏',
           body: '这一天可以按自己的节奏享受海岛，参加你选择的活动，也留出时间放松。',
           notes: ['着装：轻松度假风，需要时准备泳衣和防晒用品', '较轻松的一天，活动之间也有时间休息'],
         },
@@ -1994,7 +1994,7 @@ export function WeddingExperience() {
           <article className="flex min-h-[32rem] items-end justify-center bg-[#45689d] px-8 py-20 text-center text-white">
             <div className="max-w-md">
               <p className={cn(calligraphyFont.className, 'text-3xl leading-none text-white/80')}>
-                Review Plans
+                Island Day
               </p>
               <p className="mt-6 text-sm uppercase tracking-[0.42em] text-white/68">{t.schedule.items[1].day}</p>
               <h3 className="mt-4 font-display text-4xl leading-tight text-white">{t.schedule.items[1].title}</h3>
