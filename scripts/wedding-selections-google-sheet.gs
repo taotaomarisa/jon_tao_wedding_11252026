@@ -3,6 +3,7 @@ const SHEET_GID = 1732892122;
 const HEADERS = [
   'Guest Name',
   'Guest Email',
+  'RSVP',
   'Activity',
   'Starter',
   'Main',
@@ -13,6 +14,7 @@ const HEADERS = [
 
 function cleanActivityLabel(value) {
   const labels = {
+    'Not attending': 'Not Attending',
     'Luxurious Sunset Sail': 'Sunset Cruise',
     'Sunset Cruise': 'Sunset Cruise',
     'Ocean Horseback Riding': 'Horseback Riding',
@@ -88,6 +90,7 @@ function doPost(event) {
         [
           payload.guestName || '',
           payload.guestEmail || '',
+          payload.rsvp || (payload.submissionType === 'Rsvp Declined' ? 'Miss' : 'Attend'),
           cleanActivityLabel(payload.activity),
           cleanFoodLabel(payload.starter),
           cleanFoodLabel(payload.main),

@@ -213,6 +213,10 @@ const copy = {
       body: 'Please share your name, Nov 24 activity, and reception dinner selections so we can plan everything smoothly. You can still update them later on the website.',
       back: 'Back to Welcome',
       save: 'Save and Enter Website',
+      attending: "Yes, we'll be there",
+      cannotAttend: "Sadly, we can't attend",
+      rsvpTitle: 'Will you be joining us in Turks and Caicos?',
+      rsvpBody: "If you can make it, we'll collect your activity and dinner choices next. If not, you can still enter the website without choosing food or activities.",
       guestName: 'Guest Name',
       guestEmail: 'Guest Email',
       namePlaceholder: 'Enter your full name',
@@ -353,6 +357,7 @@ const copy = {
       sendError: 'Could not send your selections right now.',
       dinnerSaved: 'Your dinner update was saved and sent successfully.',
       activitySaved: 'Your activity update was saved and sent successfully.',
+      rsvpSaved: 'Your RSVP was saved. We will miss you!',
       selectionsSent: 'Your selections were sent successfully.',
     },
   },
@@ -402,6 +407,10 @@ const copy = {
       body: 'Comparte tu nombre, actividad del 24 de noviembre y cena de recepción para ayudarnos a organizar todo con calma. Podrás actualizarlo después en el sitio.',
       back: 'Volver a bienvenida',
       save: 'Guardar y entrar',
+      attending: 'Sí, estaremos allí',
+      cannotAttend: 'Lamentablemente no podremos asistir',
+      rsvpTitle: '¿Nos acompañarás en Turks and Caicos?',
+      rsvpBody: 'Si puedes asistir, después recopilaremos tu actividad y cena. Si no, puedes entrar al sitio sin elegir comida ni actividades.',
       guestName: 'Nombre del invitado',
       guestEmail: 'Correo del invitado',
       namePlaceholder: 'Escribe tu nombre completo',
@@ -542,6 +551,7 @@ const copy = {
       sendError: 'No pudimos enviar tus selecciones ahora.',
       dinnerSaved: 'Tu actualización de cena fue guardada y enviada.',
       activitySaved: 'Tu actualización de actividad fue guardada y enviada.',
+      rsvpSaved: 'Tu RSVP fue guardado. ¡Te vamos a extrañar!',
       selectionsSent: 'Tus selecciones fueron enviadas.',
     },
   },
@@ -591,6 +601,10 @@ const copy = {
       body: '请填写姓名、11月24日活动以及婚宴晚餐选择，方便我们更好安排。进入网站后也可以再更新。',
       back: '返回欢迎页',
       save: '保存并进入网站',
+      attending: '会参加',
+      cannotAttend: '很遗憾无法参加',
+      rsvpTitle: '你会来特克斯和凯科斯参加婚礼吗？',
+      rsvpBody: '如果你会参加，下一步会填写活动和晚餐选择。如果无法参加，也可以直接进入网站，不需要选择食物或活动。',
       guestName: '宾客姓名',
       guestEmail: '宾客邮箱',
       namePlaceholder: '请输入全名',
@@ -731,6 +745,7 @@ const copy = {
       sendError: '现在无法发送你的选择。',
       dinnerSaved: '你的晚餐更新已保存并发送。',
       activitySaved: '你的活动更新已保存并发送。',
+      rsvpSaved: '你的 RSVP 已保存。我们会想你的！',
       selectionsSent: '你的选择已发送。',
     },
   },
@@ -906,6 +921,7 @@ function getCountdownParts() {
 }
 
 type SavedPlan = {
+  attendance?: 'attending' | 'declined';
   guestName: string;
   guestEmail: string;
   starter: string;
@@ -923,6 +939,7 @@ export function WeddingExperience() {
   const weddingRoomCode = process.env.NEXT_PUBLIC_WEDDING_ROOM_CODE?.trim();
   const [introOpen, setIntroOpen] = useState(false);
   const [plannerOpen, setPlannerOpen] = useState(false);
+  const [plannerStep, setPlannerStep] = useState<'rsvp' | 'selections'>('rsvp');
   const [onboardingChecked, setOnboardingChecked] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -1232,6 +1249,7 @@ export function WeddingExperience() {
 
   function moveToPlanner() {
     setIntroOpen(false);
+    setPlannerStep('rsvp');
     setPlannerOpen(true);
   }
 
@@ -1250,6 +1268,7 @@ export function WeddingExperience() {
 
   function returnToIntro() {
     setActiveSlide(0);
+    setPlannerStep('rsvp');
     setPlannerOpen(false);
     setIntroOpen(true);
   }
@@ -1269,7 +1288,7 @@ export function WeddingExperience() {
     setMobileNavOpen(false);
   }
 
-  function savePlan() {
+  function savePlan(attendance: SavedPlan['attendance'] = 'attending') {
     const timestamp = new Date().toLocaleString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -1280,6 +1299,7 @@ export function WeddingExperience() {
     window.localStorage.setItem(
       storageKey,
       JSON.stringify({
+        attendance,
         guestName,
         guestEmail,
         starter,
@@ -1295,10 +1315,7 @@ export function WeddingExperience() {
     return timestamp;
   }
 
-  async function submitSelections(
-    successMessage: string,
-    submissionType: 'initial' | 'food_update' | 'activity_update' = 'initial',
-  ) {
+  function validateGuestIdentity() {
     if (!guestName.trim()) {
       toast.error(t.toast.guestName);
       return false;
@@ -1306,6 +1323,17 @@ export function WeddingExperience() {
 
     if (!guestEmail.trim()) {
       toast.error(t.toast.guestEmail);
+      return false;
+    }
+
+    return true;
+  }
+
+  async function submitSelections(
+    successMessage: string,
+    submissionType: 'initial' | 'food_update' | 'activity_update' = 'initial',
+  ) {
+    if (!validateGuestIdentity()) {
       return false;
     }
 
@@ -1331,6 +1359,36 @@ export function WeddingExperience() {
 
     savePlan();
     toast.success(successMessage);
+    return true;
+  }
+
+  async function submitDeclinedRsvp() {
+    if (!validateGuestIdentity()) {
+      return false;
+    }
+
+    const response = await fetch('/api/wedding-selections', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        guestName: guestName.trim(),
+        guestEmail: guestEmail.trim(),
+        starter: '',
+        main: '',
+        dessert: '',
+        allergies: '',
+        activity: 'Not attending',
+        submissionType: 'rsvp_declined',
+      }),
+    });
+
+    const data = (await response.json().catch(() => ({}))) as { error?: string };
+    if (!response.ok) {
+      throw new Error(data.error || t.toast.sendError);
+    }
+
+    savePlan('declined');
+    toast.success(t.toast.rsvpSaved);
     return true;
   }
 
@@ -1368,6 +1426,28 @@ export function WeddingExperience() {
         window.requestAnimationFrame(() => {
           window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
         });
+      });
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : t.toast.sendError;
+      toast.error(message);
+    } finally {
+      setIsSubmittingPlanner(false);
+    }
+  }
+
+  async function saveDeclinedRsvpAndEnter() {
+    setIsSubmittingPlanner(true);
+
+    try {
+      const ok = await submitDeclinedRsvp();
+      if (!ok) {
+        return;
+      }
+      setPlannerOpen(false);
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+      window.requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       });
     } catch (error) {
       const message =
@@ -1626,14 +1706,16 @@ export function WeddingExperience() {
                 >
                   {t.planner.back}
                 </button>
-                <button
-                  type="button"
-                  onClick={savePlanAndEnter}
-                  disabled={isSubmittingPlanner}
-                  className="rounded-full bg-[#45689d] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#3c5a88]"
-                >
-                  {isSubmittingPlanner ? t.common.sending : t.planner.save}
-                </button>
+                {plannerStep === 'selections' ? (
+                  <button
+                    type="button"
+                    onClick={savePlanAndEnter}
+                    disabled={isSubmittingPlanner}
+                    className="rounded-full bg-[#45689d] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#3c5a88]"
+                  >
+                    {isSubmittingPlanner ? t.common.sending : t.planner.save}
+                  </button>
+                ) : null}
               </div>
             </div>
 
@@ -1671,6 +1753,36 @@ export function WeddingExperience() {
               </div>
             </div>
 
+            {plannerStep === 'rsvp' ? (
+              <div className="mt-6 overflow-hidden rounded-[2rem] border border-[#d7e2f5] bg-[linear-gradient(135deg,rgba(255,255,255,0.88),rgba(238,245,255,0.88))] p-7 shadow-[0_20px_65px_rgba(95,134,199,0.14)] sm:p-10">
+                <div className="mx-auto max-w-3xl text-center">
+                  <p className="text-sm uppercase tracking-[0.34em] text-[#5f86c7]">RSVP</p>
+                  <h3 className="mt-4 font-display text-[2.4rem] leading-[0.95] text-[#34557f] sm:text-[3.3rem]">
+                    {t.planner.rsvpTitle}
+                  </h3>
+                  <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-600">
+                    {t.planner.rsvpBody}
+                  </p>
+                  <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                    <button
+                      type="button"
+                      onClick={() => setPlannerStep('selections')}
+                      className="rounded-full bg-[#45689d] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_36px_rgba(69,104,157,0.24)] transition hover:bg-[#3c5a88]"
+                    >
+                      {t.planner.attending}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={saveDeclinedRsvpAndEnter}
+                      disabled={isSubmittingPlanner}
+                      className="rounded-full border border-[#cfdbf2] bg-white/86 px-6 py-3 text-sm font-semibold text-[#45689d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {isSubmittingPlanner ? t.common.sending : t.planner.cannotAttend}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
             <div className="mt-6 grid gap-4 lg:grid-cols-2">
               <div className="group relative min-h-[51rem] overflow-hidden rounded-[2rem] border border-[#d7e2f5] shadow-[0_20px_60px_rgba(95,134,199,0.14)] sm:min-h-[40rem] lg:min-h-full">
                 <div className="absolute inset-0">
@@ -1767,6 +1879,7 @@ export function WeddingExperience() {
                 </div>
               </div>
             </div>
+            )}
           </section>
         </div>
       )}

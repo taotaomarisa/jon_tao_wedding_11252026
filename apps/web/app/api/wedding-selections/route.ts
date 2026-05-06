@@ -8,12 +8,12 @@ import { z } from 'zod';
 const requestSchema = z.object({
   guestName: z.string().min(1, 'Guest name is required.'),
   guestEmail: z.string().email('A valid guest email is required.'),
-  starter: z.string().min(1),
-  main: z.string().min(1),
-  dessert: z.string().min(1),
+  starter: z.string().optional().default(''),
+  main: z.string().optional().default(''),
+  dessert: z.string().optional().default(''),
   allergies: z.string().optional().default(''),
-  activity: z.string().min(1),
-  submissionType: z.enum(['initial', 'food_update', 'activity_update']).default('initial'),
+  activity: z.string().optional().default(''),
+  submissionType: z.enum(['initial', 'food_update', 'activity_update', 'rsvp_declined']).default('initial'),
 });
 
 type WeddingSelection = z.infer<typeof requestSchema>;
@@ -26,6 +26,9 @@ function formatSubmissionType(type: WeddingSelection['submissionType']) {
 }
 
 function buildEmailHtml(data: WeddingSelection) {
+  const isDeclined = data.submissionType === 'rsvp_declined';
+  const rsvpStatus = isDeclined ? 'Miss' : 'Attend';
+
   return `
 <!DOCTYPE html>
 <html>
@@ -39,11 +42,12 @@ function buildEmailHtml(data: WeddingSelection) {
   <table style="width: 100%; border-collapse: collapse; margin-top: 24px;">
     <tr><td style="padding: 10px 0; font-weight: 600;">Guest Name</td><td style="padding: 10px 0;">${data.guestName}</td></tr>
     <tr><td style="padding: 10px 0; font-weight: 600;">Guest Email</td><td style="padding: 10px 0;">${data.guestEmail}</td></tr>
+    <tr><td style="padding: 10px 0; font-weight: 600;">RSVP</td><td style="padding: 10px 0;">${rsvpStatus}</td></tr>
     <tr><td style="padding: 10px 0; font-weight: 600;">Submission Type</td><td style="padding: 10px 0;">${formatSubmissionType(data.submissionType)}</td></tr>
-    <tr><td style="padding: 10px 0; font-weight: 600;">Nov 24 Activity</td><td style="padding: 10px 0;">${data.activity}</td></tr>
-    <tr><td style="padding: 10px 0; font-weight: 600;">Starter</td><td style="padding: 10px 0;">${data.starter}</td></tr>
-    <tr><td style="padding: 10px 0; font-weight: 600;">Main</td><td style="padding: 10px 0;">${data.main}</td></tr>
-    <tr><td style="padding: 10px 0; font-weight: 600;">Dessert</td><td style="padding: 10px 0;">${data.dessert}</td></tr>
+    <tr><td style="padding: 10px 0; font-weight: 600;">Nov 24 Activity</td><td style="padding: 10px 0;">${isDeclined ? 'Not attending' : data.activity}</td></tr>
+    <tr><td style="padding: 10px 0; font-weight: 600;">Starter</td><td style="padding: 10px 0;">${data.starter || 'Not selected'}</td></tr>
+    <tr><td style="padding: 10px 0; font-weight: 600;">Main</td><td style="padding: 10px 0;">${data.main || 'Not selected'}</td></tr>
+    <tr><td style="padding: 10px 0; font-weight: 600;">Dessert</td><td style="padding: 10px 0;">${data.dessert || 'Not selected'}</td></tr>
     <tr><td style="padding: 10px 0; font-weight: 600;">Allergies / Dietary Notes</td><td style="padding: 10px 0;">${data.allergies || 'None shared'}</td></tr>
   </table>
 </body>
@@ -62,6 +66,7 @@ async function syncSelectionsToGoogleSheet(data: WeddingSelection) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       ...data,
+      rsvp: data.submissionType === 'rsvp_declined' ? 'Miss' : 'Attend',
       submissionType: formatSubmissionType(data.submissionType),
       submittedAt: new Date().toISOString(),
     }),
@@ -127,6 +132,13 @@ export async function POST(request: NextRequest) {
 
   if (!parsed.success) {
     return NextResponse.json({ error: parsed.error.issues[0]?.message || 'Invalid request.' }, { status: 400 });
+  }
+
+  if (
+    parsed.data.submissionType !== 'rsvp_declined' &&
+    (!parsed.data.starter || !parsed.data.main || !parsed.data.dessert || !parsed.data.activity)
+  ) {
+    return NextResponse.json({ error: 'Activity and dinner selections are required.' }, { status: 400 });
   }
 
   const recipient = readEnvFallback('WEDDING_SELECTIONS_TO_EMAIL');
