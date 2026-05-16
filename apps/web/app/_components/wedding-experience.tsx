@@ -28,7 +28,9 @@ const calligraphyFont = Alex_Brush({
 });
 
 const storageKey = 'jon-tao-wedding-plan';
+const introSeenStorageKey = 'jon-tao-wedding-intro-seen';
 const languageStorageKey = 'jon-tao-wedding-language';
+const wymaraBookingUrl = 'https://be.synxis.com/?Hotel=35896&Chain=24447&arrive=2026-11-22&nights=4&adult=1&group=JONTAOWEDDING';
 const weddingDate = new Date('2026-11-25T17:00:00-05:00');
 const languages = ['en', 'es', 'zh'] as const;
 type Language = (typeof languages)[number];
@@ -66,6 +68,16 @@ const welcomeMenu = {
 const receptionStarters = [
   'Three Taste of the Sea',
   'Mushroom risotto with grana Padano & truffle',
+];
+
+const kidsMenuItems = [
+  'Kids prime beef burger with cheese, tomato, lettuce, and fries',
+  'Kids mac and cheese',
+  'Kids chicken tenders and fries',
+  'Kids classic fish and chips',
+  'Kids spaghetti with butter and cheese',
+  'Kids cheese pizza',
+  'Kids nachos with ground beef, tomato salsa, sour cream, and avocado',
 ];
 
 const receptionMains = [
@@ -172,7 +184,7 @@ const copy = {
       home: 'Home',
       schedule: 'Schedule',
       food: 'Dining',
-      activity: 'Review Plans',
+      activity: 'RSVP',
       accommodation: 'Accommodation',
       explore: 'Explore',
       honeymoon: 'Thank You',
@@ -188,8 +200,8 @@ const copy = {
       updating: 'Updating...',
       updateSubmit: 'Update And Submit',
       sending: 'Sending...',
-      savedOnDevice: 'Saved on this device:',
-      saveBrowser: 'Save your choices so they stay here on this browser.',
+      savedOnDevice: 'Last submitted:',
+      saveBrowser: 'Submit once your party details look right.',
     },
     intro: {
       locationEyebrow: 'The Location',
@@ -232,6 +244,19 @@ const copy = {
       starter: 'Starter',
       main: 'Main',
       dessert: 'Dessert',
+    },
+    party: {
+      addGuest: 'Add another guest',
+      remove: 'Remove',
+      submit: 'Submit RSVP & selections',
+      guestLabel: 'Guest',
+      attend: 'Attending',
+      miss: 'Can’t attend',
+      guestName: 'Guest name',
+      guestPlaceholder: 'Full name',
+      rsvp: 'RSVP',
+      activity: 'Nov 24 activity',
+      dinner: 'Reception dinner',
     },
     home: {
       badge: 'Beach wedding weekend at Wymara Villa in Turks and Caicos',
@@ -286,9 +311,14 @@ const copy = {
       dessert: 'Dessert',
       canapes: 'Canapés',
       canapesBody: 'Passed canapés bites served during cocktail hour.',
+      kidsMenu: 'Kids Corner',
+      kidsMenuBody: 'For younger children, these options are available separately. Parents can add the child’s name and preferred Kids Corner item in RSVP.',
+      kidsMealTitle: 'Kids food request',
+      kidsMealBody: 'If you are bringing a younger child who will eat from Kids Corner, please include the child’s name and preferred kids meal here.',
+      kidsMealPlaceholder: 'Example: Emma - kids mac and cheese; Leo - kids cheese pizza...',
       selectionEyebrow: 'Reception Dinner Selection',
-      changeTitle: 'Need to update your dinner selection?',
-      changeBody: 'Your dinner selections were already collected before entering the site. This section is here in case you would like to make a change before the final deadline.',
+      changeTitle: 'Dinner selections live in RSVP',
+      changeBody: 'When you are ready, submit each guest’s reception dinner choices and allergy notes in RSVP. You can return to update them before the final deadline.',
       deadline: 'Final date to make food changes:',
       deadlineDate: 'October 1, 2026',
       allergyTitle: 'Food allergies or dietary notes',
@@ -296,12 +326,14 @@ const copy = {
       allergyPlaceholder: 'Example: shellfish allergy, gluten-free, no pork...',
     },
     activity: {
-      eyebrow: 'Review Plans',
-      title: 'Your wedding-week plans',
-      body: 'Review your saved details and update your island experience if needed.',
-      changeTitle: 'Want to switch your island experience?',
-      changeBody: 'Your activity was already collected before entering the site. This section is here in case you would like to make a change before the final deadline.',
+      eyebrow: 'RSVP',
+      title: 'Your Party Details',
+      body: 'Tell us who is joining, what each guest would like for dinner, and which island experience feels right for Nov 24.',
+      changeTitle: 'Submit RSVP and selections for your party',
+      changeBody: 'Add each guest in your party, choose whether they can attend, then select their Nov 24 activity, dinner courses, and allergy notes in one place.',
       deadline: 'Final date to make activity changes:',
+      activityDeadline: 'Final date to make activity changes:',
+      openPlanner: 'Open RSVP',
       deadlineDate: 'September 1, 2026',
       atGlance: 'At A Glance',
       glanceTitle: 'Your wedding-week plans',
@@ -326,7 +358,7 @@ const copy = {
         ['Arrival tip', 'Aim to arrive by Nov 22 or early Nov 23'],
       ],
       roomCode: 'Room Discount Code',
-      codeFallback: 'jontaowedding',
+      codeFallback: 'JONTAOWEDDING',
       codeBody: 'Use this code when booking directly with Wymara for 20% off once the wedding rate is available.',
       spaEyebrow: 'Guest Wellness',
       spaTitle: 'Wymara spa discount available',
@@ -354,6 +386,7 @@ const copy = {
     toast: {
       guestName: 'Please enter the guest name before continuing.',
       guestEmail: 'Please enter the guest email before continuing.',
+      partyGuestName: 'Please enter each guest name before submitting.',
       sendError: 'Could not send your selections right now.',
       dinnerSaved: 'Your dinner update was saved and sent successfully.',
       activitySaved: 'Your activity update was saved and sent successfully.',
@@ -366,7 +399,7 @@ const copy = {
       home: 'Inicio',
       schedule: 'Agenda',
       food: 'Comida',
-      activity: 'Revisar planes',
+      activity: 'RSVP',
       accommodation: 'Hospedaje',
       explore: 'Explorar',
       honeymoon: 'Gracias',
@@ -382,8 +415,8 @@ const copy = {
       updating: 'Actualizando...',
       updateSubmit: 'Actualizar y enviar',
       sending: 'Enviando...',
-      savedOnDevice: 'Guardado en este dispositivo:',
-      saveBrowser: 'Guarda tus elecciones para que permanezcan en este navegador.',
+      savedOnDevice: 'Último envío:',
+      saveBrowser: 'Envía cuando los detalles de tu grupo estén correctos.',
     },
     intro: {
       locationEyebrow: 'El Lugar',
@@ -426,6 +459,19 @@ const copy = {
       starter: 'Entrada',
       main: 'Plato fuerte',
       dessert: 'Postre',
+    },
+    party: {
+      addGuest: 'Agregar otro invitado',
+      remove: 'Eliminar',
+      submit: 'Enviar RSVP y selecciones',
+      guestLabel: 'Invitado',
+      attend: 'Asiste',
+      miss: 'No asiste',
+      guestName: 'Nombre del invitado',
+      guestPlaceholder: 'Nombre completo',
+      rsvp: 'RSVP',
+      activity: 'Actividad del 24 de noviembre',
+      dinner: 'Cena de recepción',
     },
     home: {
       badge: 'Boda en la playa en Wymara Villa en Turks and Caicos',
@@ -480,9 +526,14 @@ const copy = {
       dessert: 'Postre',
       canapes: 'Canapés',
       canapesBody: 'Canapés y bocaditos de cóctel servidos durante la hora de cóctel.',
+      kidsMenu: 'Kids Corner',
+      kidsMenuBody: 'Para niños pequeños, estas opciones están disponibles por separado. Los padres pueden agregar el nombre del niño y su opción preferida de Kids Corner en RSVP.',
+      kidsMealTitle: 'Solicitud de comida infantil',
+      kidsMealBody: 'Si traes un niño pequeño que comerá de Kids Corner, incluye aquí su nombre y la comida infantil preferida.',
+      kidsMealPlaceholder: 'Ejemplo: Emma - mac and cheese; Leo - pizza de queso...',
       selectionEyebrow: 'Selección de cena',
-      changeTitle: 'Necesitas actualizar tu selección de cena?',
-      changeBody: 'Tus selecciones de cena ya se recopilaron antes de entrar al sitio. Esta sección está aquí por si deseas hacer un cambio antes de la fecha límite.',
+      changeTitle: 'Las selecciones de cena están en RSVP',
+      changeBody: 'Cuando estés listo, envía las selecciones de cena y notas de alergia para cada invitado en RSVP. Puedes volver a actualizarlas antes de la fecha límite.',
       deadline: 'Fecha final para cambiar comida:',
       deadlineDate: '1 de octubre de 2026',
       allergyTitle: 'Alergias o notas dietéticas',
@@ -490,12 +541,14 @@ const copy = {
       allergyPlaceholder: 'Ejemplo: alergia a mariscos, sin gluten, sin cerdo...',
     },
     activity: {
-      eyebrow: 'Revisar planes',
-      title: 'Tus planes de la semana de boda',
-      body: 'Revisa tus detalles guardados y actualiza tu experiencia en la isla si hace falta.',
-      changeTitle: '¿Quieres cambiar tu experiencia en la isla?',
-      changeBody: 'Tu actividad ya se recopiló antes de entrar al sitio. Esta sección está aquí por si deseas hacer un cambio antes de la fecha límite.',
+      eyebrow: 'RSVP',
+      title: 'Detalles de tu grupo',
+      body: 'Cuéntanos quién viene, qué cena prefiere cada invitado y qué experiencia de isla le queda mejor para el 24 de noviembre.',
+      changeTitle: 'Envía RSVP y selecciones para tu grupo',
+      changeBody: 'Agrega cada invitado de tu grupo, indica si asistirá y selecciona su actividad del 24 de noviembre, cena y notas de alergia en un solo lugar.',
       deadline: 'Fecha final para cambiar actividad:',
+      activityDeadline: 'Fecha final para cambiar actividad:',
+      openPlanner: 'Abrir RSVP',
       deadlineDate: '1 de septiembre de 2026',
       atGlance: 'Resumen',
       glanceTitle: 'Tus planes de la semana de boda',
@@ -520,7 +573,7 @@ const copy = {
         ['Tip de llegada', 'Llegar el 22 de nov o temprano el 23 de nov'],
       ],
       roomCode: 'Código de descuento',
-      codeFallback: 'jontaowedding',
+      codeFallback: 'JONTAOWEDDING',
       codeBody: 'Usa este código al reservar directamente con Wymara para obtener 20% de descuento cuando la tarifa de boda esté disponible.',
       spaEyebrow: 'Bienestar para invitados',
       spaTitle: 'Descuento en el spa de Wymara',
@@ -548,6 +601,7 @@ const copy = {
     toast: {
       guestName: 'Por favor escribe el nombre del invitado antes de continuar.',
       guestEmail: 'Por favor escribe el correo del invitado antes de continuar.',
+      partyGuestName: 'Por favor escribe el nombre de cada invitado antes de enviar.',
       sendError: 'No pudimos enviar tus selecciones ahora.',
       dinnerSaved: 'Tu actualización de cena fue guardada y enviada.',
       activitySaved: 'Tu actualización de actividad fue guardada y enviada.',
@@ -560,7 +614,7 @@ const copy = {
       home: '首页',
       schedule: '行程',
       food: '餐饮',
-      activity: '查看安排',
+      activity: 'RSVP',
       accommodation: '住宿',
       explore: '探索',
       honeymoon: '感谢',
@@ -576,8 +630,8 @@ const copy = {
       updating: '正在更新...',
       updateSubmit: '更新并提交',
       sending: '发送中...',
-      savedOnDevice: '已保存在此设备：',
-      saveBrowser: '保存你的选择，以便它们保留在此浏览器中。',
+      savedOnDevice: '上次提交：',
+      saveBrowser: '确认同行宾客信息后即可提交。',
     },
     intro: {
       locationEyebrow: '婚礼地点',
@@ -620,6 +674,19 @@ const copy = {
       starter: '前菜',
       main: '主菜',
       dessert: '甜品',
+    },
+    party: {
+      addGuest: '添加另一位宾客',
+      remove: '删除',
+      submit: '提交 RSVP 和选择',
+      guestLabel: '宾客',
+      attend: '参加',
+      miss: '无法参加',
+      guestName: '宾客姓名',
+      guestPlaceholder: '全名',
+      rsvp: 'RSVP',
+      activity: '11月24日活动',
+      dinner: '婚宴晚餐',
     },
     home: {
       badge: 'Wymara Villa 特克斯和凯科斯海滩婚礼',
@@ -674,9 +741,14 @@ const copy = {
       dessert: '甜品',
       canapes: '小食和鸡尾酒时光',
       canapesBody: '仪式和婚宴晚餐之间会提供小食和鸡尾酒时光点心。',
+      kidsMenu: '儿童菜单',
+      kidsMenuBody: '小朋友可以选择单独的儿童菜单。家长可以在 RSVP 中写下孩子姓名和想要的儿童餐。',
+      kidsMealTitle: '儿童餐需求',
+      kidsMealBody: '如果你会带需要儿童餐的小朋友，请在这里写下孩子姓名和想要的儿童餐。',
+      kidsMealPlaceholder: '例如：Emma - 儿童 Mac and cheese；Leo - 儿童芝士披萨...',
       selectionEyebrow: '婚宴晚餐选择',
-      changeTitle: '想要更新你的晚餐选择吗？',
-      changeBody: '你的晚餐选择已经在进入网站前收集。这里可以在最终截止日期前进行更改。',
+      changeTitle: '晚餐选择请在 RSVP 中提交',
+      changeBody: '准备好后，可以在 RSVP 中为每位宾客提交婚宴晚餐选择和过敏备注。截止日期前也可以回来更新。',
       deadline: '更改餐食的最后日期：',
       deadlineDate: '2026年10月1日',
       allergyTitle: '食物过敏或饮食备注',
@@ -684,12 +756,14 @@ const copy = {
       allergyPlaceholder: '例如：海鲜过敏、无麸质、不吃猪肉...',
     },
     activity: {
-      eyebrow: '查看安排',
-      title: '你的婚礼周安排',
-      body: '查看已保存的信息，如有需要可更新海岛活动。',
-      changeTitle: '想更换你的海岛体验吗？',
-      changeBody: '你的活动选择已经在进入网站前收集。这里可以在最终截止日期前进行更改。',
+      eyebrow: 'RSVP',
+      title: '同行宾客信息',
+      body: '告诉我们谁会参加、每位宾客的晚餐选择，以及 11月24日更适合的海岛体验。',
+      changeTitle: '为你的同行宾客提交 RSVP 和选择',
+      changeBody: '添加同行的每位宾客，选择是否参加，并为每个人填写 11月24日活动、晚餐和过敏备注。',
       deadline: '更改活动的最后日期：',
+      activityDeadline: '更改活动的最后日期：',
+      openPlanner: '打开 RSVP',
       deadlineDate: '2026年9月1日',
       atGlance: '一览',
       glanceTitle: '你的婚礼周安排',
@@ -714,7 +788,7 @@ const copy = {
         ['抵达建议', '建议 11月22日或 11月23日早些时候抵达'],
       ],
       roomCode: '房间折扣代码',
-      codeFallback: 'jontaowedding',
+      codeFallback: 'JONTAOWEDDING',
       codeBody: '婚礼房价开放后，直接向 Wymara 预订并使用此代码可享 20% 折扣。',
       spaEyebrow: '宾客放松时光',
       spaTitle: 'Wymara Spa 宾客折扣',
@@ -742,6 +816,7 @@ const copy = {
     toast: {
       guestName: '继续前请输入宾客姓名。',
       guestEmail: '继续前请输入宾客邮箱。',
+      partyGuestName: '提交前请填写每位宾客姓名。',
       sendError: '现在无法发送你的选择。',
       dinnerSaved: '你的晚餐更新已保存并发送。',
       activitySaved: '你的活动更新已保存并发送。',
@@ -751,8 +826,8 @@ const copy = {
   },
 } as const;
 
-const translatedMenu: Record<Language, typeof welcomeMenu> = {
-  en: welcomeMenu,
+const translatedMenu: Record<Language, typeof welcomeMenu & { kidsMenu: string[] }> = {
+  en: { ...welcomeMenu, kidsMenu: kidsMenuItems },
   es: {
     saladTable: [
       'Panecillos horneados en casa y mantequilla',
@@ -771,6 +846,15 @@ const translatedMenu: Record<Language, typeof welcomeMenu> = {
       'Brisket de res ahumado por 24 horas con salsa BBQ',
     ],
     dessert: ['Selección de rebanadas de pastel del chef pastelero'],
+    kidsMenu: [
+      'Hamburguesa de res para niños con queso, tomate, lechuga y papas fritas',
+      'Mac and cheese para niños',
+      'Tiras de pollo con papas fritas',
+      'Fish and chips clásico para niños',
+      'Espagueti con mantequilla y queso',
+      'Pizza de queso para niños',
+      'Nachos para niños con carne molida, salsa de tomate, crema agria y aguacate',
+    ],
     canapes: [
       'Rollitos primavera de vegetales',
       'Arancini con jamón serrano y trufa',
@@ -800,6 +884,15 @@ const translatedMenu: Record<Language, typeof welcomeMenu> = {
       '24小时烟熏牛胸肉配 BBQ 酱',
     ],
     dessert: ['甜点师精选蛋糕片'],
+    kidsMenu: [
+      '儿童牛肉芝士汉堡，配番茄、生菜和薯条',
+      '儿童 Mac and cheese',
+      '儿童鸡柳配薯条',
+      '儿童经典炸鱼薯条',
+      '黄油芝士意面',
+      '儿童芝士披萨',
+      '儿童牛肉 nachos，配番茄莎莎、酸奶油和牛油果',
+    ],
     canapes: [
       '蔬菜春卷',
       '塞拉诺火腿松露 arancini',
@@ -930,7 +1023,34 @@ type SavedPlan = {
   allergies: string;
   activity: string;
   savedAt: string;
+  partyGuests?: PartyGuest[];
 };
+
+type PartyGuest = {
+  id: string;
+  name: string;
+  rsvp: 'attend' | 'miss';
+  starter: string;
+  main: string;
+  dessert: string;
+  allergies: string;
+  kidsMeal: string;
+  activity: string;
+};
+
+function createPartyGuest(name = ''): PartyGuest {
+  return {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    name,
+    rsvp: 'attend',
+    starter: receptionStarters[0],
+    main: receptionMains[0].value,
+    dessert: receptionDesserts[0],
+    allergies: '',
+    kidsMeal: '',
+    activity: activityChoices[0]?.id ?? '',
+  };
+}
 
 export function WeddingExperience() {
   const honeymoonFundUrl =
@@ -938,8 +1058,6 @@ export function WeddingExperience() {
     'https://www.honeyfund.com/site/linch-linch-11-25-2026';
   const weddingRoomCode = process.env.NEXT_PUBLIC_WEDDING_ROOM_CODE?.trim();
   const [introOpen, setIntroOpen] = useState(false);
-  const [plannerOpen, setPlannerOpen] = useState(false);
-  const [plannerStep, setPlannerStep] = useState<'rsvp' | 'selections'>('rsvp');
   const [onboardingChecked, setOnboardingChecked] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -951,8 +1069,8 @@ export function WeddingExperience() {
   const [dessert, setDessert] = useState(receptionDesserts[0]);
   const [allergies, setAllergies] = useState('');
   const [activity, setActivity] = useState(activityChoices[0]?.id ?? '');
+  const [partyGuests, setPartyGuests] = useState<PartyGuest[]>(() => [createPartyGuest()]);
   const [savedAt, setSavedAt] = useState('');
-  const [isSubmittingPlanner, setIsSubmittingPlanner] = useState(false);
   const [isUpdatingSelections, setIsUpdatingSelections] = useState(false);
   const [language, setLanguage] = useState<Language>('en');
   const t = copy[language];
@@ -1008,7 +1126,7 @@ export function WeddingExperience() {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        moveToPlanner();
+        enterWebsite();
       }
     };
 
@@ -1018,36 +1136,39 @@ export function WeddingExperience() {
 
   useEffect(() => {
     const saved = window.localStorage.getItem(storageKey);
-    if (!saved) {
-      setIntroOpen(true);
-      setPlannerOpen(false);
-      setOnboardingChecked(true);
+    const hasSeenIntro = window.localStorage.getItem(introSeenStorageKey) === '1';
+
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved) as Partial<SavedPlan>;
+        if (parsed.guestName) setGuestName(parsed.guestName);
+        if (parsed.guestEmail) setGuestEmail(parsed.guestEmail);
+        if (parsed.starter) setStarter(parsed.starter);
+        if (parsed.main) setMain(parsed.main);
+        if (parsed.dessert) setDessert(parsed.dessert);
+        if (parsed.allergies) setAllergies(parsed.allergies);
+        if (parsed.activity) setActivity(parsed.activity);
+        if (parsed.savedAt) setSavedAt(parsed.savedAt);
+        if (Array.isArray(parsed.partyGuests) && parsed.partyGuests.length > 0) {
+          setPartyGuests(parsed.partyGuests.map((guest) => ({ ...createPartyGuest(), ...guest })));
+        }
+        setIntroOpen(false);
+      } catch {
+        window.localStorage.removeItem(storageKey);
+        setIntroOpen(!hasSeenIntro);
+      } finally {
+        setOnboardingChecked(true);
+      }
       return;
     }
 
-    try {
-      const parsed = JSON.parse(saved) as Partial<SavedPlan>;
-      if (parsed.guestName) setGuestName(parsed.guestName);
-      if (parsed.guestEmail) setGuestEmail(parsed.guestEmail);
-      if (parsed.starter) setStarter(parsed.starter);
-      if (parsed.main) setMain(parsed.main);
-      if (parsed.dessert) setDessert(parsed.dessert);
-      if (parsed.allergies) setAllergies(parsed.allergies);
-      if (parsed.activity) setActivity(parsed.activity);
-      if (parsed.savedAt) setSavedAt(parsed.savedAt);
-      setIntroOpen(false);
-      setPlannerOpen(false);
-    } catch {
-      window.localStorage.removeItem(storageKey);
-      setIntroOpen(true);
-      setPlannerOpen(false);
-    } finally {
-      setOnboardingChecked(true);
-    }
+    setIntroOpen(!hasSeenIntro);
+    setOnboardingChecked(true);
   }, []);
 
   const selectedActivity =
     activityChoices.find((option) => option.id === activity) ?? activityChoices[0];
+
   const stayCards = [
     {
       title: 'The Sands at Grace Bay',
@@ -1247,10 +1368,13 @@ export function WeddingExperience() {
   const islandFacts = localizedFacts.slice(0, 3);
   const waterFacts = localizedFacts.slice(3);
 
-  function moveToPlanner() {
+  function enterWebsite() {
+    window.localStorage.setItem(introSeenStorageKey, '1');
     setIntroOpen(false);
-    setPlannerStep('rsvp');
-    setPlannerOpen(true);
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    });
   }
 
   function goToPreviousIntroSlide() {
@@ -1259,18 +1383,11 @@ export function WeddingExperience() {
 
   function goToNextIntroStep() {
     if (activeSlide >= introSlides.length - 1) {
-      moveToPlanner();
+      enterWebsite();
       return;
     }
 
     setActiveSlide((current) => Math.min(current + 1, introSlides.length - 1));
-  }
-
-  function returnToIntro() {
-    setActiveSlide(0);
-    setPlannerStep('rsvp');
-    setPlannerOpen(false);
-    setIntroOpen(true);
   }
 
   function scrollToSection(item: NavItem) {
@@ -1288,6 +1405,33 @@ export function WeddingExperience() {
     setMobileNavOpen(false);
   }
 
+  function updatePartyGuest(id: string, updates: Partial<PartyGuest>) {
+    setPartyGuests((current) => {
+      const next = current.map((guest) => (guest.id === id ? { ...guest, ...updates } : guest));
+      const firstAttendingGuest = next.find((guest) => guest.rsvp === 'attend');
+      if (firstAttendingGuest) {
+        setStarter(firstAttendingGuest.starter);
+        setMain(firstAttendingGuest.main);
+        setDessert(firstAttendingGuest.dessert);
+        setAllergies(firstAttendingGuest.allergies);
+        setActivity(firstAttendingGuest.activity);
+      }
+      return next;
+    });
+  }
+
+  function addPartyGuest() {
+    setPartyGuests((current) => [...current, createPartyGuest()]);
+  }
+
+  function removePartyGuest(id: string) {
+    setPartyGuests((current) => (current.length > 1 ? current.filter((guest) => guest.id !== id) : current));
+  }
+
+  function getGuestActivityTitle(guest: PartyGuest) {
+    return activityChoices.find((option) => option.id === guest.activity)?.title ?? activityChoices[0]?.title ?? '';
+  }
+
   function savePlan(attendance: SavedPlan['attendance'] = 'attending') {
     const timestamp = new Date().toLocaleString('en-US', {
       month: 'short',
@@ -1296,21 +1440,20 @@ export function WeddingExperience() {
       minute: '2-digit',
     });
 
-    window.localStorage.setItem(
-      storageKey,
-      JSON.stringify({
-        attendance,
-        guestName,
-        guestEmail,
-        starter,
-        main,
-        dessert,
-        allergies,
-        activity,
-        savedAt: timestamp,
-      } satisfies SavedPlan),
-    );
+    const plan: SavedPlan = {
+      attendance,
+      guestName: guestName.trim(),
+      guestEmail: guestEmail.trim(),
+      starter,
+      main,
+      dessert,
+      allergies: allergies.trim(),
+      activity,
+      savedAt: timestamp,
+      partyGuests,
+    };
 
+    window.localStorage.setItem(storageKey, JSON.stringify(plan));
     setSavedAt(timestamp);
     return timestamp;
   }
@@ -1323,6 +1466,11 @@ export function WeddingExperience() {
 
     if (!guestEmail.trim()) {
       toast.error(t.toast.guestEmail);
+      return false;
+    }
+
+    if (partyGuests.some((guest) => !guest.name.trim())) {
+      toast.error(t.toast.partyGuestName);
       return false;
     }
 
@@ -1349,6 +1497,16 @@ export function WeddingExperience() {
         allergies: allergies.trim(),
         activity: selectedActivity.title,
         submissionType,
+        guests: partyGuests.map((guest) => ({
+          guestName: guest.name.trim(),
+          rsvp: guest.rsvp === 'miss' ? 'Miss' : 'Attend',
+          starter: guest.rsvp === 'attend' ? guest.starter : '',
+          main: guest.rsvp === 'attend' ? guest.main : '',
+          dessert: guest.rsvp === 'attend' ? guest.dessert : '',
+          allergies: guest.rsvp === 'attend' ? guest.allergies.trim() : '',
+          kidsMeal: guest.rsvp === 'attend' ? guest.kidsMeal.trim() : '',
+          activity: guest.rsvp === 'attend' ? getGuestActivityTitle(guest) : 'Not attending',
+        })),
       }),
     });
 
@@ -1362,99 +1520,17 @@ export function WeddingExperience() {
     return true;
   }
 
-  async function submitDeclinedRsvp() {
-    if (!validateGuestIdentity()) {
-      return false;
-    }
-
-    const response = await fetch('/api/wedding-selections', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        guestName: guestName.trim(),
-        guestEmail: guestEmail.trim(),
-        starter: '',
-        main: '',
-        dessert: '',
-        allergies: '',
-        activity: 'Not attending',
-        submissionType: 'rsvp_declined',
-      }),
-    });
-
-    const data = (await response.json().catch(() => ({}))) as { error?: string };
-    if (!response.ok) {
-      throw new Error(data.error || t.toast.sendError);
-    }
-
-    savePlan('declined');
-    toast.success(t.toast.rsvpSaved);
-    return true;
-  }
-
-  async function updateSelections(updateType: 'food' | 'activity') {
+  async function submitPartySelections() {
     setIsUpdatingSelections(true);
 
     try {
-      await submitSelections(
-        updateType === 'food'
-          ? t.toast.dinnerSaved
-          : t.toast.activitySaved,
-        updateType === 'food' ? 'food_update' : 'activity_update',
-      );
+      await submitSelections(t.toast.selectionsSent);
     } catch (error) {
       const message =
         error instanceof Error ? error.message : t.toast.sendError;
       toast.error(message);
     } finally {
       setIsUpdatingSelections(false);
-    }
-  }
-
-  async function savePlanAndEnter() {
-    setIsSubmittingPlanner(true);
-
-    try {
-      const ok = await submitSelections(t.toast.selectionsSent);
-      if (!ok) {
-        return;
-      }
-      setPlannerOpen(false);
-      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-        window.requestAnimationFrame(() => {
-          window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-        });
-      });
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : t.toast.sendError;
-      toast.error(message);
-    } finally {
-      setIsSubmittingPlanner(false);
-    }
-  }
-
-  async function saveDeclinedRsvpAndEnter() {
-    setIsSubmittingPlanner(true);
-
-    try {
-      const ok = await submitDeclinedRsvp();
-      if (!ok) {
-        return;
-      }
-      setPlannerOpen(false);
-      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      });
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : t.toast.sendError;
-      toast.error(message);
-    } finally {
-      setIsSubmittingPlanner(false);
     }
   }
 
@@ -1682,212 +1758,11 @@ export function WeddingExperience() {
         </div>
       )}
 
-      {plannerOpen && (
-        <div className="fixed inset-0 z-[72] overflow-y-auto bg-[rgba(241,246,255,0.62)] p-3 backdrop-blur-xl sm:p-4">
-          <section
-            onClick={(event) => event.stopPropagation()}
-            className="relative mx-auto my-3 w-full max-w-[1040px] overflow-hidden rounded-[2.35rem] border border-[#d7e2f5] bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(242,247,255,0.95))] px-4 py-4 shadow-[0_45px_140px_rgba(82,113,165,0.28)] sm:px-5 sm:py-5 lg:px-7 lg:py-6"
-          >
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <h2 className="font-display text-[2rem] leading-none text-[#34557f] sm:text-[2.7rem]">
-                  {t.planner.title}
-                </h2>
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
-                  {t.planner.body}
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <LanguageToggle language={language} onChange={setLanguage} />
-                <button
-                  type="button"
-                  onClick={returnToIntro}
-                  className="rounded-full border border-[#cfdbf2] bg-white/85 px-4 py-2.5 text-sm font-medium text-[#45689d] transition hover:bg-white"
-                >
-                  {t.planner.back}
-                </button>
-                {plannerStep === 'selections' ? (
-                  <button
-                    type="button"
-                    onClick={savePlanAndEnter}
-                    disabled={isSubmittingPlanner}
-                    className="rounded-full bg-[#45689d] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#3c5a88]"
-                  >
-                    {isSubmittingPlanner ? t.common.sending : t.planner.save}
-                  </button>
-                ) : null}
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-4 rounded-[1.8rem] border border-[#d7e2f5] bg-white/78 p-5 md:grid-cols-2">
-              <div>
-                <label
-                  htmlFor="planner-guest-name"
-                  className="text-xs uppercase tracking-[0.28em] text-slate-500"
-                >
-                  {t.planner.guestName}
-                </label>
-                <Input
-                  id="planner-guest-name"
-                  value={guestName}
-                  onChange={(event) => setGuestName(event.target.value)}
-                  placeholder={t.planner.namePlaceholder}
-                  className="mt-2 h-11 rounded-xl border-[#cfdbf2] bg-white"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="planner-guest-email"
-                  className="text-xs uppercase tracking-[0.28em] text-slate-500"
-                >
-                  {t.planner.guestEmail}
-                </label>
-                <Input
-                  id="planner-guest-email"
-                  type="email"
-                  value={guestEmail}
-                  onChange={(event) => setGuestEmail(event.target.value)}
-                  placeholder={t.planner.emailPlaceholder}
-                  className="mt-2 h-11 rounded-xl border-[#cfdbf2] bg-white"
-                />
-              </div>
-            </div>
-
-            {plannerStep === 'rsvp' ? (
-              <div className="mt-6 overflow-hidden rounded-[2rem] border border-[#d7e2f5] bg-[linear-gradient(135deg,rgba(255,255,255,0.88),rgba(238,245,255,0.88))] p-7 shadow-[0_20px_65px_rgba(95,134,199,0.14)] sm:p-10">
-                <div className="mx-auto max-w-3xl text-center">
-                  <p className="text-sm uppercase tracking-[0.34em] text-[#5f86c7]">RSVP</p>
-                  <h3 className="mt-4 font-display text-[2.4rem] leading-[0.95] text-[#34557f] sm:text-[3.3rem]">
-                    {t.planner.rsvpTitle}
-                  </h3>
-                  <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-600">
-                    {t.planner.rsvpBody}
-                  </p>
-                  <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                    <button
-                      type="button"
-                      onClick={() => setPlannerStep('selections')}
-                      className="rounded-full bg-[#45689d] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_36px_rgba(69,104,157,0.24)] transition hover:bg-[#3c5a88]"
-                    >
-                      {t.planner.attending}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={saveDeclinedRsvpAndEnter}
-                      disabled={isSubmittingPlanner}
-                      className="rounded-full border border-[#cfdbf2] bg-white/86 px-6 py-3 text-sm font-semibold text-[#45689d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      {isSubmittingPlanner ? t.common.sending : t.planner.cannotAttend}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ) : (
-            <div className="mt-6 grid gap-4 lg:grid-cols-2">
-              <div className="group relative min-h-[51rem] overflow-hidden rounded-[2rem] border border-[#d7e2f5] shadow-[0_20px_60px_rgba(95,134,199,0.14)] sm:min-h-[40rem] lg:min-h-full">
-                <div className="absolute inset-0">
-                  <Image
-                    src="/selection-horseback-water.webp"
-                    alt="Ocean horseback riding in Turks and Caicos"
-                    fill
-                    className="object-cover object-[50%_10%] transition duration-700 group-hover:scale-[1.03] sm:object-top"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,31,54,0.3)_0%,rgba(17,31,54,0.08)_32%,rgba(17,31,54,0.1)_54%,rgba(17,31,54,0.54)_100%)]" />
-                <div className="relative flex min-h-[25rem] items-start p-6 sm:min-h-[16rem]">
-                  <div className="w-full max-w-sm rounded-[1.35rem] border border-white/12 bg-[rgba(11,24,43,0.16)] px-4 py-4 backdrop-blur-[2px] sm:w-auto">
-                    <p className="text-sm uppercase tracking-[0.28em] text-white/76">{t.planner.nov24}</p>
-                    <h3 className="mt-4 text-2xl font-semibold text-white sm:hidden">{t.planner.activity}</h3>
-                    <h3 className="mt-4 hidden text-2xl font-semibold text-white sm:block">{t.planner.chooseActivity}</h3>
-                    <p className="mt-3 text-sm leading-7 text-white/84 sm:hidden">
-                      {t.planner.chooseActivityMobileBody}
-                    </p>
-                    <p className="mt-3 hidden text-sm leading-7 text-white/84 sm:block">
-                      {t.planner.chooseActivityBody}
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute inset-x-3 bottom-6 rounded-[1.7rem] border border-white/25 bg-white/55 p-5 shadow-[0_-22px_60px_rgba(8,23,43,0.2)] backdrop-blur-xl sm:bottom-8">
-                  <p className="text-sm uppercase tracking-[0.3em] text-[#5f6f8d]">{t.planner.activity}</p>
-                  <div className="mt-4 grid gap-3">
-                    {translatedActivities.map((choice) => (
-                      <button
-                        key={choice.id}
-                        type="button"
-                        onClick={() => setActivity(choice.id)}
-                        aria-pressed={activity === choice.id}
-                        className={cn(
-                          'flex items-start justify-between gap-4 rounded-[1.4rem] border px-5 py-5 text-left transition',
-                          activity === choice.id
-                            ? 'border-[#7f9fd7] bg-[#eef4ff] shadow-[0_12px_30px_rgba(95,134,199,0.14)]'
-                            : 'border-[#d9e4f6] bg-white hover:bg-[#f8fbff]',
-                        )}
-                      >
-                        <span>
-                          <span className="block text-[1rem] font-semibold leading-6 text-[#34557f]">
-                            {choice.title}
-                          </span>
-                          <span className="mt-1 block text-sm font-normal leading-6 text-slate-600">
-                            {choice.description}
-                          </span>
-                        </span>
-                        {activity === choice.id ? (
-                          <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#5f86c7]" />
-                        ) : (
-                          <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-slate-400" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="group relative overflow-hidden rounded-[2rem] border border-[#d7e2f5] shadow-[0_20px_60px_rgba(214,168,73,0.14)]">
-                <div className="absolute inset-0">
-                  <Image
-                    src="/selection-lobster-garlic-butter.png"
-                    alt="Cooked lobster tails for the reception dinner"
-                    fill
-                    className="object-cover object-[52%_44%] transition duration-700 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <div className="relative min-h-[16rem] p-6">
-                  <div className="max-w-sm rounded-[1.35rem] border border-white/12 bg-[rgba(35,22,8,0.16)] px-4 py-4 backdrop-blur-[2px]">
-                    <p className="text-sm uppercase tracking-[0.28em] text-white/78">{t.planner.nov25}</p>
-                    <h3 className="mt-4 text-2xl font-semibold text-white">{t.planner.chooseDinner}</h3>
-                    <p className="mt-3 text-sm leading-7 text-white/86">
-                      {t.planner.chooseDinnerBody}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative mx-3 mb-3 rounded-[1.7rem] border border-white/25 bg-white/55 p-4 shadow-[0_-22px_60px_rgba(8,23,43,0.12)] backdrop-blur-xl">
-                  <div className="grid gap-5">
-                    <SelectionGroup
-                      title={t.planner.starter}
-                      items={translatedStarters}
-                      value={starter}
-                      onChange={setStarter}
-                    />
-                    <SelectionGroup title={t.planner.main} items={translatedMains} value={main} onChange={setMain} />
-                    <SelectionGroup
-                      title={t.planner.dessert}
-                      items={translatedDesserts}
-                      value={dessert}
-                      onChange={setDessert}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            )}
-          </section>
-        </div>
-      )}
 
       <div
         className={cn(
           'relative mx-auto max-w-7xl px-5 pb-0 pt-28 transition duration-300 sm:px-8 lg:px-12',
-          (introOpen || plannerOpen) && 'pointer-events-none select-none blur-[6px] saturate-[0.9]',
+          introOpen && 'pointer-events-none select-none blur-[6px] saturate-[0.9]',
         )}
       >
         <header className="fixed left-1/2 top-4 z-40 w-[calc(100%-2rem)] max-w-7xl -translate-x-1/2 overflow-visible rounded-full border border-[#d5e2f5] bg-white/75 px-5 py-3 shadow-[0_18px_50px_rgba(89,120,170,0.12)] backdrop-blur-xl sm:w-[calc(100%-4rem)]">
@@ -2202,53 +2077,27 @@ export function WeddingExperience() {
             </article>
           </div>
 
-          <div className="bg-[linear-gradient(180deg,#fffdfa,#f4f8ff)] px-7 py-16 lg:px-12">
-            <h2 className="text-4xl font-semibold leading-tight text-[#34557f]">{t.food.changeTitle}</h2>
-            <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-600">
-              {t.food.changeBody}
-            </p>
-            <p className="mt-4 text-sm leading-7 text-slate-700">
-              {t.food.deadline} <span className="font-semibold text-[#34557f]">{t.food.deadlineDate}</span>
-            </p>
-
-            <div className="mt-8 space-y-8">
-              <SelectionGroup
-                title={t.planner.starter}
-                items={translatedStarters}
-                value={starter}
-                onChange={setStarter}
-              />
-              <SelectionGroup title={t.planner.main} items={translatedMains} value={main} onChange={setMain} />
-              <SelectionGroup
-                title={t.planner.dessert}
-                items={translatedDesserts}
-                value={dessert}
-                onChange={setDessert}
-              />
-              <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{t.food.allergyTitle}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{t.food.allergyBody}</p>
-                <Textarea
-                  value={allergies}
-                  onChange={(event) => setAllergies(event.target.value)}
-                  placeholder={t.food.allergyPlaceholder}
-                  className="mt-3 min-h-[96px] resize-none rounded-[1.2rem] border-[#d9e4f6] bg-white/80 text-slate-700 placeholder:text-slate-400"
-                />
+          <div className="flex items-center bg-[linear-gradient(180deg,#fffdfa,#f4f8ff)] px-7 py-16 lg:px-12">
+            <div className="max-w-xl">
+              <p className={cn(calligraphyFont.className, 'text-3xl leading-none text-[#b38a35]')}>
+                Reception Dinner
+              </p>
+              <h2 className="mt-5 text-4xl font-semibold leading-tight text-[#34557f]">{t.food.changeTitle}</h2>
+              <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-600">
+                {t.food.changeBody}
+              </p>
+              <p className="mt-4 text-sm leading-7 text-slate-700">
+                {t.food.deadline} <span className="font-semibold text-[#34557f]">{t.food.deadlineDate}</span>
+              </p>
+              <div className="mt-7 border-l border-[#d7e2f5] bg-white/72 px-5 py-4">
+                <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{t.food.kidsMenu}</p>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{t.food.kidsMenuBody}</p>
+                <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-700">
+                  {menu.kidsMenu.map((item) => (
+                    <li key={item}>• {item}</li>
+                  ))}
+                </ul>
               </div>
-            </div>
-
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm text-slate-600">
-                {savedAt ? `${t.common.savedOnDevice} ${savedAt}` : t.common.saveBrowser}
-              </div>
-              <button
-                type="button"
-                onClick={() => void updateSelections('food')}
-                disabled={isUpdatingSelections}
-                className="rounded-full bg-[#5f86c7] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#5076b8]"
-              >
-                {isUpdatingSelections ? t.common.updating : t.common.updateSubmit}
-              </button>
             </div>
           </div>
           </div>
@@ -2270,70 +2119,91 @@ export function WeddingExperience() {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="grid lg:grid-cols-[1.08fr_0.92fr]">
           <div className="bg-white px-7 py-16 lg:px-12">
-            <h2 className="text-4xl font-semibold leading-tight text-[#34557f]">{t.activity.changeTitle}</h2>
-            <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-600">
-              {t.activity.changeBody}
-            </p>
-            <p className="mt-4 text-sm leading-7 text-slate-700">
-              {t.activity.deadline} <span className="font-semibold text-[#34557f]">{t.activity.deadlineDate}</span>
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {translatedActivities.map((option) => (
-                <button
-                  key={option.id}
-                  type="button"
-                  onClick={() => setActivity(option.id)}
-                  aria-pressed={activity === option.id}
-                  className={cn(
-                    'w-full overflow-hidden border text-left transition',
-                    activity === option.id
-                      ? 'border-[#7f9fd7] bg-[#eef4ff] shadow-[0_12px_35px_rgba(95,134,199,0.14)]'
-                      : 'border-[#d9e4f6] bg-[#fbfdff] hover:bg-[#f4f8ff]',
-                  )}
-                >
-                  <div className="relative h-48">
-                    <Image
-                      src={option.image}
-                      alt={option.imageAlt}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,31,54,0.06)_0%,rgba(17,31,54,0.16)_42%,rgba(17,31,54,0.48)_100%)]" />
-                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
-                      <p className="font-display text-[1.65rem] leading-tight text-white">{option.title}</p>
-                      {activity === option.id ? (
-                        <span className="rounded-full bg-white/90 p-2 text-[#5f86c7]">
-                          <Check className="h-5 w-5" />
-                        </span>
-                      ) : (
-                        <span className="rounded-full bg-white/82 p-2 text-slate-500">
-                          <ChevronRight className="h-5 w-5" />
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <p className="text-sm leading-6 text-slate-700">
-                      {option.websiteDescription ?? option.description}
-                    </p>
-                  </div>
-                </button>
+            <div className="max-w-4xl">
+              <p className={cn(calligraphyFont.className, 'text-3xl leading-none text-[#b38a35]')}>
+                RSVP Details
+              </p>
+              <h2 className="mt-5 text-4xl font-semibold leading-tight text-[#34557f]">{t.activity.changeTitle}</h2>
+              <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-600">
+                {t.activity.changeBody}
+              </p>
+              <div className="mt-5 grid gap-4 border-l border-[#c9d9f3] bg-[#f7faff] p-5 md:grid-cols-2">
+                <div>
+                  <label htmlFor="party-contact-name" className="text-xs uppercase tracking-[0.28em] text-slate-500">
+                    {t.planner.guestName}
+                  </label>
+                  <Input
+                    id="party-contact-name"
+                    value={guestName}
+                    onChange={(event) => setGuestName(event.target.value)}
+                    placeholder={t.planner.namePlaceholder}
+                    className="mt-2 h-11 rounded-xl border-[#cfdbf2] bg-white"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="party-contact-email" className="text-xs uppercase tracking-[0.28em] text-slate-500">
+                    {t.planner.guestEmail}
+                  </label>
+                  <Input
+                    id="party-contact-email"
+                    type="email"
+                    value={guestEmail}
+                    onChange={(event) => setGuestEmail(event.target.value)}
+                    placeholder={t.planner.emailPlaceholder}
+                    className="mt-2 h-11 rounded-xl border-[#cfdbf2] bg-white"
+                  />
+                </div>
+              </div>
+              <p className="mt-5 text-sm leading-7 text-slate-700">
+                {t.activity.activityDeadline} <span className="font-semibold text-[#34557f]">{t.activity.deadlineDate}</span>
+                <span className="mx-2 text-slate-300">/</span>
+                {t.food.deadline} <span className="font-semibold text-[#34557f]">{t.food.deadlineDate}</span>
+              </p>
+            </div>
+
+            <div className="mt-8 space-y-5">
+              {partyGuests.map((guest, index) => (
+                <PartyGuestCard
+                  key={guest.id}
+                  guest={guest}
+                  index={index}
+                  canRemove={partyGuests.length > 1}
+                  labels={t.party}
+                  planner={t.planner}
+                  food={t.food}
+                  translatedActivities={translatedActivities}
+                  translatedStarters={translatedStarters}
+                  translatedMains={translatedMains}
+                  translatedDesserts={translatedDesserts}
+                  onChange={(updates) => updatePartyGuest(guest.id, updates)}
+                  onRemove={() => removePartyGuest(guest.id)}
+                />
               ))}
             </div>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-sm text-slate-600">
-                {savedAt ? `${t.common.savedOnDevice} ${savedAt}` : t.common.saveBrowser}
-              </div>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="button"
-                onClick={() => void updateSelections('activity')}
-                disabled={isUpdatingSelections}
-                className="rounded-full bg-[#5f86c7] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#5076b8]"
+                onClick={addPartyGuest}
+                className="rounded-full border border-[#cfdbf2] bg-white px-5 py-3 text-sm font-semibold text-[#45689d] transition hover:bg-[#f8fbff]"
               >
-                {isUpdatingSelections ? t.common.updating : t.common.updateSubmit}
+                {t.party.addGuest}
               </button>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="text-sm text-slate-600">
+                  {savedAt ? `${t.common.savedOnDevice} ${savedAt}` : t.common.saveBrowser}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => void submitPartySelections()}
+                  disabled={isUpdatingSelections}
+                  className="rounded-full bg-[#5f86c7] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#5076b8] disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isUpdatingSelections ? t.common.updating : t.party.submit}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -2441,9 +2311,14 @@ export function WeddingExperience() {
 
                 <div className="mt-8 border-l border-[#d7e2f5] bg-[#edf4ff] px-5 py-4">
                   <p className="text-xs uppercase tracking-[0.3em] text-[#5f86c7]">{t.accommodation.roomCode}</p>
-                  <p className="mt-2 text-lg font-semibold text-[#34557f]">
+                  <a
+                    href={wymaraBookingUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2 inline-flex text-lg font-semibold text-[#34557f] underline decoration-[#b38a35]/40 underline-offset-4 transition hover:text-[#45689d]"
+                  >
                     {weddingRoomCode || t.accommodation.codeFallback}
-                  </p>
+                  </a>
                   <p className="mt-1 text-sm text-slate-600">
                     {t.accommodation.codeBody}
                   </p>
@@ -2680,10 +2555,25 @@ export function WeddingExperience() {
         </section>
       </div>
 
-      {!introOpen && !plannerOpen ? <WeddingChat language={language} /> : null}
+      {!introOpen ? <WeddingChat language={language} /> : null}
     </div>
   );
 }
+
+type PartyGuestCardProps = {
+  guest: PartyGuest;
+  index: number;
+  canRemove: boolean;
+  labels: (typeof copy)[Language]['party'];
+  planner: (typeof copy)[Language]['planner'];
+  food: (typeof copy)[Language]['food'];
+  translatedActivities: Array<(typeof activityChoices)[number] & (typeof activityCopy.en)[string]>;
+  translatedStarters: Array<{ value: string; label: string }>;
+  translatedMains: Array<{ value: string; label: string; description?: string }>;
+  translatedDesserts: Array<{ value: string; label: string }>;
+  onChange: (updates: Partial<PartyGuest>) => void;
+  onRemove: () => void;
+};
 
 type SelectionGroupProps = {
   title: string;
@@ -2701,6 +2591,211 @@ type LanguageToggleProps = {
   language: Language;
   onChange: (language: Language) => void;
 };
+
+function PartyGuestCard({
+  guest,
+  index,
+  canRemove,
+  labels,
+  planner,
+  food,
+  translatedActivities,
+  translatedStarters,
+  translatedMains,
+  translatedDesserts,
+  onChange,
+  onRemove,
+}: PartyGuestCardProps) {
+  const isAttending = guest.rsvp === 'attend';
+
+  return (
+    <article className="border border-[#d7e2f5] bg-[linear-gradient(180deg,#ffffff,#f7faff)] p-5 shadow-[0_16px_45px_rgba(95,134,199,0.08)]">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="text-xs uppercase tracking-[0.32em] text-[#5f86c7]">
+            {labels.guestLabel} {index + 1}
+          </p>
+          <h3 className="mt-2 font-display text-3xl leading-none text-[#34557f]">
+            {guest.name || labels.guestName}
+          </h3>
+        </div>
+        {canRemove ? (
+          <button
+            type="button"
+            onClick={onRemove}
+            className="rounded-full border border-[#cfdbf2] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#45689d] transition hover:bg-[#f8fbff]"
+          >
+            {labels.remove}
+          </button>
+        ) : null}
+      </div>
+
+      <div className="mt-5 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <label className="text-xs uppercase tracking-[0.28em] text-slate-500" htmlFor={`party-guest-${guest.id}`}>
+            {labels.guestName}
+          </label>
+          <Input
+            id={`party-guest-${guest.id}`}
+            value={guest.name}
+            onChange={(event) => onChange({ name: event.target.value })}
+            placeholder={labels.guestPlaceholder}
+            className="mt-2 h-11 rounded-xl border-[#cfdbf2] bg-white"
+          />
+        </div>
+        <div>
+          <p className="text-xs uppercase tracking-[0.28em] text-slate-500">{labels.rsvp}</p>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            {(['attend', 'miss'] as const).map((value) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => onChange({ rsvp: value })}
+                aria-pressed={guest.rsvp === value}
+                className={cn(
+                  'rounded-full border px-4 py-2.5 text-sm font-semibold transition',
+                  guest.rsvp === value
+                    ? 'border-[#7f9fd7] bg-[#eef4ff] text-[#34557f]'
+                    : 'border-[#d9e4f6] bg-white text-slate-500 hover:bg-[#f8fbff]',
+                )}
+              >
+                {value === 'attend' ? labels.attend : labels.miss}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {isAttending ? (
+        <div className="mt-6 grid gap-7 xl:grid-cols-2">
+          <div>
+            <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{labels.activity}</p>
+            <div className="mt-3 grid gap-4">
+              {translatedActivities.map((option) => {
+                const isSelected = guest.activity === option.id;
+
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => onChange({ activity: option.id })}
+                    aria-pressed={isSelected}
+                    className={cn(
+                      'overflow-hidden border text-left transition',
+                      isSelected
+                        ? 'border-[#7f9fd7] bg-[#eef4ff] shadow-[0_14px_34px_rgba(95,134,199,0.16)]'
+                        : 'border-[#d9e4f6] bg-white/86 hover:bg-white hover:shadow-[0_12px_30px_rgba(95,134,199,0.1)]',
+                    )}
+                  >
+                    <div className="relative h-40">
+                      <Image
+                        src={option.image}
+                        alt={option.imageAlt}
+                        fill
+                        className={cn(
+                          'object-cover transition duration-700',
+                          option.id === 'ocean-horseback' ? 'object-[50%_34%]' : 'object-center',
+                          isSelected && 'scale-[1.03]',
+                        )}
+                        sizes="(min-width: 1280px) 24vw, (min-width: 768px) 44vw, 88vw"
+                      />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,31,54,0.04)_0%,rgba(17,31,54,0.12)_48%,rgba(17,31,54,0.5)_100%)]" />
+                      <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
+                        <p className="font-display text-[1.65rem] leading-tight text-white">{option.title}</p>
+                        <span
+                          className={cn(
+                            'rounded-full p-2',
+                            isSelected ? 'bg-white/92 text-[#5f86c7]' : 'bg-white/80 text-slate-500',
+                          )}
+                        >
+                          {isSelected ? <Check className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="px-5 py-4">
+                      <p className="text-sm leading-6 text-slate-700">
+                        {option.websiteDescription ?? option.description}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="grid gap-5">
+            <SelectionGroup title={planner.starter} items={translatedStarters} value={guest.starter} onChange={(value) => onChange({ starter: value })} />
+            <SelectionGroup title={planner.main} items={translatedMains} value={guest.main} onChange={(value) => onChange({ main: value })} />
+            <SelectionGroup title={planner.dessert} items={translatedDesserts} value={guest.dessert} onChange={(value) => onChange({ dessert: value })} />
+            <div>
+              <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{food.allergyTitle}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{food.allergyBody}</p>
+              <Textarea
+                value={guest.allergies}
+                onChange={(event) => onChange({ allergies: event.target.value })}
+                placeholder={food.allergyPlaceholder}
+                className="mt-3 min-h-[84px] resize-none rounded-[1.2rem] border-[#d9e4f6] bg-white/80 text-slate-700 placeholder:text-slate-400"
+              />
+            </div>
+            <div className="border-l border-[#d7e2f5] bg-[#f7faff] px-4 py-4">
+              <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{food.kidsMealTitle}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{food.kidsMealBody}</p>
+              <Textarea
+                value={guest.kidsMeal}
+                onChange={(event) => onChange({ kidsMeal: event.target.value })}
+                placeholder={food.kidsMealPlaceholder}
+                className="mt-3 min-h-[84px] resize-none rounded-[1.2rem] border-[#d9e4f6] bg-white/80 text-slate-700 placeholder:text-slate-400"
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </article>
+  );
+}
+
+function SelectionGroup({ title, items, value, onChange }: SelectionGroupProps) {
+  return (
+    <div>
+      <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{title}</p>
+      <div className="mt-3 grid gap-3">
+        {items.map((item) => {
+          const option = typeof item === 'string' ? { value: item, label: item } : item;
+          const isSelected = value === option.value;
+
+          return (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() => onChange(option.value)}
+              aria-pressed={isSelected}
+              className={cn(
+                'flex items-start justify-between gap-4 rounded-[1.4rem] border px-5 py-4 text-left transition',
+                isSelected
+                  ? 'border-[#7f9fd7] bg-[#eef4ff] shadow-[0_12px_30px_rgba(95,134,199,0.14)]'
+                  : 'border-[#d9e4f6] bg-white/82 hover:bg-white',
+              )}
+            >
+              <span>
+                <span className="block text-[1rem] font-semibold leading-6 text-[#34557f]">{option.label}</span>
+                {option.description ? (
+                  <span className="mt-1 block text-sm font-normal leading-6 text-slate-600">
+                    {option.description}
+                  </span>
+                ) : null}
+              </span>
+              {isSelected ? (
+                <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#5f86c7]" />
+              ) : (
+                <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-slate-400" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 function MenuList({ title, items }: MenuListProps) {
   return (
@@ -2736,54 +2831,6 @@ function LanguageToggle({ language, onChange }: LanguageToggleProps) {
           {languageLabels[option]}
         </button>
       ))}
-    </div>
-  );
-}
-
-function SelectionGroup({ title, items, value, onChange }: SelectionGroupProps) {
-  return (
-    <div>
-      <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{title}</p>
-      <div className="mt-3 grid gap-3">
-        {items.map((item) => {
-          const option = typeof item === 'string' ? { value: item, label: item } : item;
-
-          return (
-            <button
-              key={option.value}
-              type="button"
-              onClick={() => onChange(option.value)}
-              aria-pressed={value === option.value}
-              className={cn(
-                'rounded-[1.4rem] border p-4 text-left transition',
-                value === option.value
-                  ? 'border-[#7f9fd7] bg-[#eef4ff] shadow-[0_10px_28px_rgba(95,134,199,0.12)]'
-                  : 'border-[#d9e4f6] bg-white hover:bg-[#f8fbff]',
-              )}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <span className="block text-sm leading-6 text-slate-700">
-                    <span className="text-[1rem] font-semibold leading-6 text-[#34557f]">
-                      {option.label}
-                    </span>
-                    {option.description ? (
-                      <span className="mt-1 block text-sm font-normal leading-6 text-slate-600">
-                        {option.description}
-                      </span>
-                    ) : null}
-                  </span>
-                </div>
-                {value === option.value ? (
-                  <Check className="mt-0.5 h-5 w-5 text-[#5f86c7]" />
-                ) : (
-                  <ChevronRight className="mt-0.5 h-5 w-5 text-slate-400" />
-                )}
-              </div>
-            </button>
-          );
-        })}
-      </div>
     </div>
   );
 }

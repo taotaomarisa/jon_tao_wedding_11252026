@@ -9,6 +9,7 @@ const HEADERS = [
   'Main',
   'Dessert',
   'Allergies',
+  'Kids Food Request',
   'Last Updated',
 ];
 
@@ -45,8 +46,16 @@ function getWeddingSelectionsSheet() {
     throw new Error(`Sheet tab with gid ${SHEET_GID} was not found.`);
   }
 
-  const firstRow = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
-  const hasHeaders = HEADERS.every((header, index) => firstRow[index] === header);
+  const firstRow = sheet.getRange(1, 1, 1, Math.max(HEADERS.length, sheet.getLastColumn())).getValues()[0];
+  const hasKidsColumn = firstRow.includes('Kids Food Request');
+  const lastUpdatedIndex = firstRow.indexOf('Last Updated');
+
+  if (!hasKidsColumn && lastUpdatedIndex >= 0) {
+    sheet.insertColumnBefore(lastUpdatedIndex + 1);
+  }
+
+  const updatedFirstRow = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
+  const hasHeaders = HEADERS.every((header, index) => updatedFirstRow[index] === header);
 
   if (!hasHeaders) {
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
@@ -71,37 +80,64 @@ function doPost(event) {
     }
 
     const sheet = getWeddingSelectionsSheet();
+    const guests = Array.isArray(payload.guests) && payload.guests.length > 0
+      ? payload.guests
+      : [
+          {
+            guestName: payload.guestName || '',
+            rsvp: payload.rsvp || (payload.submissionType === 'Rsvp Declined' ? 'Miss' : 'Attend'),
+            activity: payload.activity || '',
+            starter: payload.starter || '',
+            main: payload.main || '',
+            dessert: payload.dessert || '',
+            allergies: payload.allergies || '',
+            kidsMeal: payload.kidsMeal || '',
+          },
+        ];
+
     const lastRow = sheet.getLastRow();
-    const existingEmails =
+    const existingRows =
       lastRow > 1
         ? sheet
-            .getRange(2, 2, lastRow - 1, 1)
+            .getRange(2, 1, lastRow - 1, HEADERS.length)
             .getValues()
-            .flat()
         : [];
-    const existingIndex = existingEmails.findIndex(
-      (email) => String(email).trim().toLowerCase() === guestEmail,
-    );
-    const targetRow = existingIndex >= 0 ? existingIndex + 2 : lastRow + 1;
+    let lastTargetRow = lastRow;
 
-    sheet
-      .getRange(targetRow, 1, 1, HEADERS.length)
-      .setValues([
-        [
-          payload.guestName || '',
-          payload.guestEmail || '',
-          payload.rsvp || (payload.submissionType === 'Rsvp Declined' ? 'Miss' : 'Attend'),
-          cleanActivityLabel(payload.activity),
-          cleanFoodLabel(payload.starter),
-          cleanFoodLabel(payload.main),
-          cleanFoodLabel(payload.dessert),
-          payload.allergies || '',
-          payload.submittedAt ? new Date(payload.submittedAt) : new Date(),
-        ],
-      ]);
+    guests.forEach((guest) => {
+      const guestName = String(guest.guestName || payload.guestName || '').trim();
+      if (!guestName) {
+        return;
+      }
+
+      const existingIndex = existingRows.findIndex((row) => {
+        const rowName = String(row[0]).trim().toLowerCase();
+        const rowEmail = String(row[1]).trim().toLowerCase();
+        return rowName === guestName.toLowerCase() && rowEmail === guestEmail;
+      });
+      const targetRow = existingIndex >= 0 ? existingIndex + 2 : sheet.getLastRow() + 1;
+      lastTargetRow = targetRow;
+
+      sheet
+        .getRange(targetRow, 1, 1, HEADERS.length)
+        .setValues([
+          [
+            guestName,
+            payload.guestEmail || '',
+            guest.rsvp || (payload.submissionType === 'Rsvp Declined' ? 'Miss' : 'Attend'),
+            cleanActivityLabel(guest.activity),
+            cleanFoodLabel(guest.starter),
+            cleanFoodLabel(guest.main),
+            cleanFoodLabel(guest.dessert),
+            guest.allergies || '',
+            guest.kidsMeal || '',
+            payload.submittedAt ? new Date(payload.submittedAt) : new Date(),
+          ],
+        ]);
+    });
 
     return ContentService.createTextOutput(
-      JSON.stringify({ ok: true, row: targetRow }),
+      JSON.stringify({ ok: true, row: lastTargetRow }),
     ).setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
     return ContentService.createTextOutput(
