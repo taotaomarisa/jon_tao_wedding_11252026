@@ -5,6 +5,7 @@ const HEADERS = [
   'Guest Email',
   'RSVP',
   'Activity',
+  'Meal Type',
   'Starter',
   'Main',
   'Dessert',
@@ -47,8 +48,15 @@ function getWeddingSelectionsSheet() {
   }
 
   const firstRow = sheet.getRange(1, 1, 1, Math.max(HEADERS.length, sheet.getLastColumn())).getValues()[0];
-  const hasKidsColumn = firstRow.includes('Kids Food Request');
-  const lastUpdatedIndex = firstRow.indexOf('Last Updated');
+  const hasMealTypeColumn = firstRow.includes('Meal Type');
+  const starterIndex = firstRow.indexOf('Starter');
+  if (!hasMealTypeColumn && starterIndex >= 0) {
+    sheet.insertColumnBefore(starterIndex + 1);
+  }
+
+  const rowAfterMealType = sheet.getRange(1, 1, 1, Math.max(HEADERS.length, sheet.getLastColumn())).getValues()[0];
+  const hasKidsColumn = rowAfterMealType.includes('Kids Food Request');
+  const lastUpdatedIndex = rowAfterMealType.indexOf('Last Updated');
 
   if (!hasKidsColumn && lastUpdatedIndex >= 0) {
     sheet.insertColumnBefore(lastUpdatedIndex + 1);
@@ -75,10 +83,6 @@ function doPost(event) {
       .trim()
       .toLowerCase();
 
-    if (!guestEmail) {
-      throw new Error('guestEmail is required.');
-    }
-
     const sheet = getWeddingSelectionsSheet();
     const guests = Array.isArray(payload.guests) && payload.guests.length > 0
       ? payload.guests
@@ -87,6 +91,7 @@ function doPost(event) {
             guestName: payload.guestName || '',
             rsvp: payload.rsvp || (payload.submissionType === 'Rsvp Declined' ? 'Miss' : 'Attend'),
             activity: payload.activity || '',
+            mealType: payload.mealType || 'Adult',
             starter: payload.starter || '',
             main: payload.main || '',
             dessert: payload.dessert || '',
@@ -126,6 +131,7 @@ function doPost(event) {
             payload.guestEmail || '',
             guest.rsvp || (payload.submissionType === 'Rsvp Declined' ? 'Miss' : 'Attend'),
             cleanActivityLabel(guest.activity),
+            guest.rsvp === 'Miss' ? '' : guest.mealType || 'Adult',
             cleanFoodLabel(guest.starter),
             cleanFoodLabel(guest.main),
             cleanFoodLabel(guest.dessert),

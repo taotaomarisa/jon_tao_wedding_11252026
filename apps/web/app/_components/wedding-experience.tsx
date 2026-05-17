@@ -257,6 +257,10 @@ const copy = {
       rsvp: 'RSVP',
       activity: 'Nov 24 activity',
       dinner: 'Reception dinner',
+      mealType: 'Meal type',
+      adultMenu: 'Adult Menu',
+      kidsMenu: 'Kids Menu',
+      kidsMeal: 'Kids meal',
     },
     home: {
       badge: 'Beach wedding weekend at Wymara Villa in Turks and Caicos',
@@ -311,14 +315,14 @@ const copy = {
       dessert: 'Dessert',
       canapes: 'Canapés',
       canapesBody: 'Passed canapés bites served during cocktail hour.',
-      kidsMenu: 'Kids Corner',
-      kidsMenuBody: 'For younger children, these options are available separately. Parents can add the child’s name and preferred Kids Corner item in RSVP.',
+      kidsMenu: 'Nov 25 Meal Selection',
+      kidsMenuBody: 'For the Nov 25 reception dinner, RSVP lets you choose either Adult Menu or Kids Menu for each guest.',
       kidsMealTitle: 'Kids food request',
       kidsMealBody: 'If you are bringing a younger child who will eat from Kids Corner, please include the child’s name and preferred kids meal here.',
       kidsMealPlaceholder: 'Example: Emma - kids mac and cheese; Leo - kids cheese pizza...',
       selectionEyebrow: 'Reception Dinner Selection',
-      changeTitle: 'Dinner selections live in RSVP',
-      changeBody: 'When you are ready, submit each guest’s reception dinner choices and allergy notes in RSVP. You can return to update them before the final deadline.',
+      changeTitle: 'Reception dinner choices',
+      changeBody: 'Please submit each guest’s Nov 25 reception dinner choice in RSVP. You can choose Adult Menu or Kids Menu for each guest and update your selections before the final deadline.',
       deadline: 'Final date to make food changes:',
       deadlineDate: 'October 1, 2026',
       allergyTitle: 'Food allergies or dietary notes',
@@ -472,6 +476,10 @@ const copy = {
       rsvp: 'RSVP',
       activity: 'Actividad del 24 de noviembre',
       dinner: 'Cena de recepción',
+      mealType: 'Tipo de menú',
+      adultMenu: 'Menú adulto',
+      kidsMenu: 'Menú infantil',
+      kidsMeal: 'Comida infantil',
     },
     home: {
       badge: 'Boda en la playa en Wymara Villa en Turks and Caicos',
@@ -526,14 +534,14 @@ const copy = {
       dessert: 'Postre',
       canapes: 'Canapés',
       canapesBody: 'Canapés y bocaditos de cóctel servidos durante la hora de cóctel.',
-      kidsMenu: 'Kids Corner',
-      kidsMenuBody: 'Para niños pequeños, estas opciones están disponibles por separado. Los padres pueden agregar el nombre del niño y su opción preferida de Kids Corner en RSVP.',
+      kidsMenu: 'Selección de comida del 25 de noviembre',
+      kidsMenuBody: 'Para la cena de recepción del 25 de noviembre, RSVP te permite elegir Menú adulto o Menú infantil para cada invitado.',
       kidsMealTitle: 'Solicitud de comida infantil',
       kidsMealBody: 'Si traes un niño pequeño que comerá de Kids Corner, incluye aquí su nombre y la comida infantil preferida.',
       kidsMealPlaceholder: 'Ejemplo: Emma - mac and cheese; Leo - pizza de queso...',
       selectionEyebrow: 'Selección de cena',
-      changeTitle: 'Las selecciones de cena están en RSVP',
-      changeBody: 'Cuando estés listo, envía las selecciones de cena y notas de alergia para cada invitado en RSVP. Puedes volver a actualizarlas antes de la fecha límite.',
+      changeTitle: 'Selecciones de cena de recepción',
+      changeBody: 'Por favor envía la selección de cena de recepción del 25 de noviembre para cada invitado en RSVP. Puedes elegir Menú adulto o Menú infantil para cada invitado y actualizar antes de la fecha límite.',
       deadline: 'Fecha final para cambiar comida:',
       deadlineDate: '1 de octubre de 2026',
       allergyTitle: 'Alergias o notas dietéticas',
@@ -687,6 +695,10 @@ const copy = {
       rsvp: 'RSVP',
       activity: '11月24日活动',
       dinner: '婚宴晚餐',
+      mealType: '菜单类型',
+      adultMenu: '成人菜单',
+      kidsMenu: '儿童菜单',
+      kidsMeal: '儿童餐',
     },
     home: {
       badge: 'Wymara Villa 特克斯和凯科斯海滩婚礼',
@@ -741,14 +753,14 @@ const copy = {
       dessert: '甜品',
       canapes: '小食和鸡尾酒时光',
       canapesBody: '仪式和婚宴晚餐之间会提供小食和鸡尾酒时光点心。',
-      kidsMenu: '儿童菜单',
-      kidsMenuBody: '小朋友可以选择单独的儿童菜单。家长可以在 RSVP 中写下孩子姓名和想要的儿童餐。',
+      kidsMenu: '11月25日晚餐选择',
+      kidsMenuBody: '11月25日婚宴晚餐可在 RSVP 中为每位宾客选择成人菜单或儿童菜单。',
       kidsMealTitle: '儿童餐需求',
       kidsMealBody: '如果你会带需要儿童餐的小朋友，请在这里写下孩子姓名和想要的儿童餐。',
       kidsMealPlaceholder: '例如：Emma - 儿童 Mac and cheese；Leo - 儿童芝士披萨...',
       selectionEyebrow: '婚宴晚餐选择',
-      changeTitle: '晚餐选择请在 RSVP 中提交',
-      changeBody: '准备好后，可以在 RSVP 中为每位宾客提交婚宴晚餐选择和过敏备注。截止日期前也可以回来更新。',
+      changeTitle: '婚宴晚餐选择',
+      changeBody: '请在 RSVP 中为每位宾客提交 11月25日婚宴晚餐选择。每位宾客都可以选择成人菜单或儿童菜单，并可在截止日期前更新。',
       deadline: '更改餐食的最后日期：',
       deadlineDate: '2026年10月1日',
       allergyTitle: '食物过敏或饮食备注',
@@ -1030,6 +1042,7 @@ type PartyGuest = {
   id: string;
   name: string;
   rsvp: 'attend' | 'miss';
+  mealType: 'adult' | 'kid';
   starter: string;
   main: string;
   dessert: string;
@@ -1043,11 +1056,12 @@ function createPartyGuest(name = ''): PartyGuest {
     id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
     name,
     rsvp: 'attend',
+    mealType: 'adult',
     starter: receptionStarters[0],
     main: receptionMains[0].value,
     dessert: receptionDesserts[0],
     allergies: '',
-    kidsMeal: '',
+    kidsMeal: kidsMenuItems[0],
     activity: activityChoices[0]?.id ?? '',
   };
 }
@@ -1442,7 +1456,7 @@ export function WeddingExperience() {
 
     const plan: SavedPlan = {
       attendance,
-      guestName: guestName.trim(),
+      guestName: partyGuests.find((guest) => guest.name.trim())?.name.trim() || guestName.trim(),
       guestEmail: guestEmail.trim(),
       starter,
       main,
@@ -1459,16 +1473,6 @@ export function WeddingExperience() {
   }
 
   function validateGuestIdentity() {
-    if (!guestName.trim()) {
-      toast.error(t.toast.guestName);
-      return false;
-    }
-
-    if (!guestEmail.trim()) {
-      toast.error(t.toast.guestEmail);
-      return false;
-    }
-
     if (partyGuests.some((guest) => !guest.name.trim())) {
       toast.error(t.toast.partyGuestName);
       return false;
@@ -1489,7 +1493,7 @@ export function WeddingExperience() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        guestName: guestName.trim(),
+        guestName: partyGuests.find((guest) => guest.name.trim())?.name.trim() || guestName.trim(),
         guestEmail: guestEmail.trim(),
         starter,
         main,
@@ -1500,11 +1504,12 @@ export function WeddingExperience() {
         guests: partyGuests.map((guest) => ({
           guestName: guest.name.trim(),
           rsvp: guest.rsvp === 'miss' ? 'Miss' : 'Attend',
-          starter: guest.rsvp === 'attend' ? guest.starter : '',
-          main: guest.rsvp === 'attend' ? guest.main : '',
-          dessert: guest.rsvp === 'attend' ? guest.dessert : '',
+          mealType: guest.rsvp === 'attend' ? (guest.mealType === 'kid' ? 'Kid' : 'Adult') : '',
+          starter: guest.rsvp === 'attend' && guest.mealType === 'adult' ? guest.starter : '',
+          main: guest.rsvp === 'attend' && guest.mealType === 'adult' ? guest.main : '',
+          dessert: guest.rsvp === 'attend' && guest.mealType === 'adult' ? guest.dessert : '',
           allergies: guest.rsvp === 'attend' ? guest.allergies.trim() : '',
-          kidsMeal: guest.rsvp === 'attend' ? guest.kidsMeal.trim() : '',
+          kidsMeal: guest.rsvp === 'attend' && guest.mealType === 'kid' ? guest.kidsMeal.trim() : '',
           activity: guest.rsvp === 'attend' ? getGuestActivityTitle(guest) : 'Not attending',
         })),
       }),
@@ -2089,15 +2094,6 @@ export function WeddingExperience() {
               <p className="mt-4 text-sm leading-7 text-slate-700">
                 {t.food.deadline} <span className="font-semibold text-[#34557f]">{t.food.deadlineDate}</span>
               </p>
-              <div className="mt-7 border-l border-[#d7e2f5] bg-white/72 px-5 py-4">
-                <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{t.food.kidsMenu}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{t.food.kidsMenuBody}</p>
-                <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-700">
-                  {menu.kidsMenu.map((item) => (
-                    <li key={item}>• {item}</li>
-                  ))}
-                </ul>
-              </div>
             </div>
           </div>
           </div>
@@ -2129,33 +2125,6 @@ export function WeddingExperience() {
               <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-600">
                 {t.activity.changeBody}
               </p>
-              <div className="mt-5 grid gap-4 border-l border-[#c9d9f3] bg-[#f7faff] p-5 md:grid-cols-2">
-                <div>
-                  <label htmlFor="party-contact-name" className="text-xs uppercase tracking-[0.28em] text-slate-500">
-                    {t.planner.guestName}
-                  </label>
-                  <Input
-                    id="party-contact-name"
-                    value={guestName}
-                    onChange={(event) => setGuestName(event.target.value)}
-                    placeholder={t.planner.namePlaceholder}
-                    className="mt-2 h-11 rounded-xl border-[#cfdbf2] bg-white"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="party-contact-email" className="text-xs uppercase tracking-[0.28em] text-slate-500">
-                    {t.planner.guestEmail}
-                  </label>
-                  <Input
-                    id="party-contact-email"
-                    type="email"
-                    value={guestEmail}
-                    onChange={(event) => setGuestEmail(event.target.value)}
-                    placeholder={t.planner.emailPlaceholder}
-                    className="mt-2 h-11 rounded-xl border-[#cfdbf2] bg-white"
-                  />
-                </div>
-              </div>
               <p className="mt-5 text-sm leading-7 text-slate-700">
                 {t.activity.activityDeadline} <span className="font-semibold text-[#34557f]">{t.activity.deadlineDate}</span>
                 <span className="mx-2 text-slate-300">/</span>
@@ -2177,6 +2146,7 @@ export function WeddingExperience() {
                   translatedStarters={translatedStarters}
                   translatedMains={translatedMains}
                   translatedDesserts={translatedDesserts}
+                  translatedKidsMenu={menu.kidsMenu}
                   onChange={(updates) => updatePartyGuest(guest.id, updates)}
                   onRemove={() => removePartyGuest(guest.id)}
                 />
@@ -2329,15 +2299,19 @@ export function WeddingExperience() {
 
             <div className="grid h-full gap-5 bg-[#eef4ff] p-4 md:grid-cols-2">
               {stayCards.map((stay) => (
-                <article
+                <a
                   key={stay.title}
-                  className="grid overflow-hidden border border-[#d9e4f6] bg-white shadow-[0_16px_38px_rgba(69,104,157,0.12)]"
+                  href={stay.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${t.common.visit} ${stay.title}`}
+                  className="group grid overflow-hidden border border-[#d9e4f6] bg-white shadow-[0_16px_38px_rgba(69,104,157,0.12)] transition hover:-translate-y-1 hover:shadow-[0_22px_48px_rgba(69,104,157,0.16)]"
                 >
                   <div className="relative h-56 overflow-hidden">
                     <img
                       src={stay.image}
                       alt={stay.imageAlt}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                     />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,31,54,0.04)_0%,rgba(17,31,54,0.14)_45%,rgba(17,31,54,0.42)_100%)]" />
                     <div className="absolute left-4 top-4 border border-white/25 bg-white/18 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md">
@@ -2353,17 +2327,12 @@ export function WeddingExperience() {
                   <div className="border-t border-[#edf3fb] px-5 py-5">
                     <p className="text-sm leading-6 text-slate-700">
                       {stay.description}{' '}
-                      <a
-                        href={stay.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-medium text-[#45689d] hover:text-[#34557f]"
-                      >
+                      <span className="font-medium text-[#45689d] group-hover:text-[#34557f]">
                         {t.common.visit}
-                      </a>
+                      </span>
                     </p>
                   </div>
-                </article>
+                </a>
               ))}
             </div>
           </div>
@@ -2571,6 +2540,7 @@ type PartyGuestCardProps = {
   translatedStarters: Array<{ value: string; label: string }>;
   translatedMains: Array<{ value: string; label: string; description?: string }>;
   translatedDesserts: Array<{ value: string; label: string }>;
+  translatedKidsMenu: string[];
   onChange: (updates: Partial<PartyGuest>) => void;
   onRemove: () => void;
 };
@@ -2603,6 +2573,7 @@ function PartyGuestCard({
   translatedStarters,
   translatedMains,
   translatedDesserts,
+  translatedKidsMenu,
   onChange,
   onRemove,
 }: PartyGuestCardProps) {
@@ -2643,7 +2614,7 @@ function PartyGuestCard({
             className="mt-2 h-11 rounded-xl border-[#cfdbf2] bg-white"
           />
         </div>
-        <div>
+        <div className="lg:pt-[2px]">
           <p className="text-xs uppercase tracking-[0.28em] text-slate-500">{labels.rsvp}</p>
           <div className="mt-2 grid grid-cols-2 gap-2">
             {(['attend', 'miss'] as const).map((value) => (
@@ -2724,9 +2695,42 @@ function PartyGuestCard({
           </div>
 
           <div className="grid gap-5">
-            <SelectionGroup title={planner.starter} items={translatedStarters} value={guest.starter} onChange={(value) => onChange({ starter: value })} />
-            <SelectionGroup title={planner.main} items={translatedMains} value={guest.main} onChange={(value) => onChange({ main: value })} />
-            <SelectionGroup title={planner.dessert} items={translatedDesserts} value={guest.dessert} onChange={(value) => onChange({ dessert: value })} />
+            <div>
+              <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{labels.mealType}</p>
+              <div className="mt-3 grid grid-cols-2 gap-3">
+                {(['adult', 'kid'] as const).map((value) => {
+                  const isSelected = guest.mealType === value;
+
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => onChange({ mealType: value })}
+                      aria-pressed={isSelected}
+                      className={cn(
+                        'rounded-full border px-4 py-3 text-sm font-semibold transition',
+                        isSelected
+                          ? 'border-[#7f9fd7] bg-[#eef4ff] text-[#34557f]'
+                          : 'border-[#d9e4f6] bg-white text-slate-500 hover:bg-[#f8fbff]',
+                      )}
+                    >
+                      {value === 'adult' ? labels.adultMenu : labels.kidsMenu}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {guest.mealType === 'adult' ? (
+              <>
+                <SelectionGroup title={planner.starter} items={translatedStarters} value={guest.starter} onChange={(value) => onChange({ starter: value })} />
+                <SelectionGroup title={planner.main} items={translatedMains} value={guest.main} onChange={(value) => onChange({ main: value })} />
+                <SelectionGroup title={planner.dessert} items={translatedDesserts} value={guest.dessert} onChange={(value) => onChange({ dessert: value })} />
+              </>
+            ) : (
+              <SelectionGroup title={labels.kidsMeal} items={translatedKidsMenu} value={guest.kidsMeal} onChange={(value) => onChange({ kidsMeal: value })} />
+            )}
+
             <div>
               <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{food.allergyTitle}</p>
               <p className="mt-2 text-sm leading-6 text-slate-600">{food.allergyBody}</p>
@@ -2734,16 +2738,6 @@ function PartyGuestCard({
                 value={guest.allergies}
                 onChange={(event) => onChange({ allergies: event.target.value })}
                 placeholder={food.allergyPlaceholder}
-                className="mt-3 min-h-[84px] resize-none rounded-[1.2rem] border-[#d9e4f6] bg-white/80 text-slate-700 placeholder:text-slate-400"
-              />
-            </div>
-            <div className="border-l border-[#d7e2f5] bg-[#f7faff] px-4 py-4">
-              <p className="text-sm uppercase tracking-[0.25em] text-slate-500">{food.kidsMealTitle}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{food.kidsMealBody}</p>
-              <Textarea
-                value={guest.kidsMeal}
-                onChange={(event) => onChange({ kidsMeal: event.target.value })}
-                placeholder={food.kidsMealPlaceholder}
                 className="mt-3 min-h-[84px] resize-none rounded-[1.2rem] border-[#d9e4f6] bg-white/80 text-slate-700 placeholder:text-slate-400"
               />
             </div>
