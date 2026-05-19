@@ -27,7 +27,7 @@ function cleanActivityLabel(value) {
 
 function cleanFoodLabel(value) {
   const labels = {
-    'Three Taste of the Sea': 'Taste of the Sea',
+    'Three Taste of the Sea': 'Three Taste of the Sea',
     'Mushroom risotto with grana Padano & truffle': 'Mushroom Risotto',
     'Char-grilled beef tenderloin with Lobster': 'Beef Tenderloin + Lobster',
     'Blackened local grouper fillet': 'Grouper Fillet',
@@ -47,14 +47,18 @@ function getWeddingSelectionsSheet() {
     throw new Error(`Sheet tab with gid ${SHEET_GID} was not found.`);
   }
 
-  const firstRow = sheet.getRange(1, 1, 1, Math.max(HEADERS.length, sheet.getLastColumn())).getValues()[0];
+  const firstRow = sheet
+    .getRange(1, 1, 1, Math.max(HEADERS.length, sheet.getLastColumn()))
+    .getValues()[0];
   const hasMealTypeColumn = firstRow.includes('Meal Type');
   const starterIndex = firstRow.indexOf('Starter');
   if (!hasMealTypeColumn && starterIndex >= 0) {
     sheet.insertColumnBefore(starterIndex + 1);
   }
 
-  const rowAfterMealType = sheet.getRange(1, 1, 1, Math.max(HEADERS.length, sheet.getLastColumn())).getValues()[0];
+  const rowAfterMealType = sheet
+    .getRange(1, 1, 1, Math.max(HEADERS.length, sheet.getLastColumn()))
+    .getValues()[0];
   const hasKidsColumn = rowAfterMealType.includes('Kids Food Request');
   const lastUpdatedIndex = rowAfterMealType.indexOf('Last Updated');
 
@@ -84,29 +88,27 @@ function doPost(event) {
       .toLowerCase();
 
     const sheet = getWeddingSelectionsSheet();
-    const guests = Array.isArray(payload.guests) && payload.guests.length > 0
-      ? payload.guests
-      : [
-          {
-            guestName: payload.guestName || '',
-            rsvp: payload.rsvp || (payload.submissionType === 'Rsvp Declined' ? 'Miss' : 'Attend'),
-            activity: payload.activity || '',
-            mealType: payload.mealType || 'Adult',
-            starter: payload.starter || '',
-            main: payload.main || '',
-            dessert: payload.dessert || '',
-            allergies: payload.allergies || '',
-            kidsMeal: payload.kidsMeal || '',
-          },
-        ];
+    const guests =
+      Array.isArray(payload.guests) && payload.guests.length > 0
+        ? payload.guests
+        : [
+            {
+              guestName: payload.guestName || '',
+              rsvp:
+                payload.rsvp || (payload.submissionType === 'Rsvp Declined' ? 'Miss' : 'Attend'),
+              activity: payload.activity || '',
+              mealType: payload.mealType || 'Adult',
+              starter: payload.starter || '',
+              main: payload.main || '',
+              dessert: payload.dessert || '',
+              allergies: payload.allergies || '',
+              kidsMeal: payload.kidsMeal || '',
+            },
+          ];
 
     const lastRow = sheet.getLastRow();
     const existingRows =
-      lastRow > 1
-        ? sheet
-            .getRange(2, 1, lastRow - 1, HEADERS.length)
-            .getValues()
-        : [];
+      lastRow > 1 ? sheet.getRange(2, 1, lastRow - 1, HEADERS.length).getValues() : [];
     let lastTargetRow = lastRow;
 
     guests.forEach((guest) => {
@@ -118,7 +120,12 @@ function doPost(event) {
       const existingIndex = existingRows.findIndex((row) => {
         const rowName = String(row[0]).trim().toLowerCase();
         const rowEmail = String(row[1]).trim().toLowerCase();
-        return rowName === guestName.toLowerCase() && rowEmail === guestEmail;
+
+        if (guestEmail) {
+          return rowName === guestName.toLowerCase() && rowEmail === guestEmail;
+        }
+
+        return rowName === guestName.toLowerCase();
       });
       const targetRow = existingIndex >= 0 ? existingIndex + 2 : sheet.getLastRow() + 1;
       lastTargetRow = targetRow;

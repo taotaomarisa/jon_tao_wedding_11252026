@@ -247,7 +247,7 @@ const copy = {
     },
     party: {
       addGuest: 'Add another guest',
-      remove: 'Remove',
+      remove: 'Delete guest',
       submit: 'Submit RSVP & selections',
       guestLabel: 'Guest',
       attend: 'Attending',
@@ -466,7 +466,7 @@ const copy = {
     },
     party: {
       addGuest: 'Agregar otro invitado',
-      remove: 'Eliminar',
+      remove: 'Eliminar invitado',
       submit: 'Enviar RSVP y selecciones',
       guestLabel: 'Invitado',
       attend: 'Asiste',
@@ -685,7 +685,7 @@ const copy = {
     },
     party: {
       addGuest: '添加另一位宾客',
-      remove: '删除',
+      remove: '删除宾客',
       submit: '提交 RSVP 和选择',
       guestLabel: '宾客',
       attend: '参加',
@@ -2594,7 +2594,8 @@ function PartyGuestCard({
           <button
             type="button"
             onClick={onRemove}
-            className="rounded-full border border-[#cfdbf2] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#45689d] transition hover:bg-[#f8fbff]"
+            aria-label={`${labels.remove}: ${guest.name || `${labels.guestLabel} ${index + 1}`}`}
+            className="rounded-full border border-[#cfdbf2] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#45689d] transition hover:border-[#b9caea] hover:bg-[#f8fbff]"
           >
             {labels.remove}
           </button>
