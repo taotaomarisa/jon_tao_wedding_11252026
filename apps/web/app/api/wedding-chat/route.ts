@@ -19,9 +19,10 @@ Your job is to help guests feel prepared, welcomed, and excited for a destinatio
 Wedding facts:
 - Couple: Jon and Tao
 - Wedding venue: Wymara Villa in Turks and Caicos
-- Welcome party: Beach BBQ on November 23, 2026
+- Welcome party: Beach BBQ at 6PM on November 23, 2026
 - Activity day: November 24, 2026
-- Wedding day: Ceremony, canapes, reception dinner, and party on November 25, 2026
+- Wedding day: Ceremony starts at 4PM at Sunset Cove at Wymara Villa, followed by canapes, reception dinner, and party on November 25, 2026
+- Thanksgiving dinner: an intimate family-and-friends dinner at 5:30PM at Mango Reef on November 26, 2026
 - Main location wording: "Wymara Villa in Turks and Caicos"
 
 Tone:
@@ -46,9 +47,10 @@ What guests can ask about:
 - General flight-planning guidance, with the caveat that live fares and exact timing should be checked in Google Flights or the airline
 
 Schedule and style:
-- Nov 23 Beach BBQ: casual welcome party at Wymara Villa. Dress code is beach chic and relaxed resort wear.
+- Nov 23 Beach BBQ: starts at 6PM. Dress code is beach chic and relaxed resort wear.
 - Nov 24 Island Day: guests choose one activity and have time to unwind. Dress code is easy daytime resort wear; bring swim/sun gear if needed.
-- Nov 25 Ceremony & Reception: black tie optional. Expect ceremony, canapes after the ceremony, reception dinner, and party.
+- Nov 25 Ceremony & Reception: black tie optional. Ceremony starts at 4PM at Sunset Cove at Wymara Villa, followed by canapes, reception dinner, and party.
+- Nov 26 Thanksgiving Dinner: 5:30PM at Mango Reef, an intimate family-and-friends holiday dinner after the wedding day. No formal dress code; guests can come comfortable for dinner.
 
 Dining:
 Beach BBQ salad table:
@@ -97,7 +99,7 @@ Reception desserts:
 - Deconstructed Banoffee Pie
 
 Dining changes and dietary notes:
-- Guests choose dinner before entering the site, but they can update dinner selections on the Dining page.
+- Guests submit Nov 25 reception dinner choices in RSVP. They can choose Adult Menu or Kids Menu for each guest.
 - Final date to make food changes: October 1, 2026.
 - Guests can also leave food allergies or dietary restrictions, such as shellfish allergy, gluten-free, vegetarian, or no pork.
 
@@ -146,7 +148,7 @@ Travel tips:
 Guest-style guidance:
 - Beach BBQ: beach chic, relaxed resort wear, breezy dresses, linen, polos, sandals, elevated but comfortable.
 - Island Day: resort casual, swim/sun gear if relevant, sandals, hat, sunscreen. For horseback riding, choose clothes that can get wet and are comfortable for riding.
-- Ceremony and Reception: black tie optional. Think polished formal or semi-formal evening attire with a beachside setting in mind; avoid overly heavy fabrics and consider shoes that work near grass or sand.
+- Ceremony and Reception: black tie optional. Ceremony starts at 4PM at Sunset Cove at Wymara Villa. Think polished formal or semi-formal evening attire with a beachside setting in mind; avoid overly heavy fabrics and consider shoes that work near grass or sand.
 
 Flights:
 - You do not have live flight search. If asked "how much does a flight cost from X city" or "how long is the flight", explain that prices and routing change often.
@@ -243,7 +245,7 @@ function buildFallbackText(question: string) {
   }
 
   if (message.includes('when') || message.includes('schedule') || message.includes('itinerary')) {
-    return 'The weekend schedule is: beach BBQ welcome party on November 23, 2026, choose-your-own activity day on November 24, 2026, and the wedding plus reception dinner on November 25, 2026 at Wymara Villa.';
+    return 'The wedding-week schedule is: beach BBQ welcome party at 6PM on November 23; choose-your-own activity day on November 24; ceremony at 4PM at Sunset Cove at Wymara Villa followed by reception dinner and party on November 25; and an intimate Thanksgiving dinner with family and friends at 5:30PM at Mango Reef on November 26, 2026.';
   }
 
   if (

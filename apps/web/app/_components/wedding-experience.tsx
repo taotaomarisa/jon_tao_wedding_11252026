@@ -31,6 +31,8 @@ const storageKey = 'jon-tao-wedding-plan';
 const introSeenStorageKey = 'jon-tao-wedding-intro-seen';
 const languageStorageKey = 'jon-tao-wedding-language';
 const wymaraBookingUrl = 'https://be.synxis.com/?Hotel=35896&Chain=24447&arrive=2026-11-22&nights=4&adult=1&group=JONTAOWEDDING';
+const mangoReefMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Mango%20Reef%20Turks%20and%20Caicos';
+const sunsetCoveMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Sunset%20Cove%20Wymara%20Villa%20Turks%20and%20Caicos';
 const weddingDate = new Date('2026-11-25T17:00:00-05:00');
 const languages = ['en', 'es', 'zh'] as const;
 type Language = (typeof languages)[number];
@@ -163,7 +165,7 @@ const introSlides = [
   {
     eyebrow: 'Welcome',
     title: 'Jon & Tao wedding',
-    body: 'Three days of sea breeze, candlelight, and celebration at Wymara Villa.',
+    body: 'Four days of sea breeze, candlelight, Thanksgiving dinner, and celebration at Wymara Villa.',
   },
   {
     eyebrow: 'The Location',
@@ -207,7 +209,7 @@ const copy = {
       locationEyebrow: 'The Location',
       turks2026: 'Turks and Caicos 2026',
       wedding: 'Wedding',
-      headline: 'Three days of sea breeze, candlelight, and celebration on a Caribbean beach.',
+      headline: 'Four days of sea breeze, candlelight, and celebration on a Caribbean beach.',
       locationTitle: 'Wymara Villa in Turks and Caicos',
       locationBody: 'We want you to relax, enjoy your trip, and celebrate this island escape with us.',
       beachBadge: '#1 Beach In The World',
@@ -264,7 +266,7 @@ const copy = {
     },
     home: {
       badge: 'Beach wedding weekend at Wymara Villa in Turks and Caicos',
-      dateRange: 'November 23 to November 25, 2026',
+      dateRange: 'November 23 to November 26, 2026',
       title: 'Your island wedding plans, all in one place.',
       body: 'This site is your island planner. Start with the wedding schedule, then explore your menu selections, activity plans, and island details at your own pace.',
       countdown: 'Countdown',
@@ -279,6 +281,7 @@ const copy = {
         ['Nov 23', 'Welcome Party beach BBQ'],
         ['Nov 24', 'Island activities and time to unwind'],
         ['Nov 25', 'Wedding ceremony & Reception'],
+        ['Nov 26', 'Thanksgiving dinner'],
       ],
     },
     schedule: {
@@ -289,8 +292,8 @@ const copy = {
         {
           day: 'Nov 23',
           title: 'Beach BBQ',
-          body: 'Arrive, settle in, and join everyone for a relaxed beach BBQ kickoff at Wymara Villa.',
-          notes: ['Dress code: Beach & Resort Chic Attire', 'Lightweight fabrics and beach-friendly footwear recommended.', 'Expect a casual evening with the BBQ menu and time to reconnect'],
+          body: 'The welcome evening begins at 6PM with a relaxed beach BBQ kickoff, good food, and time to reconnect.',
+          notes: ['Dress code: Beach & Resort Chic Attire', 'Lightweight fabrics and beach-friendly footwear recommended'],
         },
         {
           day: 'Nov 24',
@@ -301,8 +304,14 @@ const copy = {
         {
           day: 'Nov 25',
           title: 'Ceremony & Reception',
-          body: 'The wedding day brings the ceremony, cocktail-style canapes, reception dinner, and the celebration into the evening.',
-          notes: ['Dress code: black tie optional', 'Expect canapes after the ceremony followed by dinner and the party'],
+          body: 'The wedding day begins with the ceremony at 4pm, followed by cocktail-style canapes, reception dinner, and the celebration into the evening.',
+          notes: ['Dress code: black tie optional', 'Ceremony starts at 4pm', 'Expect canapes after the ceremony followed by dinner and the party'],
+        },
+        {
+          day: 'Nov 26',
+          title: 'Thanksgiving Dinner',
+          body: 'Stay with us one more evening for an intimate Thanksgiving dinner with family and friends.',
+          notes: ['5:30PM at Mango Reef', 'No formal dress code, just come comfortable for dinner with family and friends'],
         },
       ],
     },
@@ -316,13 +325,13 @@ const copy = {
       canapes: 'Canapés',
       canapesBody: 'Passed canapés bites served during cocktail hour.',
       kidsMenu: 'Nov 25 Meal Selection',
-      kidsMenuBody: 'For the Nov 25 reception dinner, RSVP lets you choose either Adult Menu or Kids Menu for each guest.',
+      kidsMenuBody: 'For the Nov 25 reception dinner after the 4pm ceremony, RSVP lets you choose either Adult Menu or Kids Menu for each guest.',
       kidsMealTitle: 'Kids food request',
       kidsMealBody: 'If you are bringing a younger child who will eat from Kids Corner, please include the child’s name and preferred kids meal here.',
       kidsMealPlaceholder: 'Example: Emma - kids mac and cheese; Leo - kids cheese pizza...',
       selectionEyebrow: 'Reception Dinner Selection',
       changeTitle: 'Reception dinner choices',
-      changeBody: 'Please submit each guest’s Nov 25 reception dinner choice in RSVP. You can choose Adult Menu or Kids Menu for each guest and update your selections before the final deadline.',
+      changeBody: 'Please submit each guest’s Nov 25 reception dinner choice in RSVP. Dinner follows the 4pm ceremony, and you can choose Adult Menu or Kids Menu for each guest before the final deadline.',
       deadline: 'Final date to make food changes:',
       deadlineDate: 'October 1, 2026',
       allergyTitle: 'Food allergies or dietary notes',
@@ -339,13 +348,23 @@ const copy = {
       activityDeadline: 'Final date to make activity changes:',
       openPlanner: 'Open RSVP',
       deadlineDate: 'September 1, 2026',
+      activityTime: 'Start time TBD',
       atGlance: 'At A Glance',
       glanceTitle: 'Your wedding-week plans',
       glanceBody: 'A quick look at your wedding-week plans and the selections currently saved for your RSVP. If you make updates here, we will receive the latest version.',
       welcomeParty: 'Welcome Party',
+      welcomeTime: '6PM',
       welcomeBody: 'Beach BBQ at Wymara Villa with a relaxed first-night atmosphere by the water.',
       dinnerLabel: 'Nov 25',
+      ceremonyTitle: 'Wedding Ceremony',
+      ceremonyTime: '4PM at Sunset Cove at Wymara Villa',
+      receptionDinner: 'Reception dinner',
+      thanksgivingLabel: 'Nov 26',
+      thanksgivingTitle: 'Thanksgiving Dinner',
+      thanksgivingTime: '5:30PM at Mango Reef',
+      thanksgivingBody: 'An intimate Thanksgiving dinner with family and friends.',
       starter: 'Starter',
+      main: 'Main',
       dessert: 'Dessert',
       finalNote: 'These are the selections currently attached to your wedding plans, so if you make any updates on this page, they should reflect the version we receive for your RSVP details.',
     },
@@ -483,7 +502,7 @@ const copy = {
     },
     home: {
       badge: 'Boda en la playa en Wymara Villa en Turks and Caicos',
-      dateRange: '23 al 25 de noviembre de 2026',
+      dateRange: '23 al 26 de noviembre de 2026',
       title: 'Tus planes de boda en la isla, en un solo lugar',
       body: 'Este sitio es tu guía de la isla. Empieza con la agenda de la boda y luego explora tus selecciones de menú, actividades y detalles del viaje a tu ritmo.',
       countdown: 'Cuenta regresiva',
@@ -498,6 +517,7 @@ const copy = {
         ['Nov 23', 'Fiesta de bienvenida BBQ en la playa'],
         ['Nov 24', 'Actividades en la isla y tiempo para relajarse'],
         ['Nov 25', 'Ceremonia cena de recepción y fiesta'],
+        ['Nov 26', 'Cena de Thanksgiving'],
       ],
     },
     schedule: {
@@ -508,8 +528,8 @@ const copy = {
         {
           day: 'Nov 23',
           title: 'Beach BBQ',
-          body: 'Lleguen, acomódense y acompáñennos en una bienvenida relajada con BBQ en la playa en Wymara Villa.',
-          notes: ['Código de vestir: Beach & Resort Chic Attire', 'Telas ligeras y calzado cómodo para la playa.', 'Una noche casual con menú BBQ y tiempo para reconectar'],
+          body: 'La bienvenida comienza a las 6PM con un Beach BBQ relajado, buena comida y tiempo para reconectar.',
+          notes: ['Código de vestir: Beach & Resort Chic Attire', 'Telas ligeras y calzado cómodo para la playa'],
         },
         {
           day: 'Nov 24',
@@ -520,8 +540,14 @@ const copy = {
         {
           day: 'Nov 25',
           title: 'Ceremonia y recepción',
-          body: 'El día de la boda incluye ceremonia, canapés tipo cóctel, cena de recepción y celebración por la noche.',
-          notes: ['Código de vestir: black tie optional', 'Canapés después de la ceremonia, luego cena y fiesta'],
+          body: 'El día de la boda comienza con la ceremonia a las 4pm, seguida de canapés tipo cóctel, cena de recepción y celebración por la noche.',
+          notes: ['Código de vestir: black tie optional', 'La ceremonia empieza a las 4pm', 'Canapés después de la ceremonia, luego cena y fiesta'],
+        },
+        {
+          day: 'Nov 26',
+          title: 'Cena de Thanksgiving',
+          body: 'Quédate una noche más para compartir una cena íntima de Thanksgiving con familia y amigos.',
+          notes: ['5:30PM en Mango Reef', 'Sin código de vestir formal, solo ven cómodo para cenar con familia y amigos'],
         },
       ],
     },
@@ -535,13 +561,13 @@ const copy = {
       canapes: 'Canapés',
       canapesBody: 'Canapés y bocaditos de cóctel servidos durante la hora de cóctel.',
       kidsMenu: 'Selección de comida del 25 de noviembre',
-      kidsMenuBody: 'Para la cena de recepción del 25 de noviembre, RSVP te permite elegir Menú adulto o Menú infantil para cada invitado.',
+      kidsMenuBody: 'Para la cena de recepción del 25 de noviembre después de la ceremonia de las 4pm, RSVP te permite elegir Menú adulto o Menú infantil para cada invitado.',
       kidsMealTitle: 'Solicitud de comida infantil',
       kidsMealBody: 'Si traes un niño pequeño que comerá de Kids Corner, incluye aquí su nombre y la comida infantil preferida.',
       kidsMealPlaceholder: 'Ejemplo: Emma - mac and cheese; Leo - pizza de queso...',
       selectionEyebrow: 'Selección de cena',
       changeTitle: 'Selecciones de cena de recepción',
-      changeBody: 'Por favor envía la selección de cena de recepción del 25 de noviembre para cada invitado en RSVP. Puedes elegir Menú adulto o Menú infantil para cada invitado y actualizar antes de la fecha límite.',
+      changeBody: 'Por favor envía la selección de cena de recepción del 25 de noviembre para cada invitado en RSVP. La cena será después de la ceremonia de las 4pm, y puedes elegir Menú adulto o Menú infantil antes de la fecha límite.',
       deadline: 'Fecha final para cambiar comida:',
       deadlineDate: '1 de octubre de 2026',
       allergyTitle: 'Alergias o notas dietéticas',
@@ -558,13 +584,23 @@ const copy = {
       activityDeadline: 'Fecha final para cambiar actividad:',
       openPlanner: 'Abrir RSVP',
       deadlineDate: '1 de septiembre de 2026',
+      activityTime: 'Hora de inicio por confirmar',
       atGlance: 'Resumen',
       glanceTitle: 'Tus planes de la semana de boda',
       glanceBody: 'Un vistazo rápido a tus planes de la semana de boda y las selecciones guardadas para tu RSVP. Si haces cambios aquí, recibiremos la versión más reciente.',
       welcomeParty: 'Fiesta de bienvenida',
+      welcomeTime: '6PM',
       welcomeBody: 'Beach BBQ en Wymara Villa con un ambiente relajado de primera noche junto al agua.',
       dinnerLabel: 'Nov 25',
+      ceremonyTitle: 'Ceremonia de boda',
+      ceremonyTime: '4PM en Sunset Cove en Wymara Villa',
+      receptionDinner: 'Cena de recepción',
+      thanksgivingLabel: 'Nov 26',
+      thanksgivingTitle: 'Cena de Thanksgiving',
+      thanksgivingTime: '5:30PM en Mango Reef',
+      thanksgivingBody: 'Una cena íntima de Thanksgiving con familia y amigos.',
       starter: 'Entrada',
+      main: 'Plato fuerte',
       dessert: 'Postre',
       finalNote: 'Estas son las selecciones actualmente vinculadas a tus planes de boda. Si haces cambios en esta página, recibiremos esa versión para tus detalles de RSVP.',
     },
@@ -702,7 +738,7 @@ const copy = {
     },
     home: {
       badge: 'Wymara Villa 特克斯和凯科斯海滩婚礼',
-      dateRange: '2026年11月23日至11月25日',
+      dateRange: '2026年11月23日至11月26日',
       title: '你的海岛婚礼安排都在这里',
       body: '这个网站是你的海岛婚礼指南。先查看婚礼行程，再慢慢了解菜单选择、活动安排和岛上信息。',
       countdown: '倒计时',
@@ -717,6 +753,7 @@ const copy = {
         ['11月23日', '欢迎派对海滩 BBQ'],
         ['11月24日', '海岛活动和放松时间'],
         ['11月25日', '婚礼仪式晚宴和派对'],
+        ['11月26日', '感恩节晚餐'],
       ],
     },
     schedule: {
@@ -727,8 +764,8 @@ const copy = {
         {
           day: '11月23日',
           title: '海滩 BBQ',
-          body: '抵达后先安顿下来，然后在 Wymara Villa 参加轻松的海滩 BBQ 欢迎派对。',
-          notes: ['着装：Beach & Resort Chic Attire', '建议轻薄面料和适合海滩行走的鞋。', '轻松的 BBQ 晚上，可以和大家见面聊天'],
+          body: '欢迎晚宴将于下午 6 点开始，大家一起享用轻松的海滩 BBQ、美食，并和亲友相聚。',
+          notes: ['着装：Beach & Resort Chic Attire', '建议轻薄面料和适合海滩行走的鞋。'],
         },
         {
           day: '11月24日',
@@ -739,8 +776,14 @@ const copy = {
         {
           day: '11月25日',
           title: '仪式和晚宴',
-          body: '婚礼当天包括仪式、鸡尾酒小食、婚宴晚餐以及晚上的庆祝。',
-          notes: ['着装：Black tie optional', '仪式后有小食，随后是晚宴和派对'],
+          body: '婚礼当天仪式将于下午 4 点开始，之后是鸡尾酒小食、婚宴晚餐以及晚上的庆祝。',
+          notes: ['着装：Black tie optional', '仪式下午 4 点开始', '仪式后有小食，随后是晚宴和派对'],
+        },
+        {
+          day: '11月26日',
+          title: '感恩节晚餐',
+          body: '欢迎多留一个晚上，和家人与朋友一起享用温暖亲密的感恩节晚餐。',
+          notes: ['下午 5:30 在 Mango Reef', '没有正式着装要求，舒适出席这场家人朋友晚餐即可'],
         },
       ],
     },
@@ -754,13 +797,13 @@ const copy = {
       canapes: '小食和鸡尾酒时光',
       canapesBody: '仪式和婚宴晚餐之间会提供小食和鸡尾酒时光点心。',
       kidsMenu: '11月25日晚餐选择',
-      kidsMenuBody: '11月25日婚宴晚餐可在 RSVP 中为每位宾客选择成人菜单或儿童菜单。',
+      kidsMenuBody: '11月25日下午 4 点仪式后的婚宴晚餐，可在 RSVP 中为每位宾客选择成人菜单或儿童菜单。',
       kidsMealTitle: '儿童餐需求',
       kidsMealBody: '如果你会带需要儿童餐的小朋友，请在这里写下孩子姓名和想要的儿童餐。',
       kidsMealPlaceholder: '例如：Emma - 儿童 Mac and cheese；Leo - 儿童芝士披萨...',
       selectionEyebrow: '婚宴晚餐选择',
       changeTitle: '婚宴晚餐选择',
-      changeBody: '请在 RSVP 中为每位宾客提交 11月25日婚宴晚餐选择。每位宾客都可以选择成人菜单或儿童菜单，并可在截止日期前更新。',
+      changeBody: '请在 RSVP 中为每位宾客提交 11月25日婚宴晚餐选择。晚餐将在下午 4 点仪式后进行，每位宾客都可以选择成人菜单或儿童菜单。',
       deadline: '更改餐食的最后日期：',
       deadlineDate: '2026年10月1日',
       allergyTitle: '食物过敏或饮食备注',
@@ -777,13 +820,23 @@ const copy = {
       activityDeadline: '更改活动的最后日期：',
       openPlanner: '打开 RSVP',
       deadlineDate: '2026年9月1日',
+      activityTime: '开始时间待定',
       atGlance: '一览',
       glanceTitle: '你的婚礼周安排',
       glanceBody: '快速查看你的婚礼周安排以及目前保存到 RSVP 的选择。如果你在这里更新，我们会收到最新版本。',
       welcomeParty: '欢迎派对',
+      welcomeTime: '下午 6 点',
       welcomeBody: '在 Wymara Villa 水边享受轻松的第一晚海滩 BBQ。',
       dinnerLabel: '11月25日',
+      ceremonyTitle: '婚礼仪式',
+      ceremonyTime: '下午 4 点在 Wymara Villa 的 Sunset Cove',
+      receptionDinner: '婚宴晚餐',
+      thanksgivingLabel: '11月26日',
+      thanksgivingTitle: '感恩节晚餐',
+      thanksgivingTime: '下午 5:30 在 Mango Reef',
+      thanksgivingBody: '婚礼日之后，和家人与朋友享用温暖亲密的感恩节晚餐。',
       starter: '前菜',
+      main: '主菜',
       dessert: '甜品',
       finalNote: '这些是目前与你的婚礼安排关联的选择。如果你在本页更新，我们会收到更新后的 RSVP 信息。',
     },
@@ -1099,6 +1152,50 @@ export function WeddingExperience() {
     return choiceLabels[language][value] ?? choiceLabels.en[value] ?? { label: value };
   }
 
+  function renderScheduleText(text: string) {
+    const venueLinks = {
+      'Mango Reef': mangoReefMapsUrl,
+      'Sunset Cove': sunsetCoveMapsUrl,
+    };
+    const boldTokens = [
+      '4pm',
+      '4PM',
+      '下午 4 点',
+    ];
+    const token = [...Object.keys(venueLinks), ...boldTokens].find((candidate) => text.includes(candidate));
+
+    if (!token) {
+      return text;
+    }
+
+    const parts = text.split(token);
+    const venueHref = venueLinks[token as keyof typeof venueLinks];
+
+    return (
+      <>
+        {parts.map((part, index) => (
+          <span key={`${token}-${part}-${index}`}>
+            {part}
+            {index < parts.length - 1 ? (
+              venueHref ? (
+                <a
+                  href={venueHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold underline decoration-current/40 underline-offset-4 transition hover:opacity-75"
+                >
+                  {token}
+                </a>
+              ) : (
+                <strong className="font-semibold">{token}</strong>
+              )
+            ) : null}
+          </span>
+        ))}
+      </>
+    );
+  }
+
   const translatedStarters = receptionStarters.map((value) => ({
     value,
     label: translateChoice(value).label,
@@ -1116,6 +1213,8 @@ export function WeddingExperience() {
     ...option,
     ...activityCopy[language][option.id],
   }));
+  const primaryAttendingGuest = partyGuests.find((guest) => guest.rsvp === 'attend') ?? partyGuests[0];
+  const primaryGuestHasKidsMeal = primaryAttendingGuest?.mealType === 'kid';
 
   useEffect(() => {
     const timerId = window.setInterval(() => setCountdown(getCountdownParts()), 60_000);
@@ -1966,7 +2065,7 @@ export function WeddingExperience() {
                 <div className="mt-7 space-y-3">
                   {t.schedule.items[0].notes.map((note) => (
                     <p key={note} className="text-xs uppercase leading-6 tracking-[0.22em] text-slate-500">
-                      {note}
+                      {renderScheduleText(note)}
                     </p>
                   ))}
                 </div>
@@ -1995,7 +2094,7 @@ export function WeddingExperience() {
               <div className="mt-7 space-y-3">
                 {t.schedule.items[1].notes.map((note) => (
                   <p key={note} className="text-xs uppercase leading-6 tracking-[0.22em] text-white/62">
-                    {note}
+                    {renderScheduleText(note)}
                   </p>
                 ))}
               </div>
@@ -2008,9 +2107,9 @@ export function WeddingExperience() {
                 src="/schedule-ceremony-beach.webp"
                 alt="Sunset ceremony setup by the water"
                 fill
-                className="object-cover"
+                className="object-cover object-[center_35%]"
               />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(31,54,92,0.04),rgba(31,54,92,0.18))]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(31,54,92,0.04),rgba(31,54,92,0.16))]" />
             </div>
 
             <article className="flex min-h-[28rem] items-center justify-center bg-white px-8 py-16 text-center">
@@ -2024,13 +2123,31 @@ export function WeddingExperience() {
                 <div className="mt-7 space-y-3">
                   {t.schedule.items[2].notes.map((note) => (
                     <p key={note} className="text-xs uppercase leading-6 tracking-[0.22em] text-slate-500">
-                      {note}
+                      {renderScheduleText(note)}
                     </p>
                   ))}
                 </div>
               </div>
             </article>
           </div>
+
+          <article className="flex min-h-[32rem] items-end justify-center bg-[#45689d] px-8 py-20 text-center text-white">
+            <div className="max-w-md">
+              <p className={cn(calligraphyFont.className, 'text-3xl leading-none text-white/80')}>
+                Thanksgiving
+              </p>
+              <p className="mt-6 text-sm uppercase tracking-[0.42em] text-white/68">{t.schedule.items[3].day}</p>
+              <h3 className="mt-4 font-display text-4xl leading-tight text-white">{t.schedule.items[3].title}</h3>
+              <p className="mt-5 text-sm leading-7 text-white/78">{t.schedule.items[3].body}</p>
+              <div className="mt-7 space-y-3">
+                {t.schedule.items[3].notes.map((note) => (
+                  <p key={note} className="text-xs uppercase leading-6 tracking-[0.22em] text-white/62">
+                    {renderScheduleText(note)}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </article>
         </section>
 
         <section id="food" className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#f7faff]">
@@ -2189,6 +2306,7 @@ export function WeddingExperience() {
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.3em] text-white/70">Nov 23</p>
                     <p className="mt-1 text-lg font-semibold">{t.activity.welcomeParty}</p>
+                    <p className="mt-2 text-xs uppercase tracking-[0.18em] text-white/64">{t.activity.welcomeTime}</p>
                   </div>
                 </div>
                 <p className="mt-2 text-sm leading-6 text-white/80">
@@ -2201,6 +2319,7 @@ export function WeddingExperience() {
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.3em] text-white/70">Nov 24</p>
                     <p className="mt-1 text-lg font-semibold">{translatedActivity.title}</p>
+                    <p className="mt-2 text-xs uppercase tracking-[0.18em] text-white/64">{t.activity.activityTime}</p>
                   </div>
                 </div>
                 <p className="mt-2 text-sm leading-6 text-white/80">
@@ -2210,11 +2329,28 @@ export function WeddingExperience() {
 
               <div className="border-l border-white/24 bg-white/10 px-5 py-4">
                 <p className="text-[11px] uppercase tracking-[0.3em] text-white/70">{t.activity.dinnerLabel}</p>
-                <p className="mt-1 text-lg font-semibold">{translateChoice(main).label}</p>
+                <p className="mt-1 text-lg font-semibold">{t.activity.ceremonyTitle}</p>
+                <p className="mt-2 text-xs uppercase tracking-[0.18em] text-white/64">{renderScheduleText(t.activity.ceremonyTime)}</p>
                 <div className="mt-3 grid gap-2 text-sm text-white/80">
-                  <div>{t.activity.starter}: {translateChoice(starter).label}</div>
-                  <div>{t.activity.dessert}: {translateChoice(dessert).label}</div>
+                  {primaryGuestHasKidsMeal ? (
+                    <div>{t.party.kidsMeal}: {primaryAttendingGuest.kidsMeal}</div>
+                  ) : (
+                    <>
+                      <div>{t.activity.starter}: {translateChoice(starter).label}</div>
+                      <div>{t.activity.main}: {translateChoice(main).label}</div>
+                      <div>{t.activity.dessert}: {translateChoice(dessert).label}</div>
+                    </>
+                  )}
                 </div>
+              </div>
+
+              <div className="border-l border-white/24 bg-white/10 px-5 py-4">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-white/70">{t.activity.thanksgivingLabel}</p>
+                <p className="mt-1 text-lg font-semibold">{t.activity.thanksgivingTitle}</p>
+                <p className="mt-2 text-xs uppercase tracking-[0.18em] text-white/64">{renderScheduleText(t.activity.thanksgivingTime)}</p>
+                <p className="mt-2 text-sm leading-6 text-white/80">
+                  {t.activity.thanksgivingBody}
+                </p>
               </div>
             </div>
 
